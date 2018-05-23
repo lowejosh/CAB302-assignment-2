@@ -27,6 +27,11 @@ public class StockTests {
 		return (1 + 199 * random.nextInt());
 	}
 	
+	// Returns a random double from 1000 to 500000 for capital tests
+	private static double randCapital() {
+		return (1000 + 499000 * random.nextDouble());
+	}
+	
 	/*
 	 * ---------- START HELPER METHODS ----------
 	 */
@@ -438,6 +443,56 @@ public class StockTests {
 		
 		// Test the get method
 		assertEquals(store.getName(), storeName);
+	}
+	
+	
+	/*
+	 * Test : Modify Store Capital by adding
+	 */
+	@Test
+	public void ModifyStoreCapitalByAdding() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		stock = new Stock(map);
+		
+		// Construct the Store object
+		double capital = 100000.0; // TODO - ADD RANDOM
+		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
+		store = new Store(capital, stock, storeName);
+		
+		// Add to the capital
+		double amountToAdd = randCapital();
+		store.modifyCapital(amountToAdd);
+		
+		// Test the get method
+		assertEquals(store.getCapital(), capital + amountToAdd);
+	}
+	
+	
+	/*
+	 * Test : Modify Store Capital by removing
+	 */
+	@Test
+	public void ModifyStoreCapitalByRemoving() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		stock = new Stock(map);
+		
+		// Construct the Store object
+		double capital = 100000.0; // TODO - ADD RANDOM
+		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
+		store = new Store(capital, stock, storeName);
+		
+		// Remove from the capital
+		double amountToRemove = randCapital();
+		store.modifyCapital(-amountToRemove);
+		
+		// Test the get method
+		assertEquals(store.getCapital(), capital - amountToRemove);
 	}
 	
 	
