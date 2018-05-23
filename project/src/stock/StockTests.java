@@ -5,27 +5,22 @@ package stock;
  *
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.Uber.Uber;
-
 public class StockTests {
 	
-	
 	/*
-	 * Test 0: Declaring Item objects.
+	 * Test 0: Declaring Item object.
 	 */
 	Item item;
-	ColdItem coldItem;
-	
-	// Clear the item objects before every test.
+
+	// Clear the item object before every test.
 	@Before
 	public void setUpItem() {
 		item = null;
-		coldItem = null;
 	}
 	
 	
@@ -34,25 +29,67 @@ public class StockTests {
 	 */
 	@Test 
 	public void testItemConstruction() {
-		item = new Item("Biscuit", 4, 6, 300, 700);
+		item = new Item("Biscuit", 4, 6, 300, 700, null);
 	}
 	
 	
 	/*
-	 * Test 2: Constructing a basic ColdItem object. 
+	 * Test 2: Get the Item Cost
 	 */
 	@Test 
-	public void testColdItemConstruction() {
-		coldItem = new ColdItem("Ice-Cream", 6, 10, 200, 500, -20);
+	public void testItemCost() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getCost(), 6);
 	}
 	
 	
 	/*
-	 * Test 3: Get the item temperature
+	 * Test 3: Get the Item Price
 	 */
 	@Test 
-	public void testTemp() {
-		coldItem = new ColdItem("Ice-Cream", 6, 10, 200, 500, -20);
-		assertEquals(coldItem.getTemp(), -20);
+	public void testItemPrice() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getPrice(), 10);
+	}
+	
+	
+	/*
+	 * Test 4: Get the Item Reorder Point
+	 */
+	@Test 
+	public void testItemReorderPoint() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getReorderPoint(), 200);
+	}
+	
+	
+	/*
+	 * Test 5: Get the Item Reorder Quantity
+	 */
+	@Test 
+	public void testItemReorderQuantity() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getReorderQuantity(), 500);
+	}
+	
+	
+	/*
+	 * Test 6: Get the cooled item temperature
+	 */
+	@Test 
+	public void testCooledItemTemp() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getTemp(), -20);
+	}
+	
+	
+	/*
+	 * Test 7: Get the dry item temperature
+	 * TODO - IMPLEMENT CSV READING AND TEST FROM THAT
+	 */
+	@Test 
+	public void testDryItemTemp() {
+		item = new Item("Biscuit", 4, 6, 300, 700, null);
+		assertNull(item.getTemp());
 	}
 }
