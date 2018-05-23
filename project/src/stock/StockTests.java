@@ -50,11 +50,56 @@ public class StockTests {
 	 */
 	
 	/*
-	 * Test : Constructing a basic Item object. 
+	 * Test : Constructing a dry Item object. 
 	 */
 	@Test 
 	public void testItemConstruction() {
 		item = new Item("Biscuit", 4, 6, 300, 700, null);
+	}
+	
+	
+	/*
+	 * Test : Constructing a cooled Item object. 
+	 */
+	@Test 
+	public void testCooledItemConstruction() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+	}
+	
+	
+	/*
+	 * Test : Constructing a basic Item object with a negative cost. 
+	 */
+	@Test 
+	(expected = StockException) public void testNegativeCostItemConstruction() {
+		item = new Item("Biscuit", -4, 6, 300, 700, null);
+	}
+	
+	
+	/*
+	 * Test : Constructing a basic Item object with a negative price. 
+	 */
+	@Test 
+	(expected = StockException) public void testNegativePriceItemConstruction() {
+		item = new Item("Biscuit", 4, -6, 300, 700, null);
+	}
+	
+	
+	/*
+	 * Test : Constructing a basic Item object with a negative reorder point. 
+	 */
+	@Test 
+	(expected = StockException) public void testNegativeReorderPointItemConstruction() {
+		item = new Item("Biscuit", 4, 6, -300, 700, null);
+	}
+	
+	
+	/*
+	 * Test : Constructing a basic Item object with a negative reorder quantity. 
+	 */
+	@Test 
+	(expected = StockException) public void testNegativeReorderQuantityItemConstruction() {
+		item = new Item("Biscuit", 4, 6, 300, -700, null);
 	}
 	
 	
@@ -125,7 +170,7 @@ public class StockTests {
 	@Test 
 	public void testDryItemRequiredTemp() {
 		item = new Item("Biscuit", 4, 6, 300, 700, null);
-		assertNull(item.getRequiredTemp());
+		assertNull(item.getTemp());
 	}
 	
 	/*
