@@ -1,6 +1,12 @@
 package stock;
 
 /**
+ * A class that represents an item to be stocked in a store.
+ * An item has a name, cost, price, and storage temperature
+ * (if applicable), and an amount where if the item drops
+ * under it, a reorder is placed with an amount equal to
+ * another figure specified here.
+ * 
  * @author Ashley Husband
  *
  */
@@ -9,17 +15,17 @@ public class Item {
 	String name = "";
 	int cost = 0;
 	int price = 0;
-	int reorderPoint = 0;
-	int reorderQuantity = 0;
-	Integer temp = null;
+	int reorderPoint = 0; // When the item quantity reaches this level in an inventory, it calls a reorder
+	int reorderQuantity = 0; // The amount of items to be ordered on a reorder
+	Integer temp = null; // The storage temperature of a cold/fresh item
 	
 	/**
 	 * Constructor for an item that doesn't need to be kept under a certain temperature
-	 * @param name
-	 * @param cost
-	 * @param price
-	 * @param reorderPoint
-	 * @param reorderQuantity
+	 * @param name The name of the item
+	 * @param cost How must the item costs to order
+	 * @param price The selling price of the item
+	 * @param reorderPoint The amount at which a new delivery of the item is reordered
+	 * @param reorderQuantity The amount of the item which is ordered in a reorder
 	 */
 	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity) {
 		this.name = name;
@@ -31,12 +37,12 @@ public class Item {
 	
 	/**
 	 * Constructor for an item that needs to be kept under a certain temperature
-	 * @param name
-	 * @param cost
-	 * @param price
-	 * @param reorderPoint
-	 * @param reorderQuantity
-	 * @param temp
+	 * @param name The name of the item
+	 * @param cost How must the item costs to order
+	 * @param price The selling price of the item
+	 * @param reorderPoint The amount at which a new delivery of the item is reordered
+	 * @param reorderQuantity The amount of the item which is ordered in a reorder
+	 * @param temp The temperature the item should be stored at/under
 	 */
 	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity, Integer temp) {
 		this.name = name;
@@ -47,26 +53,50 @@ public class Item {
 		this.temp = temp;
 	}
 	
+	/**
+	 * Returns the name of an Item
+	 * @return the name of the Item
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Returns the cost of an Item
+	 * @return the cost of the Item
+	 */
 	public int getCost() {
 		return cost;
 	}
 
+	/**
+	 * Returns the price of an Item
+	 * @return the price of the Item
+	 */
 	public int getPrice() {
 		return price;
 	}
 
+	/**
+	 * Returns the reorder point of an Item
+	 * @return the reorder point of the Item
+	 */
 	public int getReorderPoint() {
 		return reorderPoint;
 	}
 
-	public Object getReorderQuantity() {
+	/**
+	 * Returns the reorder quantity of an Item
+	 * @return the reorder quantity of the Item
+	 */
+	public int getReorderQuantity() {
 		return reorderQuantity;
 	}
-	
+
+	/**
+	 * Returns the storage temperature of an Item
+	 * @return the storage temperature of the Item
+	 */
 	public Integer getTemp() {
 		return temp;
 	}
