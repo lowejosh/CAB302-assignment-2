@@ -270,10 +270,65 @@ public class StockTests {
 		
 		// Create random quantity and add it
 		int amountToAdd = randQuantity();
-		stock.addQuantityToItem(item, amountToAdd);
+		stock.addQuantity(item, amountToAdd);
 		
 		// Test the get method
 		assertEquals(stock.getQuantity(item), quantity + amountToAdd);
+	}
+	
+	
+	/*
+	 * Test : Remove quantity from an Item's existing stock
+	 */
+	@Test
+	public void testRemoveQuantityFromItem() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Create random quantity and add it
+		int amountToRemove = randQuantity();
+		stock.removeQuantity(item, amountToRemove);
+		
+		// Test the get method
+		assertEquals(stock.getQuantity(item), quantity - amountToRemove);
+	}
+	
+	
+	/*
+	 * Test : Necessary reorder for item stock
+	 */
+	@Test
+	public void testItemStockNeedsReorder() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = 1; // This is below the reorder point - requiring true to be returned
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Test the method returns true
+		assertTrue(stock.reorderRequired(item));
+	}
+	
+	
+	/*
+	 * Test : Unnecessary reorder for item stock
+	 */
+	@Test
+	public void testItemStockDoesntNeedReorder() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = 1000; // This is above the reorder point - requiring false to be returned
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Test the method returns false
+		assertFalse(stock.reorderRequired(item));
 	}
 	
 	
