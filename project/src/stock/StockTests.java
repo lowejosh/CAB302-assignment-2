@@ -6,6 +6,9 @@ package stock;
  */
 
 import static org.junit.Assert.*;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +16,41 @@ import org.junit.Test;
 public class StockTests {
 	
 	/*
-	 * Test 0: Declaring Item object.
+	 * ---------- START HELPER METHODS ----------
 	 */
-	Item item;
 
-	// Clear the item object before every test.
-	@Before
-	public void setUpItem() {
-		item = null;
-	}
+	// PLACEHOLDER
+	
+	/*
+	 * ---------- START HELPER METHODS ----------
+	 */
+	
+	
 	
 	
 	/*
-	 * Test 1: Constructing a basic Item object. 
+	 * Test 0: Declaring test objects.
+	 */
+	Item item;
+	Stock stock;
+	Store store;
+
+	// Clear the test objects before every test.
+	@Before
+	public void setUpItem() {
+		item = null;
+		store = null;
+	}
+	
+	
+	
+	
+	/*
+	 * 	---------- START ITEM TESTS ----------
+	 */
+	
+	/*
+	 * Test : Constructing a basic Item object. 
 	 */
 	@Test 
 	public void testItemConstruction() {
@@ -34,7 +59,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 2: Get the Item Name
+	 * Test : Get the Item Name
 	 */
 	@Test 
 	public void testItemName() {
@@ -44,7 +69,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 3: Get the Item Cost
+	 * Test : Get the Item Cost
 	 */
 	@Test 
 	public void testItemCost() {
@@ -64,7 +89,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 5: Get the Item Reorder Point
+	 * Test : Get the Item Reorder Point
 	 */
 	@Test 
 	public void testItemReorderPoint() {
@@ -74,7 +99,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 6: Get the Item Reorder Quantity
+	 * Test : Get the Item Reorder Quantity
 	 */
 	@Test 
 	public void testItemReorderQuantity() {
@@ -84,22 +109,109 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 7: Get the cooled item temperature
+	 * Test : Get the cooled item required temperature
 	 */
 	@Test 
-	public void testCooledItemTemp() {
+	public void testCooledItemRequiredTemp() {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		assertEquals(item.getTemp(), -20);
+		assertEquals(item.getRequiredTemp(), -20);
 	}
 	
 	
 	/*
-	 * Test 8: Get the dry item temperature
+	 * Test : Get the dry item required temperature
 	 * TODO - IMPLEMENT CSV READING AND TEST FROM THAT
 	 */
 	@Test 
-	public void testDryItemTemp() {
+	public void testDryItemRequiredTemp() {
 		item = new Item("Biscuit", 4, 6, 300, 700, null);
-		assertNull(item.getTemp());
+		assertNull(item.getRequiredTemp());
 	}
+	
+	/*
+	 *	---------- END ITEM TESTS ----------
+	 */
+	
+	
+	
+	
+	/*
+	 *	----------- START STOCK TESTS ---------
+	 */
+	
+	/*
+	 * Test : Constructing a basic Stock object. 
+	 */
+	@Test 
+	public void testStockConstruction() {
+		// Create the hashmap for <item, stock>
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		
+		// Construct the Stock object
+		stock = new Stock(map);
+	}
+	
+	
+	/*
+	 * Test : Creating a stock with negative quantity
+	 */
+	@Test
+	(expected = StockException) public void testStockNegativeQuantity() {
+		// Create a sample stock HashMap
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, -50);
+		
+		// Construct the Stock object
+		stock = new Stock(map);
+	}
+	
+	
+	/*
+	 * Test : Get the Stock HashMap
+	 */
+	@Test
+	public void testStock() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		stock = new Stock(map);
+		
+		// Test the get method
+		assertArrayEquals(stock.getStock(), map);
+	}
+	
+	/*
+	 *	----------- END STOCK TESTS ---------
+	 */
+	
+	
+	
+	
+	/*
+	 *	----------- START STORE TESTS ---------
+	 */
+	
+	/*
+	 * Test : Constructing a basic Store object. 
+	 */
+	@Test 
+	public void testStoreConstruction() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		stock = new Stock(map);
+		
+		// Construct the Store object
+		store = new Store(100,000.0, stock, "Capalaba SuperMart");
+	}
+	
+	/*
+	 *	----------- END STORE TESTS ---------
+	 */
+	
 }
