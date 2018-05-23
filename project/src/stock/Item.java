@@ -68,12 +68,7 @@ public class Item {
 	}
 	
 	public Integer getTemp() {
-//		if (temp==null) return null;
-//		else { 
-//			int intTemp = temp;
-//			return intTemp;
-//		}
-		return temp; //fails test 7 somehow
+		return temp;
 	}
 	
 }

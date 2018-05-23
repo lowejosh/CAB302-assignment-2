@@ -89,7 +89,7 @@ public class StockTests {
 	@Test 
 	public void testCooledItemTemp() {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		assertEquals(item.getTemp(), -20);
+		assertEquals((int) item.getTemp(), -20);
 	}
 	
 	
