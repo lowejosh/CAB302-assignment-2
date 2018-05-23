@@ -289,12 +289,50 @@ public class StockTests {
 		map.put(item, quantity);
 		stock = new Stock(map);
 		
-		// Create random quantity and add it
+		// Create random quantity and remove it
 		int amountToRemove = randQuantity();
 		stock.removeQuantity(item, amountToRemove);
 		
 		// Test the get method
 		assertEquals(stock.getQuantity(item), quantity - amountToRemove);
+	}
+	
+	
+	/*
+	 * Test : Add a negative quantity to an Item's existing stock
+	 */
+	@Test
+	(expected = StockException) public void testAddNegativeQuantityToItem() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Create random negative quantity and add it
+		int amountToAdd = randQuantity();
+		amountToAdd = -amountToAdd; 
+		stock.addQuantity(item, amountToAdd);
+	}
+	
+	
+	/*
+	 * Test : Remove a negative quantity from an Item's existing stock
+	 */
+	@Test
+	(expected = StockException) public void testRemoveNegativeQuantityFromItem() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Create random negative quantity and remove it
+		int amountToRemove = randQuantity();
+		amountToRemove = -amountToRemove; 
+		stock.removeQuantity(item, amountToRemove);
 	}
 	
 	
