@@ -114,7 +114,11 @@ public class StockTests {
 	@Test 
 	public void testCooledItemRequiredTemp() {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+<<<<<<< HEAD
 		assertEquals(item.getRequiredTemp(), -20);
+=======
+		assertEquals((int) item.getTemp(), -20);
+>>>>>>> 4df97cd8c6130f2347f5a675697d14a39c89d3c4
 	}
 	
 	
