@@ -18,8 +18,14 @@ public class StockTests {
 	/*
 	 * ---------- START HELPER METHODS ----------
 	 */
-
-	// PLACEHOLDER
+	
+	// Helper vars
+	private static Random random = new Random();
+	
+	// Returns a random int from 1 to 200 for quantity tests
+	private static int randQuantity() {
+		return (1 + 199 * random.nextInt());
+	}
 	
 	/*
 	 * ---------- START HELPER METHODS ----------
@@ -191,8 +197,9 @@ public class StockTests {
 	public void testStockConstruction() {
 		// Create the hashmap for <item, stock>
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
 		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
+		map.put(item, quantity);
 		
 		// Construct the Stock object
 		stock = new Stock(map);
@@ -206,8 +213,9 @@ public class StockTests {
 	(expected = StockException) public void testStockNegativeQuantity() {
 		// Create a sample stock HashMap
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
 		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, -50);
+		map.put(item, quantity);
 		
 		// Construct the Stock object
 		stock = new Stock(map);
@@ -221,13 +229,53 @@ public class StockTests {
 	public void testStock() {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
 		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
+		map.put(item, quantity);
 		stock = new Stock(map);
 		
 		// Test the get method
 		assertArrayEquals(stock.getStock(), map);
 	}
+	
+	
+	/*
+	 * Test : Get the Item Quantity
+	 */
+	@Test
+	public void testItemQuantity() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Test the get method
+		assertEquals(stock.getQuantity(item), quantity);
+	}
+	
+	
+	/*
+	 * Test : Add quantity to an Item's existing stock
+	 */
+	@Test
+	public void testAddQuantityToItem() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		int quantity = randQuantity();
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, quantity);
+		stock = new Stock(map);
+		
+		// Create random quantity and add it
+		int amountToAdd = randQuantity();
+		stock.addQuantityToItem(item, amountToAdd);
+		
+		// Test the get method
+		assertEquals(stock.getQuantity(item), quantity + amountToAdd);
+	}
+	
 	
 	/*
 	 *	----------- END STOCK TESTS ---------
