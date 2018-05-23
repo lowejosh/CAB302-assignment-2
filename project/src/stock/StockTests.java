@@ -44,7 +44,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 2: Get the Item Cost
+	 * Test 3: Get the Item Cost
 	 */
 	@Test 
 	public void testItemCost() {
@@ -54,7 +54,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 3: Get the Item Price
+	 * Test 4: Get the Item Price
 	 */
 	@Test 
 	public void testItemPrice() {
@@ -64,7 +64,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 4: Get the Item Reorder Point
+	 * Test 5: Get the Item Reorder Point
 	 */
 	@Test 
 	public void testItemReorderPoint() {
@@ -74,7 +74,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 5: Get the Item Reorder Quantity
+	 * Test 6: Get the Item Reorder Quantity
 	 */
 	@Test 
 	public void testItemReorderQuantity() {
@@ -84,7 +84,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 6: Get the cooled item temperature
+	 * Test 7: Get the cooled item temperature
 	 */
 	@Test 
 	public void testCooledItemTemp() {
@@ -94,7 +94,7 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 7: Get the dry item temperature
+	 * Test 8: Get the dry item temperature
 	 * TODO - IMPLEMENT CSV READING AND TEST FROM THAT
 	 */
 	@Test 
