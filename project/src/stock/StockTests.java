@@ -34,23 +34,62 @@ public class StockTests {
 	
 	
 	/*
-	 * Test 2: Get the cooled item temperature
+	 * Test 2: Get the Item Cost
 	 */
 	@Test 
-	public void testTemp() {
-		coldItem = new ColdItem("Ice-Cream", 6, 10, 200, 500, -20);
+	public void testItemCost() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getCost(), 6);
+	}
+	
+	
+	/*
+	 * Test 3: Get the Item Price
+	 */
+	@Test 
+	public void testItemPrice() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getPrice(), 10);
+	}
+	
+	
+	/*
+	 * Test 4: Get the Item Reorder Point
+	 */
+	@Test 
+	public void testItemReorderPoint() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getReorderPoint(), 200);
+	}
+	
+	
+	/*
+	 * Test 5: Get the Item Reorder Quantity
+	 */
+	@Test 
+	public void testItemReorderQuantity() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getReorderQuantity(), 500);
+	}
+	
+	
+	/*
+	 * Test 6: Get the cooled item temperature
+	 */
+	@Test 
+	public void testCooledItemTemp() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals(item.getTemp(), -20);
 	}
 	
 	
 	/*
-	 * Test 3: Get the dry item temperature
+	 * Test 7: Get the dry item temperature
 	 * TODO - IMPLEMENT CSV READING AND TEST FROM THAT
 	 */
 	@Test 
-	public void testTemp() {
+	public void testDryItemTemp() {
 		item = new Item("Biscuit", 4, 6, 300, 700, null);
 		assertNull(item.getTemp());
 	}
-	
 }
