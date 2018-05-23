@@ -252,8 +252,53 @@ public class StockTests {
 		stock = new Stock(map);
 		
 		// Construct the Store object
-		store = new Store(100,000.0, stock, "Capalaba SuperMart");
+		double capital = 100000.0; // TODO - ADD RANDOM
+		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
+		store = new Store(capital, stock, storeName);
 	}
+	
+	
+	/*
+	 * Test : Get the Store Capital
+	 */
+	@Test
+	public void testStoreCapital() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		stock = new Stock(map);
+		
+		// Construct the Store object
+		double capital = 100000.0; // TODO - ADD RANDOM
+		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
+		store = new Store(capital, stock, storeName);
+		
+		// Test the get method
+		assertEquals(store.getCapital(), capital);
+	}
+	
+	
+	/*
+	 * Test : Get the Store Name
+	 */
+	@Test
+	public void testStoreName() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		Map<Item, Integer> map = new HashMap<Item, Integer>();
+		map.put(item, 50);
+		stock = new Stock(map);
+		
+		// Construct the Store object
+		double capital = 100000.0; // TODO - ADD RANDOM
+		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
+		store = new Store(capital, stock, storeName);
+		
+		// Test the get method
+		assertEquals(store.getName(), storeName);
+	}
+	
 	
 	/*
 	 *	----------- END STORE TESTS ---------
