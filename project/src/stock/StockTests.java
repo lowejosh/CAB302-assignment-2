@@ -34,6 +34,16 @@ public class StockTests {
 	
 	
 	/*
+	 * Test 2: Get the Item Name
+	 */
+	@Test 
+	public void testItemName() {
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		assertEquals(item.getName(), "Ice-Cream");
+	}
+	
+	
+	/*
 	 * Test 2: Get the Item Cost
 	 */
 	@Test 
