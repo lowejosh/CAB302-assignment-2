@@ -436,7 +436,7 @@ public class StockTests {
 	
 	/*
 	 * Test : Get the Total Price
-	 * TODO - make for more than one item
+	 * TODO - test for more than one item
 	 */
 	@Test
 	public void getTotalPrice() {
@@ -458,7 +458,7 @@ public class StockTests {
 	
 	/*
 	 * Test : Get the Total Cost
-	 * TODO - make for more than one item
+	 * TODO - test for more than one item
 	 */
 	@Test
 	public void getTotalCost() {
@@ -474,6 +474,25 @@ public class StockTests {
 		int totalCost = item.getCost() * quantity;
 		
 		AssertEquals(stock.getTotalCost(), totalCost);
+		
+	}
+	
+	
+	/*
+	 * Test : Get the Total Quantity
+	 * TODO - test for more than one item
+	 */
+	@Test
+	public void getTotalQuantity() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		stock = new Stock();
+		
+		// Create random quantity and add it
+		int quantity = randQuantity();
+		stock.addQuantity(item, quantity);
+		
+		AssertEquals(stock.getTotalQuantity(), quantity);
 		
 	}
 	
