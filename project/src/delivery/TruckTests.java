@@ -67,9 +67,7 @@ public class TruckTests {
 		regTruck.addCargo(biscuit, 323);
 		assertEquals(regTruck.getCargo(), 323);
 		
-		double exactColdTemp = 900 + (200 * Math.pow(0.7, -10 / 5));
-		
-		assertEquals(coldTruck.getCost(), exactColdTemp, 1e-15);
+		assertEquals(coldTruck.getCost(), 1308.16, 1e-15);
 		assertEquals(regTruck.getCost(), 830.75, 1e-15);
 		
 		//float coldTruckCost = 900 + 200*0.7^coldTruck.getTemp()/5;

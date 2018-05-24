@@ -1,5 +1,8 @@
 package delivery;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import stock.Item;
 
 /**
@@ -30,9 +33,17 @@ public class ColdTruck extends Truck {
 
 	@Override
 	public double getCost() {
-		double result = 900 + (200 * Math.pow(0.7, ((double)temperature / 5)));
-		System.out.println("the temp is" + temperature + "\n and the result is " + result);
-		return result;
+		return round(900 + (200 * Math.pow(0.7, ((double)temperature / 5))), 2);
 	}
 
+	
+	// Helper method
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
+	}
+	
 }
