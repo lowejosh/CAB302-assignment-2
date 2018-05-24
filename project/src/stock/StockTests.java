@@ -451,7 +451,7 @@ public class StockTests {
 		// Find the proper output
 		int totalPrice = item.getPrice() * quantity;
 		
-		AssertEquals(stock.getTotalPrice(), totalPrice);
+		assertEquals(stock.getTotalPrice(), totalPrice);
 		
 	}
 	
@@ -473,7 +473,7 @@ public class StockTests {
 		// Find the proper output
 		int totalCost = item.getCost() * quantity;
 		
-		AssertEquals(stock.getTotalCost(), totalCost);
+		assertEquals(stock.getTotalCost(), totalCost);
 		
 	}
 	

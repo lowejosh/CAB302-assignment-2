@@ -12,7 +12,9 @@ import java.util.Map;
 public class Stock{
 	
 	private Map<Item, Integer> stock;
-
+	private int totalPrice = 0;
+	private int totalCost = 0;
+	
 	public Stock() {
 		stock = new HashMap<Item, Integer>();
 	}
@@ -43,6 +45,16 @@ public class Stock{
 
 	public boolean reorderRequired(Item item) {
 		return (stock.get(item) < item.getReorderPoint());
+	}
+
+	public int getTotalPrice() {
+		stock.forEach((k,v) -> totalPrice = k.getPrice() * v);
+		return totalPrice;
+	}
+
+	public int getTotalCost() {
+		stock.forEach((k,v) -> totalCost = k.getCost() * v);
+		return totalCost;
 	}
 	
 }
