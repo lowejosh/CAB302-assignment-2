@@ -64,7 +64,7 @@ public class StockTests {
 	 * Test : Constructing a dry Item object. 
 	 */
 	@Test 
-	public void testItemConstruction() {
+	public void testItemConstruction() throws StockException {
 		item = new Item("Biscuit", 4, 6, 300, 700, null);
 	}
 	
@@ -73,7 +73,7 @@ public class StockTests {
 	 * Test : Constructing a cooled Item object. 
 	 */
 	@Test 
-	public void testCooledItemConstruction() {
+	public void testCooledItemConstruction() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 	}
 	
@@ -82,7 +82,7 @@ public class StockTests {
 	 * Test : Constructing a basic Item object with a negative cost. 
 	 */
 	@Test 
-	(expected = StockException) public void testNegativeCostItemConstruction() {
+	(expected = StockException.class) public void testNegativeCostItemConstruction() throws StockException {
 		item = new Item("Biscuit", -4, 6, 300, 700, null);
 	}
 	
@@ -91,7 +91,7 @@ public class StockTests {
 	 * Test : Constructing a basic Item object with a negative price. 
 	 */
 	@Test 
-	(expected = StockException) public void testNegativePriceItemConstruction() {
+	(expected = StockException.class) public void testNegativePriceItemConstruction() throws StockException {
 		item = new Item("Biscuit", 4, -6, 300, 700, null);
 	}
 	
@@ -100,7 +100,7 @@ public class StockTests {
 	 * Test : Constructing a basic Item object with a negative reorder point. 
 	 */
 	@Test 
-	(expected = StockException) public void testNegativeReorderPointItemConstruction() {
+	(expected = StockException.class) public void testNegativeReorderPointItemConstruction() throws StockException {
 		item = new Item("Biscuit", 4, 6, -300, 700, null);
 	}
 	
@@ -109,7 +109,7 @@ public class StockTests {
 	 * Test : Constructing a basic Item object with a negative reorder quantity. 
 	 */
 	@Test 
-	(expected = StockException) public void testNegativeReorderQuantityItemConstruction() {
+	(expected = StockException.class) public void testNegativeReorderQuantityItemConstruction() throws StockException {
 		item = new Item("Biscuit", 4, 6, 300, -700, null);
 	}
 	
@@ -118,7 +118,7 @@ public class StockTests {
 	 * Test : Get the Item Name
 	 */
 	@Test 
-	public void testItemName() {
+	public void testItemName() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals(item.getName(), "Ice-Cream");
 	}
@@ -128,7 +128,7 @@ public class StockTests {
 	 * Test : Get the Item Cost
 	 */
 	@Test 
-	public void testItemCost() {
+	public void testItemCost() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals(item.getCost(), 6);
 	}
@@ -138,7 +138,7 @@ public class StockTests {
 	 * Test 4: Get the Item Price
 	 */
 	@Test 
-	public void testItemPrice() {
+	public void testItemPrice() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals(item.getPrice(), 10);
 	}
@@ -148,7 +148,7 @@ public class StockTests {
 	 * Test : Get the Item Reorder Point
 	 */
 	@Test 
-	public void testItemReorderPoint() {
+	public void testItemReorderPoint() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals(item.getReorderPoint(), 200);
 	}
@@ -158,7 +158,7 @@ public class StockTests {
 	 * Test : Get the Item Reorder Quantity
 	 */
 	@Test 
-	public void testItemReorderQuantity() {
+	public void testItemReorderQuantity() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals(item.getReorderQuantity(), 500);
 	}
@@ -168,7 +168,7 @@ public class StockTests {
 	 * Test : Get the cooled item required temperature
 	 */
 	@Test 
-	public void testCooledItemRequiredTemp() {
+	public void testCooledItemRequiredTemp() throws StockException {
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		assertEquals((int) item.getTemp(), -20);
 	}
@@ -178,7 +178,7 @@ public class StockTests {
 	 * Test : Get the dry item required temperature
 	 */
 	@Test 
-	public void testDryItemRequiredTemp() {
+	public void testDryItemRequiredTemp() throws StockException {
 		item = new Item("Biscuit", 4, 6, 300, 700, null);
 		assertNull(item.getTemp());
 	}
@@ -209,7 +209,7 @@ public class StockTests {
 	 * Test : Get quantity for an Item
 	 */
 	@Test
-	public void testAddQuantityToItem() {
+	public void testAddQuantityToItem() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		stock = new Stock();
@@ -227,7 +227,7 @@ public class StockTests {
 	 * Test : Remove quantity from an Item's existing stock
 	 */
 	@Test
-	public void testRemoveQuantityFromItem() {
+	public void testRemoveQuantityFromItem() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		stock = new Stock();
@@ -249,7 +249,7 @@ public class StockTests {
 	 * Test : Add a negative quantity to an Item's existing stock
 	 */
 	@Test
-	(expected = StockException) public void testAddNegativeQuantityToItem() {
+	(expected = StockException.class) public void testAddNegativeQuantityToItem() throws StockException {
 		// Create a sample stock and item object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		stock = new Stock();
@@ -265,7 +265,7 @@ public class StockTests {
 	 * Test : Remove a negative quantity from an Item's existing stock
 	 */
 	@Test
-	(expected = StockException) public void testRemoveNegativeQuantityFromItem() {
+	(expected = StockException.class) public void testRemoveNegativeQuantityFromItem() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		stock = new Stock();
@@ -285,7 +285,7 @@ public class StockTests {
 	 * Test : Necessary reorder for item stock
 	 */
 	@Test
-	public void testItemStockNeedsReorder() {
+	public void testItemStockNeedsReorder() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		int quantity = 1; // This is below the reorder point - requiring true to be returned
@@ -303,7 +303,7 @@ public class StockTests {
 	 * Test : Unnecessary reorder for item stock
 	 */
 	@Test
-	public void testItemStockDoesntNeedReorder() {
+	public void testItemStockDoesntNeedReorder() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		int quantity = 1000; // This is above the reorder point - requiring false to be returned
@@ -439,7 +439,7 @@ public class StockTests {
 	 * TODO - test for more than one item
 	 */
 	@Test
-	public void getTotalPrice() {
+	public void getTotalPrice() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		stock = new Stock();
@@ -461,7 +461,7 @@ public class StockTests {
 	 * TODO - test for more than one item
 	 */
 	@Test
-	public void getTotalCost() {
+	public void getTotalCost() throws StockException {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		stock = new Stock();

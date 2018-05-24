@@ -26,8 +26,9 @@ public class Item {
 	 * @param price The selling price of the item
 	 * @param reorderPoint The amount at which a new delivery of the item is reordered
 	 * @param reorderQuantity The amount of the item which is ordered in a reorder
+	 * @throws StockException 
 	 */
-	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity) {
+	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity) throws StockException {
 		this.name = name;
 		this.cost = cost;
 		this.price = price;
@@ -43,8 +44,19 @@ public class Item {
 	 * @param reorderPoint The amount at which a new delivery of the item is reordered
 	 * @param reorderQuantity The amount of the item which is ordered in a reorder
 	 * @param temp The temperature the item should be stored at/under
+	 * @throws StockException If an item is initialised with a negative value
 	 */
-	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity, Integer temp) {
+	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity, Integer temp) throws StockException {
+		
+		if (cost <= 0 || price <= 0) {
+			throw new StockException("Item cannot be initialised: Cost/Price cannot be Zero");
+		}
+		
+		if (reorderPoint < 0 || reorderQuantity < 0) {
+			throw new StockException("Item cannot be initialised: Reorder Point/Quantity cannot be negative value");
+
+		}
+		
 		this.name = name;
 		this.cost = cost;
 		this.price = price;
