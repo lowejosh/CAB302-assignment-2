@@ -7,9 +7,7 @@ package delivery;
 public class RegTruck extends Truck {
 
 	public RegTruck() {
-
 		super(1000);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -17,8 +15,8 @@ public class RegTruck extends Truck {
 	 */
 	@Override
 	public double getCost() {
-		// TODO Auto-generated method stub
-		return 0;
+		double totalQuantity = super.getCargo();
+		return 750 + (0.25 * totalQuantity);
 	}
 
 }

@@ -477,11 +477,11 @@ public class StockTests {
 		
 	}
 	
-	
-	/*
+	/* 	TODO REMOVE ---- MIGHT BE UNNECESSARY, IMPLEMENTING IN TRUCK'S GETCARGO	
+	 *
 	 * Test : Get the Total Quantity
 	 * TODO - test for more than one item
-	 */
+	 *
 	@Test
 	public void getTotalQuantity() {
 		// Create a sample stock object
@@ -495,7 +495,7 @@ public class StockTests {
 		AssertEquals(stock.getTotalQuantity(), quantity);
 		
 	}
-	
+	*/
 	
 	/*
 	 *	----------- END SALES LOG TESTS ---------
