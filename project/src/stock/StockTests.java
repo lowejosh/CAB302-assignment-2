@@ -33,7 +33,7 @@ public class StockTests {
 	}
 	
 	/*
-	 * ---------- START HELPER METHODS ----------
+	 * ---------- END HELPER METHODS ----------
 	 */
 	
 	

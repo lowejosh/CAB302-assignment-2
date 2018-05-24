@@ -19,9 +19,7 @@ public abstract class Truck {
 		this.cargo = new Stock();
 	}
 	
-	public void addCargo(Item item, int quantity) {
-		cargo.addQuantity(item, quantity);
-	}
+	public abstract void addCargo(Item item, int quantity);
 	
 	public int getCargo() {
 		int sum = 0; 
