@@ -176,7 +176,6 @@ public class StockTests {
 	
 	/*
 	 * Test : Get the dry item required temperature
-	 * TODO - IMPLEMENT CSV READING AND TEST FROM THAT
 	 */
 	@Test 
 	public void testDryItemRequiredTemp() {
@@ -200,85 +199,27 @@ public class StockTests {
 	 */
 	@Test 
 	public void testStockConstruction() {
-		// Create the hashmap for <item, stock>
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		
-		// Construct the Stock object
-		stock = new Stock(map);
+		stock = new Stock();
 	}
 	
-	
-	/*
-	 * Test : Creating a stock with negative quantity
-	 */
-	@Test
-	(expected = StockException) public void testStockNegativeQuantity() {
-		// Create a sample stock HashMap
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		
-		// Construct the Stock object
-		stock = new Stock(map);
-	}
-	
-	
-	/*
-	 * Test : Get the Stock HashMap
-	 */
-	@Test
-	public void testStock() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
-		
-		// Test the get method
-		assertArrayEquals(stock.getStock(), map);
-	}
-	
-	
-	/*
-	 * Test : Get the Item Quantity
-	 */
-	@Test
-	public void testItemQuantity() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
-		
-		// Test the get method
-		assertEquals(stock.getQuantity(item), quantity);
-	}
-	
+
 	
 	/*
 	 * Test : Add quantity to an Item's existing stock
+	 * Test : Get quantity for an Item
 	 */
 	@Test
 	public void testAddQuantityToItem() {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
+		stock = new Stock();
 		
 		// Create random quantity and add it
-		int amountToAdd = randQuantity();
-		stock.addQuantity(item, amountToAdd);
+		int quantity = randQuantity();
+		stock.addQuantity(item, quantity);
 		
 		// Test the get method
-		assertEquals(stock.getQuantity(item), quantity + amountToAdd);
+		assertEquals(stock.getQuantity(item), quantity);
 	}
 	
 	
@@ -289,10 +230,11 @@ public class StockTests {
 	public void testRemoveQuantityFromItem() {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
+		stock = new Stock();
+		
+		// Add 200 to the stock
+		int quantity = 200;
+		stock.addQuantity(item, quantity);
 		
 		// Create random quantity and remove it
 		int amountToRemove = randQuantity();
@@ -308,12 +250,9 @@ public class StockTests {
 	 */
 	@Test
 	(expected = StockException) public void testAddNegativeQuantityToItem() {
-		// Create a sample stock object
+		// Create a sample stock and item object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
+		stock = new Stock();
 		
 		// Create random negative quantity and add it
 		int amountToAdd = randQuantity();
@@ -329,10 +268,11 @@ public class StockTests {
 	(expected = StockException) public void testRemoveNegativeQuantityFromItem() {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		int quantity = randQuantity();
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
+		stock = new Stock();
+		
+		// Add 200 to the stock
+		int quantity = 200;
+		stock.addQuantity(item, quantity);
 		
 		// Create random negative quantity and remove it
 		int amountToRemove = randQuantity();
@@ -349,9 +289,10 @@ public class StockTests {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		int quantity = 1; // This is below the reorder point - requiring true to be returned
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
+		// Create a sample stock object
+		stock = new Stock();
+		// Add the quantity
+		stock.addQuantity(item, quantity);
 		
 		// Test the method returns true
 		assertTrue(stock.reorderRequired(item));
@@ -366,9 +307,10 @@ public class StockTests {
 		// Create a sample stock object
 		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
 		int quantity = 1000; // This is above the reorder point - requiring false to be returned
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, quantity);
-		stock = new Stock(map);
+		// Create a sample stock object
+		stock = new Stock();
+		// Add the quantity
+		stock.addQuantity(item, quantity);
 		
 		// Test the method returns false
 		assertFalse(stock.reorderRequired(item));
@@ -391,14 +333,11 @@ public class StockTests {
 	 */
 	@Test 
 	public void testStoreConstruction() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
-		stock = new Stock(map);
+		// Create the stock
+		stock = new Stock();
 		
 		// Construct the Store object
-		double capital = 100000.0; // TODO - ADD RANDOM
+		double capital = randCapital();
 		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
 		store = new Store(capital, stock, storeName);
 	}
@@ -409,14 +348,11 @@ public class StockTests {
 	 */
 	@Test
 	public void testStoreCapital() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
-		stock = new Stock(map);
+		// Create the stock
+		stock = new Stock();
 		
 		// Construct the Store object
-		double capital = 100000.0; // TODO - ADD RANDOM
+		double capital = randCapital();
 		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
 		store = new Store(capital, stock, storeName);
 		
@@ -430,14 +366,11 @@ public class StockTests {
 	 */
 	@Test
 	public void testStoreName() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
-		stock = new Stock(map);
+		// Create the stock
+		stock = new Stock();
 		
 		// Construct the Store object
-		double capital = 100000.0; // TODO - ADD RANDOM
+		double capital = randCapital();
 		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
 		store = new Store(capital, stock, storeName);
 		
@@ -451,14 +384,11 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByAdding() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
-		stock = new Stock(map);
+		// Create the stock
+		stock = new Stock();
 		
 		// Construct the Store object
-		double capital = 100000.0; // TODO - ADD RANDOM
+		double capital = randCapital();
 		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
 		store = new Store(capital, stock, storeName);
 		
@@ -476,14 +406,11 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByRemoving() {
-		// Create a sample stock object
-		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
-		Map<Item, Integer> map = new HashMap<Item, Integer>();
-		map.put(item, 50);
-		stock = new Stock(map);
+		// Create the stock
+		stock = new Stock();
 		
 		// Construct the Store object
-		double capital = 100000.0; // TODO - ADD RANDOM
+		double capital = randCapital();
 		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
 		store = new Store(capital, stock, storeName);
 		
@@ -498,6 +425,39 @@ public class StockTests {
 	
 	/*
 	 *	----------- END STORE TESTS ---------
+	 */
+	
+	
+	
+	
+	/*
+	 *	----------- START SALES LOG TESTS ---------
+	 */
+	
+	/*
+	 * Test : Get the Total Sales - CAN CHANGE NAME IF YOU WANT
+	 * TODO - make for more than one item
+	 */
+	@Test
+	public void getTotalSales() {
+		// Create a sample stock object
+		item = new Item("Ice-Cream", 6, 10, 200, 500, -20);
+		stock = new Stock();
+		
+		// Create random quantity and add it
+		int quantity = randQuantity();
+		stock.addQuantity(item, quantity);
+		
+		// Find the proper output
+		int totalSales = item.getPrice() * quantity;
+		
+		AssertEquals(stock.getTotalSales(), totalSales);
+		
+	}
+	
+	
+	/*
+	 *	----------- END SALES LOG TESTS ---------
 	 */
 	
 }
