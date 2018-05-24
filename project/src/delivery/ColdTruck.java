@@ -30,7 +30,9 @@ public class ColdTruck extends Truck {
 
 	@Override
 	public double getCost() {
-		return 900 + (200 * Math.pow(0.7, ((double)temperature / 5)));
+		double result = 900 + (200 * Math.pow(0.7, ((double)temperature / 5)));
+		System.out.println("the temp is" + temperature + "\n and the result is " + result);
+		return result;
 	}
 
 }
