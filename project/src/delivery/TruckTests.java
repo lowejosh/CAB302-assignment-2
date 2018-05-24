@@ -1,6 +1,7 @@
 package delivery;
 import stock.Item;
 import stock.Stock;
+import stock.StockException;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class TruckTests {
 	
 	//Setting up the items used in the tests
 	@Before 
-	public void setupItems() {
+	public void setupItems() throws StockException {
 		biscuit = new Item("biscuit", 4, 6, 300, 700);
 		iceCream = new Item("ice-cream", 6, 10, 200, 500, -20);
 	}
@@ -36,7 +37,7 @@ public class TruckTests {
 	 * Test 1: Initialising the two truck types and checking their default cargo values
 	 */
 	@Before @Test 
-	public void truckTest() {
+	public void truckTest() throws DeliveryException{
 		coldTruck = new ColdTruck(-10); //Cold trucks let you assign a temperature
 		regTruck = new RegTruck();
 		
@@ -48,7 +49,7 @@ public class TruckTests {
 	 * Test 2: Adding cargo to a truck
 	 */
 	@Test 
-	public void addCargoTest(){
+	public void addCargoTest() throws DeliveryException{
 		coldTruck.addCargo(iceCream, 1);
 		assertEquals(coldTruck.getCargo(), 1);
 		coldTruck.addCargo(biscuit, 1);
@@ -79,16 +80,16 @@ public class TruckTests {
 	/*
 	 * Test 4: Adding a cold item to a regular truck - Throws Exception
 	 */
-	@Test (expected = DeliveryException) 
-	public void addColdCargoToRegTruck(){
+	@Test (expected = DeliveryException.class) 
+	public void addColdCargoToRegTruck() throws DeliveryException{
 		regTruck.addCargo(iceCream, 1);
 	}
 	
 	/*
 	 * Test 5: Adding too much cargo to a regular truck - Throws Exception
 	 */
-	@Test (expected = DeliveryException) 
-	public void addTooMuchCargo(){
+	@Test (expected = DeliveryException.class) 
+	public void addTooMuchCargo() throws DeliveryException{
 		regTruck.addCargo(biscuit, 1000); //Thassa lotta bickies, try dunkin that in ya bushells
 		assertEquals(coldTruck.getCargo(), 1000);
 		
@@ -98,8 +99,8 @@ public class TruckTests {
 	/*
 	 * Test 6: Adding too much cargo to a cold truck - Throws Exception
 	 */
-	@Test (expected = DeliveryException) 
-	public void addTooMuchColdCargo(){
+	@Test (expected = DeliveryException.class) 
+	public void addTooMuchColdCargo() throws DeliveryException{
 		coldTruck.addCargo(iceCream, 800);
 		assertEquals(coldTruck.getCargo(), 800);
 	
@@ -109,16 +110,16 @@ public class TruckTests {
 	/*
 	 * Test 7: Setting the temperature of a cold truck too low - Throws Exception
 	 */
-	@Test (expected = DeliveryException) 
-	public void tempTooLow(){
+	@Test (expected = DeliveryException.class) 
+	public void tempTooLow() throws DeliveryException{
 		ColdTruck brokenTruck = new ColdTruck(-50);
 	}	
 
 	/*
 	 * Test 8: Setting the temperature of a cold truck too high - Throws Exception
 	 */
-	@Test (expected = DeliveryException) 
-	public void tempTooHigh(){
+	@Test (expected = DeliveryException.class) 
+	public void tempTooHigh() throws DeliveryException{
 		ColdTruck brokenTruck = new ColdTruck(50);
 	}
 	
