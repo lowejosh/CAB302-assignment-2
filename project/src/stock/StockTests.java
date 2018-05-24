@@ -357,6 +357,7 @@ public class StockTests {
 	/*
 	 * Test : Get the Store Name
 	 * TODO - DELETE? MIGHT NOT BE NEEDED
+	 * 
 	@Test
 	public void testStoreName() {
 		// Create the stock
