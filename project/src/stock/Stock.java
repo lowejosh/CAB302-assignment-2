@@ -13,8 +13,8 @@ public class Stock{
 	
 	private Map<Item, Integer> stock;
 
-	public Stock(Map<Item, Integer> map) {
-		stock = map;
+	public Stock() {
+		stock = new HashMap<Item, Integer>();
 	}
 
 	public Map<Item, Integer> getStock() {
