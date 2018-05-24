@@ -27,19 +27,23 @@ public class Stock{
 		return stock.get(item);
 	}
 
-	public void addQuantity(Item item, int amountToAdd) {
-		if (stock.containsKey(item)) {
+	public void addQuantity(Item item, int amountToAdd) throws StockException {
+		if (amountToAdd <= 0) {
+			throw new StockException("Amount cannot be added: Negative or empty value");
+		} else if (stock.containsKey(item)) {
 			stock.replace(item, stock.get(item) + amountToAdd);
 		} else {
 			stock.put(item, amountToAdd);
 		}
 	}
 
-	public void removeQuantity(Item item, int amountToRemove) { // TO-DO: Throws Exception if amount becomes negative or item doesn't exist
-		if (stock.containsKey(item)) {
+	public void removeQuantity(Item item, int amountToRemove) throws StockException { // TO-DO: Throws Exception if amount becomes negative or item doesn't exist
+		if (amountToRemove <= 0) {
+			throw new StockException("Amount cannot be removed: Negative or empty value");
+		} else if (stock.containsKey(item)) {
 			stock.replace(item, stock.get(item) - amountToRemove);
 		} else {
-			// Throw exception
+			throw new StockException("Amount cannot be removed: Item does not exist in stock");
 		}
 	}
 
