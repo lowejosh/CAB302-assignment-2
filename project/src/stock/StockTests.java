@@ -329,41 +329,35 @@ public class StockTests {
 	 */
 	
 	/*
-	 * Test : Constructing a basic Store object. 
+	 * Test : Grabbing the basic store instance 
 	 */
 	@Test 
 	public void testStoreConstruction() {
-		// Create the stock
-		stock = new Stock();
-		
-		// Construct the Store object
-		double capital = randCapital();
-		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
-		store = new Store(capital, stock, storeName);
+		// Retrieve the store instance
+		Store store = Store.getInstance();
 	}
 	
 	
 	/*
-	 * Test : Get the Store Capital
+	 * Test : Get the Starting Store Capital
 	 */
 	@Test
 	public void testStoreCapital() {
-		// Create the stock
-		stock = new Stock();
 		
-		// Construct the Store object
-		double capital = randCapital();
-		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
-		store = new Store(capital, stock, storeName);
+		double startingCapital = 100000.0;
+		
+		// Retrieve the store instance
+		Store store = Store.getInstance();
 		
 		// Test the get method
-		assertEquals(store.getCapital(), capital);
+		assertEquals(store.getCapital(), startingCapital);
 	}
 	
 	
 	/*
 	 * Test : Get the Store Name
-	 */
+	 * TODO - DELETE? MIGHT NOT BE NEEDED
+	 * 
 	@Test
 	public void testStoreName() {
 		// Create the stock
@@ -377,6 +371,7 @@ public class StockTests {
 		// Test the get method
 		assertEquals(store.getName(), storeName);
 	}
+	*/
 	
 	
 	/*
@@ -384,20 +379,18 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByAdding() {
-		// Create the stock
-		stock = new Stock();
 		
-		// Construct the Store object
-		double capital = randCapital();
-		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
-		store = new Store(capital, stock, storeName);
+		double startingCapital = 100000.0;
+		
+		// Retrieve the store instance
+		Store store = Store.getInstance();
 		
 		// Add to the capital
 		double amountToAdd = randCapital();
 		store.modifyCapital(amountToAdd);
 		
 		// Test the get method
-		assertEquals(store.getCapital(), capital + amountToAdd);
+		assertEquals(store.getCapital(), startingCapital + amountToAdd);
 	}
 	
 	
@@ -406,20 +399,18 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByRemoving() {
-		// Create the stock
-		stock = new Stock();
 		
-		// Construct the Store object
-		double capital = randCapital();
-		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
-		store = new Store(capital, stock, storeName);
+		double startingCapital = 100000.0;
+		
+		// Retrieve the store instance
+		Store store = Store.getInstance();
 		
 		// Remove from the capital
 		double amountToRemove = randCapital();
 		store.modifyCapital(-amountToRemove);
 		
 		// Test the get method
-		assertEquals(store.getCapital(), capital - amountToRemove);
+		assertEquals(store.getCapital(), startingCapital - amountToRemove);
 	}
 	
 	
