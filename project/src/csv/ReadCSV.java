@@ -32,24 +32,24 @@ public class ReadCSV {
 	public static List<Item> initialiseItems(String fileName) throws IOException {
 		// Initialise a list of Item objects and retrieve the File Path
 		List<Item> items = new ArrayList<>();
-		Path pathToFile = Paths.get(fileName);
+		Path filePath = Paths.get(fileName);
 		
 		// Try to create a BufferedReader from the file
-		try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+		try (BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII)) {
 			// Read the first line
-			String line = br.readLine();
+			String line = buff.readLine();
 			
 			// While the whole document file hasn't been read
 			while (line!=null) {
 				// Split the line into an array from the ,'s
-				String[] attributes = line.split(",");
+				String[] values = line.split(",");
 				
 				// Create the Item object and add it to the list
-				Item item = createItem(attributes);
+				Item item = createItem(values);
 				items.add(item);
 				
 				// Read the next line
-				line = br.readLine();
+				line = buff.readLine();
 			}
 		}
 		// Catch exception
@@ -98,7 +98,7 @@ public class ReadCSV {
 			temp = null;
 		}
 		
-		// Try to create the item object
+		// Try to create the item object and return it
 		try {
 			Item item = new Item(name, cost, price, reorderPoint, reorderQuantity, temp);
 			return item;
