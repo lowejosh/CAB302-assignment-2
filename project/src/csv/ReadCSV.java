@@ -23,16 +23,13 @@ public class ReadCSV {
 		List<Item> items = new ArrayList<>();
 		Path pathToFile = Paths.get(fileName);
 		
-		try (BufferedReader br = Files.newBufferedReader(
-				pathToFile, StandardCharsets.US_ASCII)) {
+		try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
 			
 			String line = br.readLine();
 			
 			while (line!=null) {
 				String[] attributes = line.split(",");
-				
 				Item item = createItem(attributes);
-				
 				items.add(item);
 				line = br.readLine();
 			}
@@ -50,9 +47,16 @@ public class ReadCSV {
 		int price = Integer.parseInt(data[2]);
 		int reorderPoint = Integer.parseInt(data[3]);
 		int reorderQuantity = Integer.parseInt(data[4]);
+		Integer temp;
 		
 		try {
-			Item item = new Item(name, cost, price, reorderPoint, reorderQuantity);
+			temp = Integer.parseInt(data[5]);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			temp = null;
+		}
+		
+		try {
+			Item item = new Item(name, cost, price, reorderPoint, reorderQuantity, temp);
 			return item;
 		} catch (Exception e) {
 			throw new StockException();

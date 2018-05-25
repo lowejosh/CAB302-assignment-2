@@ -17,7 +17,7 @@ public class ReadCSVTesting {
 	public void test() throws IOException {
 		List<Item> items = ReadCSV.initialiseItems("item_properties.txt");
 		for (Item i : items) {
-			System.out.println(i);
+			System.out.println(i.getTemp());
 		}
 	}
 
