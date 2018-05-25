@@ -7,7 +7,10 @@ package stock;
 
 import static org.junit.Assert.*;
 
+import csv.ReadCSV;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import org.junit.Before;
@@ -379,12 +382,16 @@ public class StockTests {
 	 * TODO - i'm not sure if you've decided how to do it but
 	 * we could initialize the starting inventory of the store
 	 * from the store class by importing the item properties
-	 * and setting every item to 0 quantity
+	 * and setting every item to 0 quantity - example below
 	 */
 	@Test
 	public void testStoreInventory() {
 		
-		Stock startingInventory = null;
+		Stock startingInventory;
+		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
+		for (Item i : itemList) {
+			startingInventory.addQuantity(i, 0);
+		}
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
