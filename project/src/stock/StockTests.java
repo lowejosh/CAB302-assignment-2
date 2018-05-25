@@ -397,7 +397,7 @@ public class StockTests {
 		Store store = Store.getInstance();
 		
 		// Test the get method
-		assertEquals(store.getInventory(), startingInventory);
+		assertThat(store.getInventory).isEqualToComparingFieldByField(startingInventory);
 	}
 	
 	
