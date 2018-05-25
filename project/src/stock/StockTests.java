@@ -350,7 +350,7 @@ public class StockTests {
 		Store store = Store.getInstance();
 		
 		// Test the get method
-		assertEquals(store.getCapital(), startingCapital);
+		assertEquals(store.getCapital(), startingCapital, 0.01);
 	}
 	
 	
@@ -390,7 +390,7 @@ public class StockTests {
 		store.modifyCapital(amountToAdd);
 		
 		// Test the get method
-		assertEquals(store.getCapital(), startingCapital + amountToAdd);
+		assertEquals(store.getCapital(), startingCapital + amountToAdd, 0.01);
 	}
 	
 	
@@ -410,7 +410,7 @@ public class StockTests {
 		store.modifyCapital(-amountToRemove);
 		
 		// Test the get method
-		assertEquals(store.getCapital(), startingCapital - amountToRemove);
+		assertEquals(store.getCapital(), startingCapital - amountToRemove, 0.01);
 	}
 	
 	
