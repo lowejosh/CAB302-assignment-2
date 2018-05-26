@@ -49,8 +49,8 @@ public class Stock{
 	 * @throws StockException if the amount being added is negative or zero
 	 */
 	public void addQuantity(Item item, int amountToAdd) throws StockException {
-		if (amountToAdd <= 0) {
-			throw new StockException("Amount cannot be added: Negative or empty value");
+		if (amountToAdd < 0) {
+			throw new StockException("Amount cannot be added: Negative value");
 		} else if (stock.containsKey(item)) {
 			stock.replace(item, stock.get(item) + amountToAdd);
 		} else {
@@ -64,9 +64,9 @@ public class Stock{
 	 * @param amountToRemove the amount being removed
 	 * @throws StockException if the amount being removed is negative or zero or if the item doesn't exist
 	 */
-	public void removeQuantity(Item item, int amountToRemove) throws StockException { // TO-DO: Throws Exception if amount becomes negative or item doesn't exist
-		if (amountToRemove <= 0) {
-			throw new StockException("Amount cannot be removed: Negative or empty value");
+	public void removeQuantity(Item item, int amountToRemove) throws StockException {
+		if (amountToRemove < 0) {
+			throw new StockException("Amount cannot be removed: Negative value");
 		} else if (stock.containsKey(item)) {
 			stock.replace(item, stock.get(item) - amountToRemove);
 		} else {
