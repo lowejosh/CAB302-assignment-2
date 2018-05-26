@@ -142,7 +142,7 @@ public class TruckTests {
 	 */
 	
 	@Test 
-	public void testManifestConstruction() throws StockException, IOException {
+	public void testManifestConstruction() throws StockException, IOException, DeliveryException {
 		manifest = new Manifest();
 	}
 	
