@@ -8,6 +8,7 @@ package stock;
 import static org.junit.Assert.*;
 
 import csv.ReadCSV;
+import delivery.Manifest;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -525,8 +526,7 @@ public class StockTests {
 		assertEquals(stock.getTotalPrice(), totalPrice);
 		
 	}
-	
-	
+
 	/*
 	 * Test : Get the Total Cost
 	 * TODO - test for more than one item

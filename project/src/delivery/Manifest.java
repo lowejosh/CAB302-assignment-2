@@ -19,15 +19,44 @@ import stock.Store;
 public class Manifest {
 	List<Truck> trucks = new ArrayList<>();
 	
-	public Manifest() {
-		
-		
-	}
-	
-	// TODO - generateManifest() - export manifest csv based on current inventory
+	public Manifest() throws StockException, IOException {
 		// Create a cold truck with the temperature of the item with the lowest temp
 		// If there are still cold items, make a new cold truck with the lowest remaining temp
 		// Create a reg truck and fill it to the max
+		
+		// Initialise variables
+		Store store = Store.getInstance();
+		Stock inventory = store.getInventory();
+		List<Item> reorderedItems = new ArrayList<>();
+		
+		// Find out which items need reordering
+		for (Item i : store.getItemList()) {
+			if (inventory.reorderRequired(i)) {
+				reorderedItems.add(i);
+			}
+		}
+		
+		// Find out the item with the lowest required temperature and create a truck for it
+		Integer lowestTemp = null;
+		for (Item i : reorderedItems) {
+			if (i.getTemp() != null) {
+				if (lowestTemp == null) {
+					lowestTemp = i.getTemp();
+				}  else if (i.getTemp() < lowestTemp) {
+					lowestTemp = i.getTemp();
+				}
+			}
+		}
+		System.out.println(lowestTemp);
+		
+	}
+	
+	// TODO - generateManifest() - export manifest csv based on manifest and reduce capital
+	public static void generateManifest(Manifest trucks) {
+
+		
+	}
+
 	
 	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
 	
