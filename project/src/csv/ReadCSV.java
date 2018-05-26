@@ -29,7 +29,7 @@ import stock.Store;
 public class ReadCSV {
 
 	/**
-	 * Initialises a list of Item objects from the imported .csv file
+	 * Initialises a list of Item objects from the imported item properties file
 	 * @param fileName The name of the file
 	 * @return A list of items retrieved from the file
 	 * @throws IOException If the file does not exist
@@ -114,7 +114,13 @@ public class ReadCSV {
 		}
 	}
 	
-	
+	/**
+	 * Creates a Stock object from the imported sales log file
+	 * @param fileName The name of the file
+	 * @return A Stock object detailing the items and quantities present in the file
+	 * @throws IOException If the file does not exist
+	 * @throws StockException If an invalid quantity is added
+	 */
 	public static Stock readSalesLog(String fileName) throws IOException, StockException {
 		// Initialise a Stock object for representing the store's sales and get the file path
 		Stock sales = new Stock();
@@ -148,8 +154,10 @@ public class ReadCSV {
 			        Entry<Item, Integer> pair = itr.next();
 			        Item i = pair.getKey();
 
+			        // If the string from csv is equal to a string from the inventory's item name
 					if (values[0].equals(i.getName())) {
 						quantity = Integer.parseInt(values[1]);
+						// Add the item and quantity to the sales log
 						sales.addQuantity(i, quantity);
 					} 
 			    }
