@@ -66,6 +66,7 @@ public class ReadCSV {
 		return items;
 	}
 	
+	
 	/**
 	 * Creates an Item object from a given String array of data
 	 * @param data The array of data retrieved from the .csv file
@@ -114,6 +115,7 @@ public class ReadCSV {
 		}
 	}
 	
+	
 	/**
 	 * Creates a Stock object from the imported sales log file
 	 * @param fileName The name of the file
@@ -131,7 +133,7 @@ public class ReadCSV {
 		Stock inventory = new Stock();
 		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
 		for (Item i : itemList) {
-			inventory.addQuantity(i, 1);
+			inventory.addQuantity(i, 0);
 		}
 		
 		

@@ -9,10 +9,14 @@ import static org.junit.Assert.*;
 
 import csv.ReadCSV;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Map.Entry;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -378,27 +382,75 @@ public class StockTests {
 	
 	
 	/*
-	 * Test : Get the Store Inventory
-	 * TODO - i'm not sure if you've decided how to do it but
-	 * we could initialize the starting inventory of the store
-	 * from the store class by importing the item properties
-	 * and setting every item to 0 quantity - example below
+	 * Test : Get the Store ItemList
 	 */
 	@Test
-	public void testStoreInventory() {
-		
-		stock = new Stock();
-		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
-		for (Item i : itemList) {
-			stock.addQuantity(i, 0);
-		}
-		
+	public void testStoreItemList() throws IOException, StockException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 		
-		// Test the get method
-		assertThat(store.getInventory()).isEqualToComparingFieldByField(stock);
+		// Create a test stock object
+		stock = new Stock();
+		
+		// Get the item list
+		List<Item> itemList = store.getItemList();
+		
+		// Create a test item list
+		List<Item> testItemList = ReadCSV.initialiseItems("item_properties.txt");
+		
+		// If the test succeeds
+		int successes = 0;
+		
+		// Compare the String representations
+		for (Item i : itemList) {
+			String itemName = i.getName();
+			for (Item ii : testItemList) {
+				String testItemName = ii.getName();
+				if (itemName.equals(testItemName)) {
+					successes++;
+				}
+			}
+		}
+		
+		assertEquals(itemList.size(), successes);		
+	}
+	
+	
+	
+	/*
+	 * Test : Get the Store Inventory
+	 */
+	@Test
+	public void testStoreInventory() throws StockException, IOException {
+		
+		// Retrieve the store instance
+		Store store = Store.getInstance();
+		
+		stock = new Stock();
+		List<Item> itemList = store.getItemList();
+		for (Item i : itemList) {
+			stock.addQuantity(i, 0);
+		}
+		
+		// Comparison failures
+		int failures = 0;
+		
+		// Add the Item object and quantity to the sales
+	    Iterator<Entry<Item, Integer>> storeIterator = store.getInventory().getStock().entrySet().iterator();
+	    while (storeIterator.hasNext()) {
+	        Entry<Item, Integer> storePair = storeIterator.next();
+	        Item item = storePair.getKey();
+	        int storeQuantity = storePair.getValue();
+	        int testQuantity = stock.getQuantity(item);
+	        
+	        if (storeQuantity != testQuantity) {
+	        	failures++;
+	        }
+	    }
+		
+		// Test to see there were no failures in comparisons between the objects
+		assertEquals(failures, 0);
 	}
 	
 	
