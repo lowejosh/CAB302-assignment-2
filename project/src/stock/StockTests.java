@@ -339,7 +339,7 @@ public class StockTests {
 	 * Test : Grabbing the basic store instance 
 	 */
 	@Test 
-	public void testStoreConstruction() {
+	public void testStoreConstruction() throws StockException, IOException {
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 	}
@@ -349,7 +349,7 @@ public class StockTests {
 	 * Test : Get the Starting Store Capital
 	 */
 	@Test
-	public void testStoreCapital() {
+	public void testStoreCapital() throws StockException, IOException {
 		
 		double startingCapital = 100000.0;
 		
@@ -458,7 +458,7 @@ public class StockTests {
 	 * Test : Modify Store Capital by adding
 	 */
 	@Test
-	public void ModifyStoreCapitalByAdding() {
+	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
 		
 		double startingCapital = 100000.0;
 		
@@ -478,7 +478,7 @@ public class StockTests {
 	 * Test : Modify Store Capital by removing
 	 */
 	@Test
-	public void ModifyStoreCapitalByRemoving() {
+	public void ModifyStoreCapitalByRemoving() throws StockException, IOException {
 		
 		double startingCapital = 100000.0;
 		

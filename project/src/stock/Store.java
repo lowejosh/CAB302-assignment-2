@@ -14,6 +14,7 @@ public class Store {
     private static Stock inventory = null;
     private String name = STORE_NAME;
     private static Store instance;
+    static List<Item> itemList;
     
     private Store() {
     }
@@ -21,7 +22,7 @@ public class Store {
     public static Store getInstance() throws StockException, IOException {
         if (instance == null) instance = new Store();
         inventory = new Stock();
-        List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
+        itemList = ReadCSV.initialiseItems("item_properties.txt");
         for (Item i : itemList) {
             inventory.addQuantity(i, 0);
         }
@@ -39,4 +40,8 @@ public class Store {
     public Stock getInventory() {
         return inventory;
     }
+
+	public List<Item> getItemList() {
+		return itemList;
+	}
 }
