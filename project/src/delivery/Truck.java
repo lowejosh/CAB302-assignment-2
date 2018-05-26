@@ -19,7 +19,7 @@ public abstract class Truck {
 		this.cargo = new Stock();
 	}
 	
-	public abstract void addCargo(Item item, int quantity);
+	public abstract void addCargo(Item item, int quantity) throws DeliveryException;
 	
 	public int getCargo() {
 		int sum = 0; 

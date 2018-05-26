@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import stock.Item;
+import stock.StockException;
 
 /**
  * @author Joshua Lowe
@@ -12,22 +13,26 @@ import stock.Item;
 public class ColdTruck extends Truck {
 	private int temperature;
 	
-	public ColdTruck(int temperature) {
+	public ColdTruck(int temperature) throws DeliveryException {
 		super(800);
 		if (temperature > 10 || temperature < -20) {
-			//throw exception
+			throw new DeliveryException();
 		} else {
 			this.temperature = temperature;
 		}
 	}
 	
 	@Override
-	public void addCargo(Item item, int quantity) {
+	public void addCargo(Item item, int quantity) throws DeliveryException {
 		// If there is not enough space for the cargo, throw exception
 		if (this.getCargo() + quantity > this.cargoCapacity) {
-			// throw exception
+			throw new DeliveryException();
 		} else {
-			super.cargo.addQuantity(item, quantity);
+			try {
+				super.cargo.addQuantity(item, quantity);
+			} catch (StockException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

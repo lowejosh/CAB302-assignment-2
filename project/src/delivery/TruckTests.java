@@ -1,6 +1,5 @@
 package delivery;
 import stock.Item;
-import stock.Stock;
 import stock.StockException;
 
 import static org.junit.Assert.*;
@@ -63,7 +62,7 @@ public class TruckTests {
 	 * Test 3: Checking the costs of the trucks
 	 */
 	@Test
-	public void getCostTest() {
+	public void getCostTest() throws DeliveryException {
 		regTruck.addCargo(biscuit, 323);
 		assertEquals(regTruck.getCargo(), 323);
 		
@@ -91,7 +90,7 @@ public class TruckTests {
 	@Test (expected = DeliveryException.class) 
 	public void addTooMuchCargo() throws DeliveryException{
 		regTruck.addCargo(biscuit, 1000); //Thassa lotta bickies, try dunkin that in ya bushells
-		assertEquals(coldTruck.getCargo(), 1000);
+		assertEquals(regTruck.getCargo(), 1000);
 		
 		regTruck.addCargo(biscuit, 1);
 	}
