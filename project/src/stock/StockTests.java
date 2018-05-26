@@ -31,12 +31,12 @@ public class StockTests {
 	
 	// Returns a random int from 1 to 200 for quantity tests
 	private static int randQuantity() {
-		return (1 + 199 * random.nextInt());
+		return ((int) (Math.random()*(200 - 1))) + 1;
 	}
 	
 	// Returns a random double from 1000 to 500000 for capital tests
 	private static double randCapital() {
-		return (1000 + 499000 * random.nextDouble());
+		return ((double) (Math.random()*(100000 - 1000) + 1000));
 	}
 	
 	/*
@@ -460,11 +460,11 @@ public class StockTests {
 	@Test
 	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
 		
-		double startingCapital = 100000.0;
-		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 		
+		double startingCapital = store.getCapital();
+
 		// Add to the capital
 		double amountToAdd = randCapital();
 		store.modifyCapital(amountToAdd);
@@ -479,11 +479,11 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByRemoving() throws StockException, IOException {
-		
-		double startingCapital = 100000.0;
-		
+
 		// Retrieve the store instance
 		Store store = Store.getInstance();
+		
+		double startingCapital = store.getCapital();
 		
 		// Remove from the capital
 		double amountToRemove = randCapital();
