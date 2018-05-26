@@ -11,14 +11,14 @@ public class Manifest {
 	List<Truck> trucks = new ArrayList<>();
 	
 	public Manifest() {
-		// TODO
 		
-		/*
-		 * 
-		 * Should we take the sales log as a parameter and implement an
-		 * algorithm for finding the suitable trucks and loading them?
-		 * 
-		 */
+		
 	}
+	
+	// TODO - generateManifest() - export manifest csv based on current inventory
+	
+	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
+	
+	// TODO - loadSalesLog() - load in sales log and reduce store inventory
 
 }
