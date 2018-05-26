@@ -459,6 +459,11 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
+<<<<<<< HEAD
+=======
+		
+		double startingCapital = 100000.0;
+>>>>>>> 303825fbfa2dd355296c2796517a94f3e518bc7b
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
