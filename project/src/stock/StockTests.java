@@ -387,10 +387,10 @@ public class StockTests {
 	@Test
 	public void testStoreInventory() {
 		
-		Stock startingInventory = new Stock();
+		stock = new Stock();
 		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
 		for (Item i : itemList) {
-			startingInventory.addQuantity(i, 0);
+			stock.addQuantity(i, 0);
 		}
 		
 		
@@ -398,7 +398,7 @@ public class StockTests {
 		Store store = Store.getInstance();
 		
 		// Test the get method
-		assertThat(store.getInventory()).isEqualToComparingFieldByField(startingInventory);
+		assertThat(store.getInventory()).isEqualToComparingFieldByField(stock);
 	}
 	
 	
