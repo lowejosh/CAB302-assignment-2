@@ -7,10 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import stock.Item;
+import stock.Stock;
 import stock.StockException;
+import stock.Store;
 
 /**
  * 
@@ -108,5 +113,59 @@ public class ReadCSV {
 			throw new StockException();
 		}
 	}
+	
+	
+	public static Stock readSalesLog(String fileName) throws IOException, StockException {
+		// Initialise a Stock object for representing the store's sales and get the file path
+		Stock sales = new Stock();
+		Path filePath = Paths.get(fileName);
+		
+		// Get the Store's stock for reference to initialised item objects
+		//Stock inventory = Store.getInventory();
+		Stock inventory = new Stock();
+		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
+		for (Item i : itemList) {
+			inventory.addQuantity(i, 1);
+		}
+		
+		
+		// Try to create a BufferedReader from the file
+		try (BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII)) {
+			// Read the first line
+			String line = buff.readLine();
+			
+			// While the whole document file hasn't been read
+			while (line!=null) {
+				// Split the line into an array from the ,'s
+				String[] values = line.split(",");
+				
+				// Initialise quantity integer
+				int quantity;
+				
+				// Add the Item object and quantity to the sales
+			    Iterator<Entry<Item, Integer>> itr = inventory.getStock().entrySet().iterator();
+			    while (itr.hasNext()) {
+			        Entry<Item, Integer> pair = itr.next();
+			        Item i = pair.getKey();
+
+					if (values[0].equals(i.getName())) {
+						quantity = Integer.parseInt(values[1]);
+						sales.addQuantity(i, quantity);
+					} 
+			    }
+				// Read the next line
+				line = buff.readLine();
+
+			}
+		}
+		// Catch exception
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Return the sales log Stock object
+		return sales;
+	}
+	
 
 }
