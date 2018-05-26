@@ -31,12 +31,12 @@ public class StockTests {
 	
 	// Returns a random int from 1 to 200 for quantity tests
 	private static int randQuantity() {
-		return (1 + 199 * random.nextInt());
+		return ((int) (Math.random()*(200 - 1))) + 1;
 	}
 	
 	// Returns a random double from 1000 to 500000 for capital tests
 	private static double randCapital() {
-		return (1000 + 499000 * random.nextDouble());
+		return ((double) (Math.random()*(100000 - 1000) + 1000));
 	}
 	
 	/*
@@ -339,7 +339,7 @@ public class StockTests {
 	 * Test : Grabbing the basic store instance 
 	 */
 	@Test 
-	public void testStoreConstruction() {
+	public void testStoreConstruction() throws StockException, IOException {
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 	}
@@ -349,7 +349,7 @@ public class StockTests {
 	 * Test : Get the Starting Store Capital
 	 */
 	@Test
-	public void testStoreCapital() {
+	public void testStoreCapital() throws StockException, IOException {
 		
 		double startingCapital = 100000.0;
 		
@@ -458,12 +458,14 @@ public class StockTests {
 	 * Test : Modify Store Capital by adding
 	 */
 	@Test
-	public void ModifyStoreCapitalByAdding() {
+	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
 		
 		double startingCapital = 100000.0;
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
+		
+		System.out.println(store.getCapital());
 		
 		// Add to the capital
 		double amountToAdd = randCapital();
@@ -478,12 +480,14 @@ public class StockTests {
 	 * Test : Modify Store Capital by removing
 	 */
 	@Test
-	public void ModifyStoreCapitalByRemoving() {
+	public void ModifyStoreCapitalByRemoving() throws StockException, IOException {
 		
 		double startingCapital = 100000.0;
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
+		
+		System.out.println(store.getCapital());
 		
 		// Remove from the capital
 		double amountToRemove = randCapital();
