@@ -54,9 +54,10 @@ public class Manifest {
 			regItemRemovedIndex[i] = false;
 		}
 		
-		// Sort the list from lowest temperature to highest
+		// Sort the cold list from lowest temperature to highest
 		Collections.sort(coldReorderItems, Comparator.comparingInt(Item::getTemp));
-		//Collections.sort(reorderItems, Comparator.comparingInt(Item::getReorderQuantity));
+		// Sort the reg list from highest to lowest reorder quantity, for best optimization
+		Collections.sort(reorderItems, Comparator.comparingInt(Item::getReorderQuantity).reversed());
 		
 		// Find out the item with the lowest required temperature and set the variable
 		Integer lowestTemp = null;
@@ -92,6 +93,7 @@ public class Manifest {
 						coldItr++;
 					}
 				}
+				// If there can be no more coldItems fit, try to squeeze in some reg items
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
 					Item item = reorderItems.get(regCheck);
 					if (!regItemRemovedIndex[regCheck] && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
@@ -106,11 +108,12 @@ public class Manifest {
 				// Add the truck to the manifest
 				trucks.add(coldTruck);
 				System.out.println("added cold truck ($" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo() + "\n");
+			// If there are no more cold items - create a reg truck
 			} else {
 				System.out.println("CREATING REG TRUCK");
-				// Create a regular truck if there is no more cold items
 				Truck regTruck = new RegTruck();
 				int currentCapacity = 0;
+				// Squeeze in as many as you can
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
 					Item item = reorderItems.get(regCheck);
 					if (!regItemRemovedIndex[regCheck] && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
@@ -134,12 +137,27 @@ public class Manifest {
 			} else {
 				lowestTemp = null;
 			}
+			
+			// Find out the item with the lowest required temperature again and set the variable
+			if (coldReorderItems != null) {
+				for (int i = 0; i < coldReorderItems.size(); i++) {
+					Item item = coldReorderItems.get(i);
+					if (lowestTemp == null && !coldItemRemovedIndex[i]) {
+						lowestTemp = item.getTemp();
+					} else if (lowestTemp != null) {
+						if (item.getTemp() < lowestTemp && !coldItemRemovedIndex[i]) {
+							lowestTemp = item.getTemp();
+						}
+					} else {
+						lowestTemp = null;
+					}
+				}		
+			}
 
 			// Stop the loop if all the items are in trucks
 			if (coldItr == coldReorderItems.size() && regItr == reorderItems.size()) {
 				itemsRemaining = false;
 			}
-			
 		}
 	}
 	
