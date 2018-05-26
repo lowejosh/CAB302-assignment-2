@@ -167,5 +167,49 @@ public class ReadCSV {
 		return sales;
 	}
 	
+	public static Stock readSalesLog(String fileName) throws IOException, StockException {
+		// Initialise a Stock object for representing the store's sales and get the file path
+		Stock sales = new Stock();
+		Path filePath = Paths.get(fileName);
+		
+		// Get the Store's stock for reference to initialised item objects
+		//Stock inventory = Store.getInstance().getInventory();
+		
+		
+		// Try to create a BufferedReader from the file
+		try (BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII)) {
+			// Read the first line
+			String line = buff.readLine();
+			
+			// While the whole document file hasn't been read
+			while (line!=null) {
+				// Split the line into an array from the ,'s
+				String[] values = line.split(",");
+				
+				// Initialise quantity integer
+				int quantity;
+				
+				for (Item i : Store.getInstance().getItemList()) {
+					// If the string from csv is equal to a string from the inventory's item name
+					if (values[0].equals(i.getName())) {
+						quantity = Integer.parseInt(values[1]);
+						// Add the item and quantity to the sales log
+						sales.addQuantity(i, quantity);
+					} 
+				}
+				// Read the next line
+				line = buff.readLine();
+
+			}
+		}
+		// Catch exception
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Return the sales log Stock object
+		return sales;
+	}
+	
 
 }

@@ -19,21 +19,21 @@ import stock.Store;
  *
  */
 public class Manifest {
-	List<Truck> trucks = new ArrayList<>();
+	private List<Truck> trucks;
 	
-	public Manifest() throws StockException, IOException, DeliveryException {
-		// Create a cold truck with the temperature of the item with the lowest temp
-		// If there are still cold items, make a new cold truck with the lowest remaining temp
-		// Create a reg truck and fill it to the max
-		
+	public Manifest() {
+		trucks = new ArrayList<>();
+	}
+	
+	// TODO - generateManifest() - export manifest csv based on inventory
+	public void generateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
 		// Initialise variables
-		Store store = Store.getInstance();
-		Stock inventory = store.getInventory();
+		Manifest manifest = new Manifest();
 		List<Item> reorderItems = new ArrayList<>();
 		List<Item> coldReorderItems = new ArrayList<>();
 
 		// Find out which items need reordering
-		for (Item i : store.getItemList()) {
+		for (Item i : Store.getInstance().getItemList()) {
 			if (inventory.reorderRequired(i)) {
 				if (i.getTemp() != null) {
 					coldReorderItems.add(i);
@@ -106,7 +106,7 @@ public class Manifest {
 				}
 				
 				// Add the truck to the manifest
-				trucks.add(coldTruck);
+				manifest.addTruck(coldTruck);
 				System.out.println("added cold truck ($" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo() + "\n");
 			// If there are no more cold items - create a reg truck
 			} else {
@@ -126,7 +126,7 @@ public class Manifest {
 				}
 				
 				// Add the truck to the manifest
-				trucks.add(regTruck);
+				manifest.addTruck(regTruck);
 				System.out.println("added reg truck ($" + regTruck.getCost() + ") with capacity " + regTruck.getCargo() + "\n");
 			}
 			
@@ -161,14 +161,17 @@ public class Manifest {
 		}
 	}
 	
-	// TODO - generateManifest() - export manifest csv based on manifest and reduce capital
-	public static void generateManifest(Manifest trucks) {
-
+	public void addTruck(Truck truck) {
+		trucks.add(truck);
+	}
+	
+	public List<Truck> getManifest() {
+		return trucks;
 		
 	}
-
 	
 	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
+	
 	
 	public static void loadSalesLog(String fileName) throws IOException, StockException {
 		// Load in the sales and the store inventory

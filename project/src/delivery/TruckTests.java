@@ -7,6 +7,7 @@ import stock.Store;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -143,6 +144,7 @@ public class TruckTests {
 	
 	@Test 
 	public void testManifestConstruction() throws StockException, IOException, DeliveryException {
+		Stock inventory = Store.getInstance().getInventory();
 		manifest = new Manifest();
 	}
 	
@@ -183,9 +185,10 @@ public class TruckTests {
         manifest.loadSalesLog("sales_log_test.txt");
         
         assertEquals(store.getCapital(), expected, 0.001);
+        
         // cant assert these two properly as they are different instances
         // in stockTests testGetInventory ya can see some code i made for 
-        // iterating through the two objects and checking field by field but
+        // iterating through the two stock objects and checking field by field but
         // thats as good as it can get without third party libraries
         //assertEquals(store.getInventory(), stock);
 		
@@ -193,12 +196,15 @@ public class TruckTests {
 	
 	@Test
 	public void testAddTruck() {
+		manifest = new Manifest();
 		manifest.addTruck(regTruck); //Adds this Truck object
 		manifest.addTruck(coldTruck); //Adds this Truck object
 	}
 	
 	@Test
 	public void testGetManifest() {
+		manifest = new Manifest();
+		list = new ArrayList<>();
 		manifest.addTruck(regTruck);
 		manifest.addTruck(coldTruck);
 		list.add(regTruck);
