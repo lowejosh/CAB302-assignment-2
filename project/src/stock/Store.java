@@ -7,7 +7,7 @@ import csv.ReadCSV;
 
 public class Store {
     
-    private final double STARTING_CAPITAL = 100000.001;
+    private final double STARTING_CAPITAL = 100000.00;
     private final String STORE_NAME = "SuperMart";
     
     private double capital = STARTING_CAPITAL;

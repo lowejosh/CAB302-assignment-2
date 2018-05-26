@@ -7,9 +7,12 @@ import stock.Store;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import csv.ReadCSV;
 
 /**
  * 
@@ -143,23 +146,42 @@ public class TruckTests {
 	}
 	
 	@Test
-	public void testGenerateManifest() throws StockException, IOException {
-		store = Store.getInstance();
-		
-	}
-	
-	@Test
 	public void testLoadManifest() throws StockException, IOException {
 		store = Store.getInstance();
+		stock = new Stock();
 		
-		manifest.loadManifest("manifest.csv");
+		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
+        for (Item i : itemList) {
+            stock.addQuantity(i, 0);
+        }
 		
+		stock.addQuantity(biscuit, 700);
+		manifest.loadManifest("manifest_test.csv");
+		
+		assertEquals(store.getCapital(), 97200.00, 0.001);
+		assertEquals(store.getInventory(), stock);
 	}
 	
 	@Test
 	public void testLoadSalesLog() throws StockException, IOException {
 		store = Store.getInstance();
+		stock = new Stock();
 		
+		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
+        for (Item i : itemList) {
+            stock.addQuantity(i, 0);
+        }
+        stock.addQuantity(biscuit, 394);
+        
+        manifest.loadManifest("sales_log_test.csv");
+        
+        assertEquals(store.getCapital(), 102364.00, 0.001);
+        assertEquals(store.getInventory(), stock);
 		
+	}
+	
+	@Test
+	public void testFindLowestTemp() throws StockException, IOException {
+		store = Store.getInstance();
 	}
 }
