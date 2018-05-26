@@ -25,6 +25,7 @@ public class TruckTests {
 	private Truck coldTruck;
 	private Truck regTruck;
 	private Manifest manifest;
+	private List<Truck> list;
 	
 	private Item iceCream;
 	private Item biscuit;
@@ -47,7 +48,7 @@ public class TruckTests {
 	 */
 	@Before @Test 
 	public void truckTest() throws DeliveryException{
-		coldTruck = new ColdTruck(-10); //Cold trucks let you assign a temperature
+		coldTruck = new ColdTruck(-20); //Cold trucks let you assign a temperature
 		regTruck = new RegTruck();
 		
 		assertEquals(coldTruck.getCargo(), 0);
@@ -76,7 +77,7 @@ public class TruckTests {
 		regTruck.addCargo(biscuit, 323);
 		assertEquals(regTruck.getCargo(), 323);
 		
-		assertEquals(coldTruck.getCost(), 1308.16, 1e-15);
+		assertEquals(coldTruck.getCost(), 1732.99, 1e-15);
 		assertEquals(regTruck.getCost(), 830.75, 1e-15);
 		
 		//float coldTruckCost = 900 + 200*0.7^coldTruck.getTemp()/5;
@@ -181,7 +182,30 @@ public class TruckTests {
 	}
 	
 	@Test
-	public void testFindLowestTemp() throws StockException, IOException {
-		store = Store.getInstance();
+	public void testAddTruck() {
+		manifest.addTruck(regTruck); //Adds this Truck object
+		manifest.addTruck(coldTruck); //Adds this Truck object
 	}
+	
+	@Test
+	public void testGetManifest() {
+		manifest.addTruck(regTruck);
+		manifest.addTruck(coldTruck);
+		list.add(regTruck);
+		list.add(coldTruck);
+		assertEquals(manifest.getManifest(), list);
+	}
+	
+	// Might be unnecessary - cost is worked out as part of parsing the manifest
+	/*@Test
+	public void testGetTotalCost() throws DeliveryException {
+		regTruck.addCargo(biscuit, 300);
+		coldTruck.addCargo(iceCream, 50);
+		
+		manifest.addTruck(regTruck);
+		manifest.addTruck(coldTruck);
+		
+		assertEquals(manifest.getTotalPrice(), 2557.99, 0.001);
+	}*/
+	
 }
