@@ -460,13 +460,11 @@ public class StockTests {
 	@Test
 	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
 		
-		double startingCapital = 100000.0;
-		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 		
-		System.out.println(store.getCapital());
-		
+		double startingCapital = store.getCapital();
+
 		// Add to the capital
 		double amountToAdd = randCapital();
 		store.modifyCapital(amountToAdd);
@@ -481,13 +479,11 @@ public class StockTests {
 	 */
 	@Test
 	public void ModifyStoreCapitalByRemoving() throws StockException, IOException {
-		
-		double startingCapital = 100000.0;
-		
+
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 		
-		System.out.println(store.getCapital());
+		double startingCapital = store.getCapital();
 		
 		// Remove from the capital
 		double amountToRemove = randCapital();
