@@ -71,8 +71,8 @@ public class Manifest {
 				// While the truck isn't full, keep adding items in order of lowest temperature
 				int currentCapacity = 0;
 				for (int coldCheck = 0; coldCheck < coldReorderItems.size(); coldCheck++) {
-					Item item = coldReorderItems.get(coldItr);
-					if (coldCheck >= coldItr - 1 && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					Item item = coldReorderItems.get(coldCheck);
+					if (coldCheck >= coldItr && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
 						System.out.println("\tadded " + item.getName());
@@ -80,8 +80,8 @@ public class Manifest {
 					}
 				}
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
-					Item item = reorderItems.get(regItr);
-					if (regCheck >= regItr - 1 && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					Item item = reorderItems.get(regCheck);
+					if (regCheck >= regItr && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
 						System.out.println("\tadded " + item.getName());
@@ -97,8 +97,8 @@ public class Manifest {
 				Truck regTruck = new RegTruck();
 				int currentCapacity = 0;
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
-					Item item = reorderItems.get(regItr);
-					if (regCheck >= regItr - 1 && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					Item item = reorderItems.get(regCheck);
+					if (regCheck >= regItr && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						regTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
 						System.out.println("\tadded " + item.getName());
