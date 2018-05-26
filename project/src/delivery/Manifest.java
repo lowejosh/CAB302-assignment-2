@@ -32,7 +32,6 @@ public class Manifest {
 		List<Item> reorderItems = new ArrayList<>();
 		List<Item> coldReorderItems = new ArrayList<>();
 
-		
 		// Find out which items need reordering
 		for (Item i : store.getItemList()) {
 			if (inventory.reorderRequired(i)) {
@@ -44,9 +43,20 @@ public class Manifest {
 			}
 		}
 		
+		// Initialize an array of booleans for holding whether the item has been removed or not
+		boolean[] coldItemRemovedIndex = new boolean[coldReorderItems.size()];
+		boolean[] regItemRemovedIndex = new boolean[reorderItems.size()];
+		// Initialize the values as false
+		for (int i = 0; i < coldReorderItems.size(); i++) {
+			coldItemRemovedIndex[i] = false;
+		}
+		for (int i = 0; i < reorderItems.size(); i++) {
+			regItemRemovedIndex[i] = false;
+		}
+		
 		// Sort the list from lowest temperature to highest
-		Collections.sort(coldReorderItems, Comparator.comparingInt(Item::getReorderQuantity));
-		Collections.sort(reorderItems, Comparator.comparingInt(Item::getReorderQuantity));
+		Collections.sort(coldReorderItems, Comparator.comparingInt(Item::getTemp));
+		//Collections.sort(reorderItems, Comparator.comparingInt(Item::getReorderQuantity));
 		
 		// Find out the item with the lowest required temperature and set the variable
 		Integer lowestTemp = null;
@@ -74,19 +84,21 @@ public class Manifest {
 				int currentCapacity = 0;
 				for (int coldCheck = 0; coldCheck < coldReorderItems.size(); coldCheck++) {
 					Item item = coldReorderItems.get(coldCheck);
-					if (coldCheck >= coldItr && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					if (!coldItemRemovedIndex[coldCheck] && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName() + " at coldItr = " + coldItr);
+						System.out.println("\tadded " + item.getName() + " at coldCheck = " + coldCheck);
+						coldItemRemovedIndex[coldCheck] = true;
 						coldItr++;
 					}
 				}
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
 					Item item = reorderItems.get(regCheck);
-					if (regCheck >= regItr && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					if (!regItemRemovedIndex[regCheck] && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName() + " at regItr = " + regItr);
+						System.out.println("\tadded " + item.getName() + " at regCheck = " + regCheck);
+						regItemRemovedIndex[regCheck] = true;
 						regItr++;
 					}
 				}
@@ -101,10 +113,11 @@ public class Manifest {
 				int currentCapacity = 0;
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
 					Item item = reorderItems.get(regCheck);
-					if (regCheck >= regItr && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					if (!regItemRemovedIndex[regCheck] && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						regTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName() + " at regItr = " + regItr);
+						System.out.println("\tadded " + item.getName() + " at regCheck = " + regCheck);
+						regItemRemovedIndex[regCheck] = true;
 						regItr++;
 					}
 				}
@@ -113,6 +126,7 @@ public class Manifest {
 				trucks.add(regTruck);
 				System.out.println("added reg truck ($" + regTruck.getCost() + ") with capacity " + regTruck.getCargo() + "\n");
 			}
+			
 			
 			// Update the lowest temp
 			if (coldReorderItems != null && coldItr != coldReorderItems.size()) {
