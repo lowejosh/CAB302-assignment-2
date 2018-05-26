@@ -1,8 +1,13 @@
 package delivery;
 import stock.Item;
+import stock.Stock;
 import stock.StockException;
+import stock.Store;
 
 import static org.junit.Assert.*;
+
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +25,8 @@ public class TruckTests {
 	
 	private Item iceCream;
 	private Item biscuit;
+	private Stock stock;
+	private Store store;
 	
 	//Setting up the items used in the tests
 	@Before 
@@ -135,4 +142,24 @@ public class TruckTests {
 		manifest = new Manifest();
 	}
 	
+	@Test
+	public void testGenerateManifest() throws StockException, IOException {
+		store = Store.getInstance();
+		
+	}
+	
+	@Test
+	public void testLoadManifest() throws StockException, IOException {
+		store = Store.getInstance();
+		
+		manifest.loadManifest("manifest.csv");
+		
+	}
+	
+	@Test
+	public void testLoadSalesLog() throws StockException, IOException {
+		store = Store.getInstance();
+		
+		
+	}
 }
