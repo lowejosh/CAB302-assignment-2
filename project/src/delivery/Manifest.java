@@ -45,9 +45,10 @@ public class Manifest {
 		}
 		
 		// Sort the list from lowest temperature to highest
-		Collections.sort(coldReorderItems, Comparator.comparingInt(Item::getTemp));
+		Collections.sort(coldReorderItems, Comparator.comparingInt(Item::getReorderQuantity));
+		Collections.sort(reorderItems, Comparator.comparingInt(Item::getReorderQuantity));
 		
-		// Find out the item with the lowest required temperature
+		// Find out the item with the lowest required temperature and set the variable
 		Integer lowestTemp = null;
 		if (coldReorderItems != null) {
 			for (Item i : coldReorderItems) {
@@ -65,6 +66,7 @@ public class Manifest {
 		int regItr = 0;
 		while(itemsRemaining) {
 			if (lowestTemp != null) {
+				System.out.println("CREATING COLD TRUCK");
 				// Create a cold truck with the lowest temp
 				Truck coldTruck = new ColdTruck(lowestTemp);
 				
@@ -75,7 +77,7 @@ public class Manifest {
 					if (coldCheck >= coldItr && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName());
+						System.out.println("\tadded " + item.getName() + " at coldItr = " + coldItr);
 						coldItr++;
 					}
 				}
@@ -84,15 +86,16 @@ public class Manifest {
 					if (regCheck >= regItr && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName());
+						System.out.println("\tadded " + item.getName() + " at regItr = " + regItr);
 						regItr++;
 					}
 				}
 				
 				// Add the truck to the manifest
 				trucks.add(coldTruck);
-				System.out.println("added cold truck (" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo());
+				System.out.println("added cold truck ($" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo() + "\n");
 			} else {
+				System.out.println("CREATING REG TRUCK");
 				// Create a regular truck if there is no more cold items
 				Truck regTruck = new RegTruck();
 				int currentCapacity = 0;
@@ -101,14 +104,14 @@ public class Manifest {
 					if (regCheck >= regItr && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
 						regTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName());
+						System.out.println("\tadded " + item.getName() + " at regItr = " + regItr);
 						regItr++;
 					}
 				}
 				
 				// Add the truck to the manifest
 				trucks.add(regTruck);
-				System.out.println("added reg truck with capacity " + regTruck.getCargo());
+				System.out.println("added reg truck ($" + regTruck.getCost() + ") with capacity " + regTruck.getCargo() + "\n");
 			}
 			
 			// Update the lowest temp
@@ -124,12 +127,6 @@ public class Manifest {
 			}
 			
 		}
-
-		System.out.println("reached");
-		for (Truck truck : trucks) {
-			System.out.println(truck.getCargo());
-		}
-		
 	}
 	
 	// TODO - generateManifest() - export manifest csv based on manifest and reduce capital
