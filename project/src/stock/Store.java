@@ -20,9 +20,12 @@ public class Store {
     }
 
     public static Store getInstance() throws StockException, IOException {
-        if (instance == null) instance = new Store();
-        inventory = new Stock();
-        itemList = ReadCSV.initialiseItems("item_properties.txt");
+        if (instance == null) {
+        	instance = new Store();
+            inventory = new Stock();
+            itemList = ReadCSV.initialiseItems("item_properties.txt");
+        }
+
         for (Item i : itemList) {
             inventory.addQuantity(i, 0);
         }

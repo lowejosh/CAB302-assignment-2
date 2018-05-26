@@ -129,12 +129,7 @@ public class ReadCSV {
 		Path filePath = Paths.get(fileName);
 		
 		// Get the Store's stock for reference to initialised item objects
-		//Stock inventory = Store.getInventory();
-		Stock inventory = new Stock();
-		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
-		for (Item i : itemList) {
-			inventory.addQuantity(i, 0);
-		}
+		//Stock inventory = Store.getInstance().getInventory();
 		
 		
 		// Try to create a BufferedReader from the file
@@ -150,19 +145,14 @@ public class ReadCSV {
 				// Initialise quantity integer
 				int quantity;
 				
-				// Add the Item object and quantity to the sales
-			    Iterator<Entry<Item, Integer>> itr = inventory.getStock().entrySet().iterator();
-			    while (itr.hasNext()) {
-			        Entry<Item, Integer> pair = itr.next();
-			        Item i = pair.getKey();
-
-			        // If the string from csv is equal to a string from the inventory's item name
+				for (Item i : Store.getInstance().getItemList()) {
+					// If the string from csv is equal to a string from the inventory's item name
 					if (values[0].equals(i.getName())) {
 						quantity = Integer.parseInt(values[1]);
 						// Add the item and quantity to the sales log
 						sales.addQuantity(i, quantity);
 					} 
-			    }
+				}
 				// Read the next line
 				line = buff.readLine();
 
