@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import csv.CSVFormatException;
 import csv.ReadCSV;
 import csv.WriteCSV;
 
@@ -144,13 +145,13 @@ public class TruckTests {
 	 */
 	
 	@Test 
-	public void testManifestConstruction() throws StockException, IOException, DeliveryException {
+	public void testManifestConstruction() throws StockException, IOException, DeliveryException, CSVFormatException {
 		Stock inventory = Store.getInstance().getInventory();
 		manifest = new Manifest();
 	}
 	
 	@Test
-	public void testLoadManifest() throws StockException, IOException, DeliveryException {
+	public void testLoadManifest() throws StockException, IOException, DeliveryException, CSVFormatException {
 		stock = new Stock();
 		store = Store.getInstance();
 		
@@ -181,34 +182,7 @@ public class TruckTests {
         //assertEquals(store.getInventory(), stock);
 	}
 	
-	@Test
-	public void testLoadSalesLog() throws StockException, IOException {
-		store = Store.getInstance();
-		stock = new Stock();
-		
-		List<Item> itemList = Store.getInstance().getItemList();
-        for (Item i : itemList) {
-            stock.addQuantity(i, 0);
-        }
-        // For getting the same instances of items initialised in the store
-        for (Item i : itemList) {
-        	if (i.getName().equals("biscuits")) {
-        		biscuit = i;
-        	}
-        }
-        stock.addQuantity(biscuit, 394);
-        double expected = store.getCapital() + biscuit.getPrice() * stock.getQuantity(biscuit);
-        Manifest.loadSalesLog("sales_log_test.txt");
-        
-        assertEquals(store.getCapital(), expected, 0.001);
-        
-        // cant assert these two properly as they are different instances
-        // in stockTests testGetInventory ya can see some code i made for 
-        // iterating through the two stock objects and checking field by field but
-        // thats as good as it can get without third party libraries
-        //assertEquals(store.getInventory(), stock);
-		
-	}
+	
 	
 	@Test
 	public void testAddTruck() {

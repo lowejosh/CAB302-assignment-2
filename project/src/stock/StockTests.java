@@ -7,6 +7,7 @@ package stock;
 
 import static org.junit.Assert.*;
 
+import csv.CSVFormatException;
 import csv.ReadCSV;
 import delivery.Manifest;
 
@@ -340,7 +341,7 @@ public class StockTests {
 	 * Test : Grabbing the basic store instance 
 	 */
 	@Test 
-	public void testStoreConstruction() throws StockException, IOException {
+	public void testStoreConstruction() throws StockException, IOException, CSVFormatException {
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 	}
@@ -350,7 +351,7 @@ public class StockTests {
 	 * Test : Get the Starting Store Capital
 	 */
 	@Test
-	public void testStoreCapital() throws StockException, IOException {
+	public void testStoreCapital() throws StockException, IOException, CSVFormatException {
 		
 		double startingCapital = 100000.0;
 		
@@ -386,7 +387,7 @@ public class StockTests {
 	 * Test : Get the Store ItemList
 	 */
 	@Test
-	public void testStoreItemList() throws IOException, StockException {
+	public void testStoreItemList() throws IOException, StockException, CSVFormatException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -423,7 +424,7 @@ public class StockTests {
 	 * Test : Get the Store Inventory
 	 */
 	@Test
-	public void testStoreInventory() throws StockException, IOException {
+	public void testStoreInventory() throws StockException, IOException, CSVFormatException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -459,7 +460,7 @@ public class StockTests {
 	 * Test : Modify Store Capital by adding
 	 */
 	@Test
-	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
+	public void ModifyStoreCapitalByAdding() throws StockException, IOException, CSVFormatException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -479,7 +480,7 @@ public class StockTests {
 	 * Test : Modify Store Capital by removing
 	 */
 	@Test
-	public void ModifyStoreCapitalByRemoving() throws StockException, IOException {
+	public void ModifyStoreCapitalByRemoving() throws StockException, IOException, CSVFormatException {
 
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -545,6 +546,36 @@ public class StockTests {
 		int totalCost = item.getCost() * quantity;
 		
 		assertEquals(stock.getTotalCost(), totalCost);
+		
+	}
+	
+	@Test
+	public void testLoadSalesLog() throws StockException, IOException, CSVFormatException {
+		store = Store.getInstance();
+		stock = new Stock();
+		
+		
+		List<Item> itemList = Store.getInstance().getItemList();
+        for (Item i : itemList) {
+            stock.addQuantity(i, 0);
+        }
+        // For getting the same instances of items initialised in the store
+        for (Item i : itemList) {
+        	if (i.getName().equals("biscuits")) {
+        		item = i;
+        	}
+        }
+        stock.addQuantity(item, 394);
+        double expected = store.getCapital() + item.getPrice() * stock.getQuantity(item);
+        Store.loadSalesLog("sales_log_test.txt");
+        
+        assertEquals(store.getCapital(), expected, 0.001);
+        
+        // cant assert these two properly as they are different instances
+        // in stockTests testGetInventory ya can see some code i made for 
+        // iterating through the two stock objects and checking field by field but
+        // thats as good as it can get without third party libraries
+        //assertEquals(store.getInventory(), stock);
 		
 	}
 	

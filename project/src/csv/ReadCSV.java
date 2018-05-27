@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import delivery.ColdTruck;
+import delivery.DeliveryException;
 import delivery.Manifest;
 import delivery.RegTruck;
 import delivery.Truck;
@@ -121,14 +122,16 @@ public class ReadCSV {
 	 * @return A Stock object detailing the items and quantities present in the file
 	 * @throws IOException If the file does not exist
 	 * @throws StockException If an invalid quantity is added
+	 * @throws CSVFormatException 
+	 * @throws NumberFormatException 
 	 */
-	public static Stock readSalesLog(String fileName) throws IOException, StockException {
+	public static Stock readSalesLog(String fileName) throws IOException, StockException, NumberFormatException, CSVFormatException {
 		// Initialise a Stock object for representing the store's sales and get the file path
 		Stock sales = new Stock();
 		Path filePath = Paths.get(fileName);
 		
 		// Try to create a BufferedReader from the file
-		try (BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII)) {
+		BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII);
 			// Read the first line
 			String line = buff.readLine();
 			
@@ -152,24 +155,19 @@ public class ReadCSV {
 				line = buff.readLine();
 
 			}
-		}
-		// Catch exception
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		// Return the sales log Stock object
 		return sales;
 	}
 	
-	public static Manifest readManifest(String fileName) throws IOException, StockException {
+	public static Manifest readManifest(String fileName) throws IOException, StockException, DeliveryException, NumberFormatException, CSVFormatException {
 		// Initialise variables
 		Stock stock = new Stock();
 		Path filePath = Paths.get(fileName);
 		Manifest manifest = new Manifest();
 
 		// Try to create a BufferedReader from the file
-		try (BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII)) {
+		BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII); 
 			// Read the first line
 			String line = buff.readLine();
 			
@@ -353,11 +351,7 @@ public class ReadCSV {
 					throw new CSVFormatException();
 				}
 			}
-		}
-		// Catch exception
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		
 		// Return the manifest
 		return manifest;
