@@ -17,7 +17,7 @@ public class Store {
     private static Stock inventory = null;
     private String name = STORE_NAME;
     private static Store instance;
-    static List<Item> itemList;
+    private static List<Item> itemList;
     
     private Store() {
     }
@@ -26,12 +26,9 @@ public class Store {
         if (instance == null) {
         	instance = new Store();
             inventory = new Stock();
-            itemList = ReadCSV.initialiseItems("item_properties.txt");
+            //itemList = ReadCSV.initialiseItems("item_properties.txt");
         }
 
-        for (Item i : itemList) {
-            inventory.addQuantity(i, 0);
-        }
         return instance;
     }
 
@@ -49,6 +46,14 @@ public class Store {
 
 	public List<Item> getItemList() {
 		return itemList;
+	}
+	
+	public void setItemList(List<Item> list) throws StockException {
+		itemList = list;
+		for (Item i : itemList) {
+			inventory.addQuantity(i, 0);
+		}
+		
 	}
 	
 	public static void loadSalesLog(String fileName) throws IOException, StockException, CSVFormatException {

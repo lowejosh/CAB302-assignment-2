@@ -29,6 +29,7 @@ import csv.ReadCSV;
 import stock.StockException;
 import stock.Store;
 import stock.Item;
+import stock.Stock;
 
 public class Main extends JFrame implements ActionListener, Runnable {
 
@@ -162,29 +163,28 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		//Consider the alternatives - not all active at once. 
 		if (src== btnLoadItems) {
 			try {
-				populateTable();
-			} catch (IOException e) {
-				System.err.println("Error");
-				JOptionPane.showMessageDialog(this,"Error Message","Error: File Not Found",JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
+				loadItemProperties();
 			} catch (StockException e) {
-				JOptionPane.showMessageDialog(this,"Error Message","Error: Item can't be created",JOptionPane.ERROR_MESSAGE);
-				//e.printStackTrace();
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} catch (CSVFormatException e) {
-				JOptionPane.showMessageDialog(this,"Error Message","Error: File format incorrect",JOptionPane.ERROR_MESSAGE);
-				//e.printStackTrace();
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			updateTable();		
 		}
 		if (src == btnLoadSales) {
-			JFrame chooserFrame = new JFrame("FileChooserDemo");
 			JFileChooser chooser = new JFileChooser();
-			chooserFrame.add(chooser);
 			
 			int returnValue = chooser.showOpenDialog(null);
 
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				try {
 					store.loadSalesLog(chooser.getSelectedFile().getAbsolutePath());
+					updateTable();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -198,24 +198,37 @@ public class Main extends JFrame implements ActionListener, Runnable {
 			}		
 		}
 	}
+	
+	private void loadItemProperties() throws StockException, IOException, CSVFormatException {
+		JFileChooser chooser = new JFileChooser();
+		int returnValue = chooser.showOpenDialog(null);
 
-	private void populateTable() throws IOException, StockException, CSVFormatException {
-		itemList = ReadCSV.initialiseItems("item_properties.txt");
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			Store.getInstance().setItemList(ReadCSV.initialiseItems(chooser.getSelectedFile().getAbsolutePath())) ;
+		}
+	}
+
+	private void updateTable() {
+		itemList = null;
+		//itemList.addAll(store.getInventory().getStock().keySet());
+		Stock stock = store.getInventory();
 		// TODO - dont know if this will break anything in the long run it stops a bug from loading the list over and over again
-		if (!itemsLoaded) { 
-			for (Item item : itemList) {
+		//if (!itemsLoaded) { 
+		tableModel.setRowCount(0);
+			for (Item item : stock.getStock().keySet()) {
 				Object[] newRowData = new Object[7];
 				newRowData[0] = item.getName();
-				newRowData[1] = 0;
+				newRowData[1] = store.getInventory().getStock().get(item);
 				newRowData[2] = item.getCost();
 				newRowData[3] = item.getPrice();
 				newRowData[4] = item.getReorderPoint();
 				newRowData[5] = item.getReorderQuantity();
 				if (item.getTemp() == null) newRowData[6] = "N/A";
 				else newRowData[6] = item.getTemp();
+				
 				tableModel.addRow(newRowData);	
-			}
-			itemsLoaded = true;
+			//}
+			//itemsLoaded = true;
 		}
 	}
 
