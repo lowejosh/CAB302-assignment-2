@@ -2,9 +2,13 @@ package delivery;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import stock.Item;
+import stock.Stock;
 import stock.StockException;
+import stock.Store;
 
 /**
  * @author Joshua Lowe

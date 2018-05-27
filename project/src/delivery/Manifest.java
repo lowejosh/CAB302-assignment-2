@@ -29,7 +29,7 @@ public class Manifest {
 	
 	
 	
-	public void automateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
+	public static Manifest automateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
 		// Initialise variables
 		Manifest manifest = new Manifest();
 		List<Item> reorderItems = new ArrayList<>();
@@ -110,7 +110,8 @@ public class Manifest {
 				
 				// Add the truck to the manifest
 				manifest.addTruck(coldTruck);
-				System.out.println("added cold truck ($" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo() + "\n");
+				System.out.println("added cold truck ($" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo());
+				System.out.println("item cost ($" + coldTruck.getStock().getTotalCost() + ")\n");
 			// If there are no more cold items - create a reg truck
 			} else {
 				System.out.println("CREATING REG TRUCK");
@@ -130,7 +131,8 @@ public class Manifest {
 				
 				// Add the truck to the manifest
 				manifest.addTruck(regTruck);
-				System.out.println("added reg truck ($" + regTruck.getCost() + ") with capacity " + regTruck.getCargo() + "\n");
+				System.out.println("added reg truck ($" + regTruck.getCost() + ") with capacity " + regTruck.getCargo());
+				System.out.println("item cost ($" + regTruck.getStock().getTotalCost() + ")\n");
 			}
 			
 			// Update the lowest temp
@@ -161,6 +163,7 @@ public class Manifest {
 				itemsRemaining = false;
 			}
 		}
+		return manifest;
 	}
 	
 	public void addTruck(Truck truck) {
@@ -173,23 +176,39 @@ public class Manifest {
 	
 	public double getCost() {
 		double sum = 0;
+		// Sum the cost of the truck + the cost of the items
 		for (Truck truck : trucks) {
-			sum+=truck.getCost();
+			sum+=truck.getCost() + truck.getStock().getTotalCost();
+			
 		}
 		return sum;
 	}
 	
 	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
 	public static void loadManifest(String fileName) throws IOException, StockException {
-		System.out.println("reached");
+		// Initialise variables
 		Manifest manifest = ReadCSV.readManifest(fileName);
 		double cost = manifest.getCost();
-		System.out.println(cost);
-		Store.getInstance().modifyCapital(-cost);
+		Store store = Store.getInstance();
+		store.modifyCapital(-cost);
+		Stock inventory = store.getInventory();
+		
+		// Iterate through every truck in the manifest
+	    for (Truck truck : manifest.getManifest()) {
+	    	Stock cargo = truck.getStock();
+			// Iterate through every item in the cargo
+		    Iterator<Entry<Item, Integer>> itr = cargo.getStock().entrySet().iterator();
+		    while (itr.hasNext()) {
+		        Entry<Item, Integer> pair = itr.next();
+		        Item i = pair.getKey();
+		        // Add the amount of items received to the store inventory
+		        int quantity = cargo.getQuantity(i);
+		        inventory.addQuantity(i, quantity);
+		        itr.remove(); // avoids a ConcurrentModificationException
+		    }
+	    }
 	}
 	
-	
-	// We could move this somewhere else if needed
 	public static void loadSalesLog(String fileName) throws IOException, StockException {
 		// Load in the sales and the store inventory
 		Stock sales = ReadCSV.readSalesLog(fileName);

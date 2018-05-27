@@ -187,7 +187,7 @@ public class ReadCSV {
 			// While the whole document file hasn't been read
 			while (line!=null) {
 				// If the line represents a truck declaration or the document has no more lines
-				if (line.charAt(0) == '>' || buff.readLine() == null) {
+				if (line.charAt(0) == '>') {
 					// Create the truck if previously found
 					if (itr != 0) {
 						// If the truck is cold
@@ -215,9 +215,9 @@ public class ReadCSV {
 						    while (stockIterator.hasNext()) {
 						        Entry<Item, Integer> stockPair = stockIterator.next();
 						        Item item = stockPair.getKey();
-						        int quantity = stockPair.getValue();
+						        int stockQuantity = stockPair.getValue();
 						        
-						        truck.addCargo(item, quantity);
+						        truck.addCargo(item, stockQuantity);
 						    }
 						    
 						    // Add the truck to the manifest
@@ -231,9 +231,9 @@ public class ReadCSV {
 						    while (stockIterator.hasNext()) {
 						        Entry<Item, Integer> stockPair = stockIterator.next();
 						        Item item = stockPair.getKey();
-						        int quantity = stockPair.getValue();
+						        int stockQuantity = stockPair.getValue();
 						        
-						        truck.addCargo(item, quantity);
+						        truck.addCargo(item, stockQuantity);
 						    }
 						    
 						    // Add the truck to the manifest
@@ -250,7 +250,6 @@ public class ReadCSV {
 					} else if (line.equals(">Refrigerated")) {
 						willTruckBeCold = true;
 					}
-					System.out.println("truck is cold : " + willTruckBeCold + "\nitr = " + itr);
 					
 					// Increase the iteration counter
 					itr++;
@@ -262,20 +261,90 @@ public class ReadCSV {
 					// Throw exception because each manifest should begin with a truck declaration
 					throw new CSVFormatException();
 					
-				} else {
-					
+				} else if (buff.readLine() == null) {
 					// Split the line into an array from the ,'s
 					String[] values = line.split(",");
 					
 					// Initialise quantity integer
-					System.out.println(line);
 					int quantity;
 					
 					for (Item i : Store.getInstance().getItemList()) {
 						// If the string from csv is equal to a string from the inventory's item name
 						if (values[0].equals(i.getName())) {
 							quantity = Integer.parseInt(values[1]);
-							// Add the item and quantity to the sales log
+							// Add the item and quantity to the cargo
+							stock.addQuantity(i, quantity);
+						} 
+					}
+					
+					// If the truck is cold
+					if (willTruckBeCold) {
+						// Find out the item with the lowest required temperature and set the variable
+						Integer lowestTemp = null;
+						Iterator<Entry<Item, Integer>> tempCheck = stock.getStock().entrySet().iterator();
+						while (tempCheck.hasNext()) {
+							Entry<Item, Integer> storePair = tempCheck.next();
+							Item item = storePair.getKey();
+							if (item.getTemp() != null) {
+								if (lowestTemp == null) {
+									lowestTemp = item.getTemp();
+								} else if (item.getTemp() < lowestTemp) {
+									lowestTemp = item.getTemp();
+								}
+							}
+						}
+						
+						// Create the truck
+						Truck truck = new ColdTruck(lowestTemp);
+						
+						// Add the items to the truck
+					    Iterator<Entry<Item, Integer>> stockIterator = stock.getStock().entrySet().iterator();
+					    while (stockIterator.hasNext()) {
+					        Entry<Item, Integer> stockPair = stockIterator.next();
+					        Item item = stockPair.getKey();
+					        int stockQuantity = stockPair.getValue();
+					        
+					        truck.addCargo(item, stockQuantity);
+					    }
+					    
+					    // Add the truck to the manifest
+						manifest.addTruck(truck);
+					} else {
+						// Create the truck
+						Truck truck = new RegTruck();
+						
+						// Add the items to the truck
+					    Iterator<Entry<Item, Integer>> stockIterator = stock.getStock().entrySet().iterator();
+					    while (stockIterator.hasNext()) {
+					        Entry<Item, Integer> stockPair = stockIterator.next();
+					        Item item = stockPair.getKey();
+					        int stockQuantity = stockPair.getValue();
+					        
+					        truck.addCargo(item, stockQuantity);
+					    }
+					    
+					    // Add the truck to the manifest
+					    manifest.addTruck(truck);
+					}					
+					
+					// Increase the iteration counter
+					itr++;
+					
+					// Read the next line
+					line = buff.readLine();
+					
+				} else if (buff.readLine() != null) {
+					// Split the line into an array from the ,'s
+					String[] values = line.split(",");
+					
+					// Initialise quantity integer
+					int quantity;
+					
+					for (Item i : Store.getInstance().getItemList()) {
+						// If the string from csv is equal to a string from the inventory's item name
+						if (values[0].equals(i.getName())) {
+							quantity = Integer.parseInt(values[1]);
+							// Add the item and quantity to the cargo
 							stock.addQuantity(i, quantity);
 						} 
 					}
@@ -285,6 +354,8 @@ public class ReadCSV {
 					
 					// Read the next line
 					line = buff.readLine();
+				} else {
+					throw new CSVFormatException();
 				}
 			}
 		}
