@@ -1,0 +1,1049 @@
+AshaDasha (36):
+      Moved files from old directory
+      Removed Git testing files
+      Added initial Truck test cases
+      Updated the comment formatting for TruckTests.java
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Added Item.java
+      Fixed a problem in StockTests.java causing a test to fail, removed comments from Item.java
+      Added Javadoc comments to and fixed a return type in Item.java, generated Javadoc
+      Added Stock.java and Store.java
+      Updated Stock constructor to work with test changes
+      Fixed some formatting in TruckTests.java, fixed some broken tests in StockTests.java, added two methods to Stock.java
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Added Exception files, added "throws Exception" to some tests, added Exception throwing to Item.java and Stock.Java
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Fixed Exception formatting in TruckTests.java
+      Fixed some tests in StockTests.java, restructured and wrote methods for Store.java
+      Added Javadoc comments to Store.java and fixed a potential bug where some temporary variables wouldn't be overridden
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Changed Stock.java to allow zero values to be added and removed, and added inventory initialisation and a new method to Store.java
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Added skeleton for manifest tests in TruckTests.java and added sample files to project directory for testing
+      Added throws Exception declarations to some tests in StockTests.java and added a new method to Store.java
+      Added some more Manifest Tests, as well as a test csv file
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Added some more Manifest tests and changed the coldTruck initialisation so that it's cold enough to store ice-cream
+      Added Main.java with GUI frame
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Removed try/catch blocks from ReadCSV.java, added loading items properties to Main.java, added some throws declarations to Store.java, deleted some unnecessary files
+      Removed more try/catch blocks from ReadCSV.java, moved a method from Manifest.java to Store.java and moved matching test from TruckTests.java to StockTests.java, added more throws declarations
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Added declarations to Manifest.java
+      Added file choosing window for Loading the Sales Log in Main.java
+      Added file choosing to the Load Item Properties option
+      Added loading and exporting Manifests to Main.java, added a missing Javadoc comment to Store.java, removed a duplicated method in Manifest.java
+      Added Javadoc comments to Store.java, removed unnecessary throws declarations from Store.java and Main.java
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+Joshua Lowe (1):
+      Create README.md
+
+Your name (64):
+      added 3 stockTests and stock package
+      minor changes to stockTest
+      added 4 more stock tests
+      added 1 more stock test for getname
+      fixed comment
+      merging
+      added 3 stock tests and 1 store test
+      merging
+      resolved merge conflict
+      added 5 more item tests
+      added 2 more store tests
+      added helper methods and 2 more stock tests
+      added 3 more stock tests
+      added 2 more stock tests
+      added 2 more store tests
+      fixed stock tests
+      merging
+      added truck abstract class
+      merging
+      started regTruck and added another stock test
+      added another stock test
+      more progress on regTruck and added more methods
+      added coldTruck and more progress with truck stuff
+      store test changes
+      created manifest class
+      minor changest to truck getCost test
+      merging
+      tiny minor small changes
+      starting work on initialising items with csv
+      created ReadCSV class and finished initializing a list of items from item_properties
+      fixed csv reading to include temperature
+      further improved readCSV
+      added exception throws to truck classes - now pass all junit tests
+      working on manifests - added a new store test
+      better storeInventory test
+      small modifcation to inventory test
+      fixed a comment
+      merging
+      added csv reading for sales log
+      minor fixes to storeinventory
+      fixed some more stuff in storeinventory test
+      added a store test and fixed getInventory
+      merging
+      fixed errors in stockTest
+      finished with stockTests (for now)
+      fixed merge conflicts
+      ok now actually finished with merge conflicts
+      finished loadSalesLog
+      more progress with generating a manifest from inventory
+      slow progress with manifest thingy
+      wow it nearly works
+      manifest is working but not fully optimized by temperature
+      wow it works
+      fully optimized the manifest algorithm
+      added addTruck and getManifest
+      created manifest csv reading and begun readManifest()
+      readManifest is working
+      loadManifest fully functional
+      fixed some cost calculations
+      finished writeCSV and optimized automanifest a bit more
+      added javadoc
+      merging
+      Fixed small bug with loading items
+      debugged
+
+*   de55887 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * c59a741 debugged
+* | 0a6dcbb Added Javadoc comments to Store.java, removed unnecessary throws declarations from Store.java and Main.java
+|/  
+* e57e9cc Added loading and exporting Manifests to Main.java, added a missing Javadoc comment to Store.java, removed a duplicated method in Manifest.java
+* 4c29a06 Added file choosing to the Load Item Properties option
+* 664db44 Added file choosing window for Loading the Sales Log in Main.java
+* 74138e2 Added declarations to Manifest.java
+*   7e362e8 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * 95f7431 Fixed small bug with loading items
+| *   25c3278 merging
+| |\  
+| * | 42de0dc added javadoc
+* | | a06ae17 Removed more try/catch blocks from ReadCSV.java, moved a method from Manifest.java to Store.java and moved matching test from TruckTests.java to StockTests.java, added more throws declarations
+| |/  
+|/|   
+* | 35ee858 Removed try/catch blocks from ReadCSV.java, added loading items properties to Main.java, added some throws declarations to Store.java, deleted some unnecessary files
+|/  
+* dccb988 finished writeCSV and optimized automanifest a bit more
+*   a29e55c Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * 3f7a256 fixed some cost calculations
+| * 3c5aa8e loadManifest fully functional
+* | f8d6bb0 Added Main.java with GUI frame
+|/  
+* 8653d38 readManifest is working
+* 646c8f5 created manifest csv reading and begun readManifest()
+* 7b3ca2a added addTruck and getManifest
+* 81e31b9 fully optimized the manifest algorithm
+* 7bb61c3 wow it works
+* 1274fcf manifest is working but not fully optimized by temperature
+* dc7f35f wow it nearly works
+* aeef637 slow progress with manifest thingy
+* 636bfff more progress with generating a manifest from inventory
+* d2cb4c5 finished loadSalesLog
+* b5aabee Added some more Manifest tests and changed the coldTruck initialisation so that it's cold enough to store ice-cream
+*   b2f0848 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * 3d1645e ok now actually finished with merge conflicts
+| *   798fb5c fixed merge conflicts
+| |\  
+| * | f32a259 finished with stockTests (for now)
+| * | c45f0ab fixed errors in stockTest
+* | | 695a10a Added some more Manifest Tests, as well as a test csv file
+| |/  
+|/|   
+* | 303825f Added throws Exception declarations to some tests in StockTests.java and added a new method to Store.java
+|/  
+*   e9f0bc8 merging
+|\  
+| * 7ad6c8b Added skeleton for manifest tests in TruckTests.java and added sample files to project directory for testing
+* | 9ae064d added a store test and fixed getInventory
+|/  
+*   3e2f611 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * 12a41f0 fixed some more stuff in storeinventory test
+| * cd66ef3 minor fixes to storeinventory
+* | 488e940 Changed Stock.java to allow zero values to be added and removed, and added inventory initialisation and a new method to Store.java
+|/  
+* 1df8d26 added csv reading for sales log
+*   4c0e7f0 merging
+|\  
+| *   d97d369 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+| |\  
+| * | e88a949 Added Javadoc comments to Store.java and fixed a potential bug where some temporary variables wouldn't be overridden
+* | | e884a81 fixed a comment
+* | | 5d6aae8 small modifcation to inventory test
+| |/  
+|/|   
+* | 173f9f2 better storeInventory test
+* | 7fe3ec4 working on manifests - added a new store test
+* | 13096fa added exception throws to truck classes - now pass all junit tests
+* | bd91d2d further improved readCSV
+* | fb4feb3 fixed csv reading to include temperature
+* | cb9eec7 created ReadCSV class and finished initializing a list of items from item_properties
+* | 91b079d starting work on initialising items with csv
+|/  
+* 06f4116 Fixed some tests in StockTests.java, restructured and wrote methods for Store.java
+* 629522f tiny minor small changes
+*   53d2e09 merging
+|\  
+| * d3b21b4 Fixed Exception formatting in TruckTests.java
+| *   51c177c Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+| |\  
+| * | 5fdea04 Added Exception files, added "throws Exception" to some tests, added Exception throwing to Item.java and Stock.Java
+* | | f9e981d minor changest to truck getCost test
+| |/  
+|/|   
+* | fd08518 created manifest class
+* | dc9111b store test changes
+|/  
+*   75020e0 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * aba302d added coldTruck and more progress with truck stuff
+* | 0c4dc9f Fixed some formatting in TruckTests.java, fixed some broken tests in StockTests.java, added two methods to Stock.java
+|/  
+* 8d9be64 more progress on regTruck and added more methods
+* e90add6 added another stock test
+* f2583c1 started regTruck and added another stock test
+*   7931f3e merging
+|\  
+| * 1b12199 Updated Stock constructor to work with test changes
+* | 0ecc6d0 added truck abstract class
+|/  
+*   869b6af merging
+|\  
+| * 3587c5b Added Stock.java and Store.java
+* | 260614e fixed stock tests
+|/  
+* 09ff34a added 2 more store tests
+* e789124 added 2 more stock tests
+* 3428e49 added 3 more stock tests
+* 39277bb added helper methods and 2 more stock tests
+* 24c1d82 added 2 more store tests
+* 2ee05ed added 5 more item tests
+* 85374b6 resolved merge conflict
+*   1a91b3b merging
+|\  
+| * 4df97cd Added Javadoc comments to and fixed a return type in Item.java, generated Javadoc
+| * 798577a Fixed a problem in StockTests.java causing a test to fail, removed comments from Item.java
+| * 462cc1c Added Item.java
+* | 6e1c575 added 3 stock tests and 1 store test
+|/  
+*   5852a12 merging
+|\  
+| *   b1029d4 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+| |\  
+| * | c36d571 Updated the comment formatting for TruckTests.java
+| * | e6b8cca Added initial Truck test cases
+* | | 8afad96 fixed comment
+* | | b27e616 added 1 more stock test for getname
+| |/  
+|/|   
+* | 99cfc11 added 4 more stock tests
+* | 0472daa minor changes to stockTest
+|/  
+* 1c1e4da added 3 stockTests and stock package
+* a1cf337 Removed Git testing files
+* 3562b65 Moved files from old directory
+* 5ce76c6 Create README.md
+commit de558870178d871da3b41b57664b173c7ae1f5e4
+Merge: 0a6dcbb c59a741
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:33:01 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+    
+    # Conflicts:
+    #       project/src/stock/Store.java
+
+commit 0a6dcbb65ef30c2e5a713987b621fa8e4c32bb10
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:23:11 2018 +1000
+
+    Added Javadoc comments to Store.java, removed unnecessary throws declarations from Store.java and Main.java
+
+ 2 files changed, 44 insertions(+), 18 deletions(-)
+
+commit c59a7411e7f56d78d28d986a9523b160018c5de2
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 23:22:28 2018 +1000
+
+    debugged
+
+ 6 files changed, 206 insertions(+), 21 deletions(-)
+
+commit e57e9cc4732e88ef13f6d0c0083c6edb8fe30af3
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:01:32 2018 +1000
+
+    Added loading and exporting Manifests to Main.java, added a missing Javadoc comment to Store.java, removed a duplicated method in Manifest.java
+
+ 3 files changed, 72 insertions(+), 31 deletions(-)
+
+commit 4c29a06840d96b428ea152e451b34e4c14a9ab74
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 22:26:51 2018 +1000
+
+    Added file choosing to the Load Item Properties option
+
+ 2 files changed, 40 insertions(+), 22 deletions(-)
+
+commit 664db44d2dc7c417cb815d2c193240378dd0be62
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 21:42:43 2018 +1000
+
+    Added file choosing window for Loading the Sales Log in Main.java
+
+ 1 file changed, 24 insertions(+)
+
+commit 74138e2a4d7477ffa00f2d769eadac225f8bcc42
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 20:37:12 2018 +1000
+
+    Added declarations to Manifest.java
+
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 7e362e812678d62d90c911b1b8bba07389a206f4
+Merge: a06ae17 95f7431
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 20:36:02 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+    
+    # Conflicts:
+    #       project/src/csv/ReadCSV.java
+    #       project/src/delivery/Manifest.java
+    #       project/src/delivery/TruckTests.java
+
+commit a06ae178e89646c4b1d9abe17c2b88d0fa6a9491
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 20:12:22 2018 +1000
+
+    Removed more try/catch blocks from ReadCSV.java, moved a method from Manifest.java to Store.java and moved matching test from TruckTests.java to StockTests.java, added more throws declarations
+
+ 5 files changed, 75 insertions(+), 71 deletions(-)
+
+commit 95f74311cb1945af657f8ac057d18ab1d87bfd1f
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 19:35:00 2018 +1000
+
+    Fixed small bug with loading items
+
+ 7 files changed, 41 insertions(+), 78 deletions(-)
+
+commit 25c327803d2f8f2655c305286e04d4bcfb0be179
+Merge: 42de0dc 35ee858
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 19:24:02 2018 +1000
+
+    merging
+
+commit 42de0dca6a2be90bb1d9b553c2225eaaaf2b84bc
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 19:23:08 2018 +1000
+
+    added javadoc
+
+ 6 files changed, 163 insertions(+), 28 deletions(-)
+
+commit 35ee858eecf11eb76a992411998008397a569372
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 18:57:24 2018 +1000
+
+    Removed try/catch blocks from ReadCSV.java, added loading items properties to Main.java, added some throws declarations to Store.java, deleted some unnecessary files
+
+ 5 files changed, 78 insertions(+), 60 deletions(-)
+
+commit dccb9880171d7564089d784987b6122d04a115d4
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 15:29:11 2018 +1000
+
+    finished writeCSV and optimized automanifest a bit more
+
+ 4 files changed, 77 insertions(+), 9 deletions(-)
+
+commit a29e55c3a8db00a8ba2caa13ef09ac5c89a08eb5
+Merge: f8d6bb0 3f7a256
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 14:33:33 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit f8d6bb0a290daa19047f85cbbb760f186bbdd851
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 14:32:38 2018 +1000
+
+    Added Main.java with GUI frame
+
+ 1 file changed, 149 insertions(+)
+
+commit 3f7a256f6533800cc43f675f08523e16b75695cb
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 13:41:45 2018 +1000
+
+    fixed some cost calculations
+
+ 7 files changed, 67 insertions(+), 35 deletions(-)
+
+commit 3c5aa8e1c6e7704e292eb23bca3ff2bbbb529285
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 12:27:27 2018 +1000
+
+    loadManifest fully functional
+
+ 6 files changed, 136 insertions(+), 19 deletions(-)
+
+commit 8653d38786dd55da2faf8a59c655d7cfa68644ef
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 11:10:14 2018 +1000
+
+    readManifest is working
+
+ 3 files changed, 28 insertions(+), 10 deletions(-)
+
+commit 646c8f50e340f269f71918b327b45aa24590da2c
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 10:42:30 2018 +1000
+
+    created manifest csv reading and begun readManifest()
+
+ 3 files changed, 124 insertions(+), 33 deletions(-)
+
+commit 7b3ca2aaef71dd3330147041ec2adc11bea94479
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 09:41:54 2018 +1000
+
+    added addTruck and getManifest
+
+ 3 files changed, 69 insertions(+), 16 deletions(-)
+
+commit 81e31b98652ee7c34d231cb206109c110b0fdaf6
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 09:01:01 2018 +1000
+
+    fully optimized the manifest algorithm
+
+ 1 file changed, 22 insertions(+), 4 deletions(-)
+
+commit 7bb61c32260f91424082e1e7122ed7768279b04a
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 08:45:53 2018 +1000
+
+    wow it works
+
+ 1 file changed, 23 insertions(+), 9 deletions(-)
+
+commit 1274fcf0f46d7121e642e1a231300691f4f26b54
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 04:29:23 2018 +1000
+
+    manifest is working but not fully optimized by temperature
+
+ 1 file changed, 10 insertions(+), 13 deletions(-)
+
+commit dc7f35fefcf99f2ff6ad88d63042aabbec5a8405
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 03:55:51 2018 +1000
+
+    wow it nearly works
+
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit aeef637d71a7e56b57f41cb0cf9e18937bb79c86
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 03:46:33 2018 +1000
+
+    slow progress with manifest thingy
+
+ 2 files changed, 89 insertions(+), 8 deletions(-)
+
+commit 636bfff2aca9b8c8e124f0485968c9cb79773c03
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 02:25:02 2018 +1000
+
+    more progress with generating a manifest from inventory
+
+ 3 files changed, 37 insertions(+), 8 deletions(-)
+
+commit d2cb4c5b3379dd8d50ebd3aceaa7f2e841134b2e
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 02:00:41 2018 +1000
+
+    finished loadSalesLog
+
+ 12 files changed, 58 insertions(+), 64 deletions(-)
+
+commit b5aabeed3313bad1b7eb1f8799e7fe0f057426b4
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 22:23:38 2018 +1000
+
+    Added some more Manifest tests and changed the coldTruck initialisation so that it's cold enough to store ice-cream
+
+ 1 file changed, 28 insertions(+), 4 deletions(-)
+
+commit b2f0848f6ba462ef4a0d9b5cd5bf4512dcd75e28
+Merge: 695a10a 3d1645e
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 21:32:04 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+    
+    # Conflicts:
+    #       project/src/stock/Store.java
+
+commit 695a10a317a67ce5f3aca5c10363995d56878d50
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 21:29:20 2018 +1000
+
+    Added some more Manifest Tests, as well as a test csv file
+
+ 3 files changed, 30 insertions(+), 7 deletions(-)
+
+commit 3d1645e3ae3cb98cf7b04453e5c72a5870067e86
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 17:22:11 2018 +1000
+
+    ok now actually finished with merge conflicts
+
+ 1 file changed, 5 deletions(-)
+
+commit 798fb5c4c73242768fc5c72dd093b11597b78492
+Merge: f32a259 303825f
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 17:20:16 2018 +1000
+
+    fixed merge conflicts
+
+commit f32a25903995376e158bcaa7242c414a1dff911f
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 17:18:29 2018 +1000
+
+    finished with stockTests (for now)
+
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+commit c45f0ab234ca2c7f3a3d37fb8adce0c3a80915c7
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 17:14:17 2018 +1000
+
+    fixed errors in stockTest
+
+ 2 files changed, 50 insertions(+), 40 deletions(-)
+
+commit 303825fbfa2dd355296c2796517a94f3e518bc7b
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 17:02:04 2018 +1000
+
+    Added throws Exception declarations to some tests in StockTests.java and added a new method to Store.java
+
+ 2 files changed, 10 insertions(+), 5 deletions(-)
+
+commit e9f0bc89aacedf05bd273a03dcbb3fe2fe0489b6
+Merge: 9ae064d 7ad6c8b
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 16:30:19 2018 +1000
+
+    merging
+
+commit 9ae064d73c34a475a44b0a11f5d011193d475dab
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 16:29:50 2018 +1000
+
+    added a store test and fixed getInventory
+
+ 3 files changed, 98 insertions(+), 44 deletions(-)
+
+commit 7ad6c8b068c6006ea92144937ce30d1bd2d18a39
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 16:18:35 2018 +1000
+
+    Added skeleton for manifest tests in TruckTests.java and added sample files to project directory for testing
+
+ 9 files changed, 180 insertions(+)
+
+commit 3e2f6110fba0a3d63e51912149f0c0c0ee1593d2
+Merge: 488e940 12a41f0
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 15:10:03 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit 488e940150f623c1e1c22bc3d1de59693ad0edf2
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 15:09:30 2018 +1000
+
+    Changed Stock.java to allow zero values to be added and removed, and added inventory initialisation and a new method to Store.java
+
+ 2 files changed, 20 insertions(+), 7 deletions(-)
+
+commit 12a41f090e565bb7ec67c8c130e81029042cac62
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 15:06:46 2018 +1000
+
+    fixed some more stuff in storeinventory test
+
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit cd66ef3bb58edd83526a37c160de792b56ce3b8a
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 15:05:06 2018 +1000
+
+    minor fixes to storeinventory
+
+ 2 files changed, 13 insertions(+), 4 deletions(-)
+
+commit 1df8d265bbe4dc55001543b9f324c599e59c1a24
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 12:21:08 2018 +1000
+
+    added csv reading for sales log
+
+ 4 files changed, 105 insertions(+), 1 deletion(-)
+
+commit 4c0e7f0326c318c5f8459752d4299c8d0f8b5666
+Merge: e884a81 d97d369
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 11:08:04 2018 +1000
+
+    merging
+
+commit e884a81345a2aee21e53dffbe3842fbb522f91d1
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 11:07:46 2018 +1000
+
+    fixed a comment
+
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit d97d369c225ef07608a74f39571ca51fb4b5a53d
+Merge: e88a949 173f9f2
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 10:56:53 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit e88a949084083540be22b59fc32550bcc604a53f
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sat May 26 10:49:50 2018 +1000
+
+    Added Javadoc comments to Store.java and fixed a potential bug where some temporary variables wouldn't be overridden
+
+ 1 file changed, 59 insertions(+), 10 deletions(-)
+
+commit 5d6aae84a69f7cc50b782a0abd0fa880bd335cd5
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 00:34:49 2018 +1000
+
+    small modifcation to inventory test
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 173f9f200ed4c1b3010671cf18b211de1d752a9f
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 00:28:29 2018 +1000
+
+    better storeInventory test
+
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+commit 7fe3ec43d6c0baba4e52df9b739daf9970845611
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sat May 26 00:19:09 2018 +1000
+
+    working on manifests - added a new store test
+
+ 2 files changed, 32 insertions(+), 20 deletions(-)
+
+commit 13096faae4848e4ac8bc6b303f6f084dd4b9fd20
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 23:48:57 2018 +1000
+
+    added exception throws to truck classes - now pass all junit tests
+
+ 5 files changed, 28 insertions(+), 19 deletions(-)
+
+commit bd91d2d461dc89a6bf431dea2295fb8bc8fba03e
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 20:45:16 2018 +1000
+
+    further improved readCSV
+
+ 1 file changed, 59 insertions(+), 13 deletions(-)
+
+commit fb4feb3d4c35363509bd26e23941270338099f1e
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 20:26:00 2018 +1000
+
+    fixed csv reading to include temperature
+
+ 2 files changed, 10 insertions(+), 6 deletions(-)
+
+commit cb9eec7f07aca6340d0042cd884de29f3b2ae4b1
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 20:20:06 2018 +1000
+
+    created ReadCSV class and finished initializing a list of items from item_properties
+
+ 4 files changed, 51 insertions(+), 40 deletions(-)
+
+commit 91b079db1550d98a30a3517e9a9118fcc7ffd008
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 19:29:01 2018 +1000
+
+    starting work on initialising items with csv
+
+ 3 files changed, 75 insertions(+)
+
+commit 06f41167b71469700655131a4d8c35a6839bddb6
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Fri May 25 15:10:20 2018 +1000
+
+    Fixed some tests in StockTests.java, restructured and wrote methods for Store.java
+
+ 2 files changed, 19 insertions(+), 7 deletions(-)
+
+commit 629522f938fb866d5ee5dc4627164ce6609f101d
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 00:38:05 2018 +1000
+
+    tiny minor small changes
+
+ 2 files changed, 15 insertions(+), 6 deletions(-)
+
+commit 53d2e0906a5d16442613b498e5f65d63533516d7
+Merge: f9e981d d3b21b4
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 00:32:08 2018 +1000
+
+    merging
+
+commit f9e981d2a0e11854f4a908471a8cad52af8a8e1b
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 00:31:22 2018 +1000
+
+    minor changest to truck getCost test
+
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+commit d3b21b473649e305da505f46c3847f3f3d07fdb9
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Fri May 25 00:22:54 2018 +1000
+
+    Fixed Exception formatting in TruckTests.java
+
+ 1 file changed, 14 insertions(+), 13 deletions(-)
+
+commit 51c177cfdb9d8074a68cf4766ad45c1d981b84f9
+Merge: 5fdea04 fd08518
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Fri May 25 00:12:30 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit 5fdea045285542256d4d316ee7c276117eda7ee8
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Fri May 25 00:11:51 2018 +1000
+
+    Added Exception files, added "throws Exception" to some tests, added Exception throwing to Item.java and Stock.Java
+
+ 6 files changed, 84 insertions(+), 28 deletions(-)
+
+commit fd08518ceb8fbe0aafe9ef51513a1a27fd253427
+Author: Your name <lowejosh50@gmail.com>
+Date:   Fri May 25 00:00:53 2018 +1000
+
+    created manifest class
+
+ 2 files changed, 14 insertions(+)
+
+commit dc9111b26f47c3b8d597ef89df6bcda035a63b6f
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 23:51:02 2018 +1000
+
+    store test changes
+
+ 1 file changed, 21 insertions(+), 31 deletions(-)
+
+commit 75020e0feaae8ba9d433646de7d5a38a9797aa0e
+Merge: 0c4dc9f aba302d
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Thu May 24 22:37:50 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit 0c4dc9fee0a72cff5054df62ed02261de365293c
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Thu May 24 22:36:04 2018 +1000
+
+    Fixed some formatting in TruckTests.java, fixed some broken tests in StockTests.java, added two methods to Stock.java
+
+ 3 files changed, 50 insertions(+), 11 deletions(-)
+
+commit aba302d54144a6712dd46a99182ebe90f0dc306f
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 22:19:34 2018 +1000
+
+    added coldTruck and more progress with truck stuff
+
+ 5 files changed, 53 insertions(+), 12 deletions(-)
+
+commit 8d9be64da634288fc706ce423ad2e28ee23404dd
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 21:46:25 2018 +1000
+
+    more progress on regTruck and added more methods
+
+ 3 files changed, 20 insertions(+), 8 deletions(-)
+
+commit e90add6494e0e99fd2fb8a515308139023ee7e79
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 21:31:43 2018 +1000
+
+    added another stock test
+
+ 1 file changed, 21 insertions(+), 2 deletions(-)
+
+commit f2583c15db3155f0163ba010dd52697b74ce3e70
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 21:27:34 2018 +1000
+
+    started regTruck and added another stock test
+
+ 2 files changed, 50 insertions(+), 4 deletions(-)
+
+commit 7931f3e7b62b07141a86ddea887be94a87f4e6dd
+Merge: 0ecc6d0 1b12199
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 21:19:29 2018 +1000
+
+    merging
+
+commit 0ecc6d0caba71e80145193bef3be251f490aa4da
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 21:13:40 2018 +1000
+
+    added truck abstract class
+
+ 1 file changed, 21 insertions(+)
+
+commit 1b1219968b16d60537b68d68af1156a15c924a09
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Thu May 24 21:12:55 2018 +1000
+
+    Updated Stock constructor to work with test changes
+
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 869b6af9f3ccc1bac38c977a5962d3b86fef7e9e
+Merge: 260614e 3587c5b
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 19:03:03 2018 +1000
+
+    merging
+
+commit 260614e38b3c44f34b9894b5674163f12f65d9d3
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 19:02:15 2018 +1000
+
+    fixed stock tests
+
+ 1 file changed, 75 insertions(+), 115 deletions(-)
+
+commit 3587c5babea9e02d23873b699af2672538cef65d
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Thu May 24 16:22:59 2018 +1000
+
+    Added Stock.java and Store.java
+
+ 2 files changed, 65 insertions(+)
+
+commit 09ff34a2a37b3b4c7d9812730d79c648c5f0b894
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 01:32:49 2018 +1000
+
+    added 2 more store tests
+
+ 1 file changed, 55 insertions(+)
+
+commit e789124ad78b06c102efefe5f8a390031a4e6087
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 01:15:04 2018 +1000
+
+    added 2 more stock tests
+
+ 1 file changed, 39 insertions(+), 1 deletion(-)
+
+commit 3428e49b93162b8a18d08944922a8f107733423d
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 01:08:26 2018 +1000
+
+    added 3 more stock tests
+
+ 1 file changed, 56 insertions(+), 1 deletion(-)
+
+commit 39277bb1782198b9412af5c7a06aaafb58d191b0
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 00:55:54 2018 +1000
+
+    added helper methods and 2 more stock tests
+
+ 1 file changed, 53 insertions(+), 5 deletions(-)
+
+commit 24c1d82fc321e686eaf163f22cd64c8ef4a59bc7
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 00:33:50 2018 +1000
+
+    added 2 more store tests
+
+ 1 file changed, 46 insertions(+), 1 deletion(-)
+
+commit 2ee05eda691f9de1357fe564c9f3d7f5cd45f2c8
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 00:21:05 2018 +1000
+
+    added 5 more item tests
+
+ 1 file changed, 47 insertions(+), 2 deletions(-)
+
+commit 85374b680bdd38313eec6bc4c8dda462e787f680
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 00:13:10 2018 +1000
+
+    resolved merge conflict
+
+ 1 file changed, 4 deletions(-)
+
+commit 1a91b3b20aaab270d725bcf9764c595f23884409
+Merge: 6e1c575 4df97cd
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 00:10:20 2018 +1000
+
+    merging
+
+commit 6e1c575b04e84f36afe8b1cfe011248daf7a8c60
+Author: Your name <lowejosh50@gmail.com>
+Date:   Thu May 24 00:09:31 2018 +1000
+
+    added 3 stock tests and 1 store test
+
+ 1 file changed, 125 insertions(+), 13 deletions(-)
+
+commit 4df97cd8c6130f2347f5a675697d14a39c89d3c4
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 23 23:50:12 2018 +1000
+
+    Added Javadoc comments to and fixed a return type in Item.java, generated Javadoc
+
+ 18 files changed, 1352 insertions(+), 71 deletions(-)
+
+commit 798577a7066b90d35cabda2a7709b7560323019e
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 23 23:29:02 2018 +1000
+
+    Fixed a problem in StockTests.java causing a test to fail, removed comments from Item.java
+
+ 2 files changed, 2 insertions(+), 7 deletions(-)
+
+commit 462cc1cbf8049564fbbf9ec49e71458ce7d6f7b2
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 23 23:12:58 2018 +1000
+
+    Added Item.java
+
+ 1 file changed, 79 insertions(+)
+
+commit 5852a12db8c9c6332c8a28c6fd33f9fc9ec64291
+Merge: 8afad96 b1029d4
+Author: Your name <lowejosh50@gmail.com>
+Date:   Wed May 23 22:36:33 2018 +1000
+
+    merging
+
+commit 8afad960d8af9ec159bc6292a06f8361f317e5c5
+Author: Your name <lowejosh50@gmail.com>
+Date:   Wed May 23 22:36:12 2018 +1000
+
+    fixed comment
+
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit b27e616042c53b0c5c5b8c39f74bda019bc9904c
+Author: Your name <lowejosh50@gmail.com>
+Date:   Wed May 23 22:35:41 2018 +1000
+
+    added 1 more stock test for getname
+
+ 1 file changed, 10 insertions(+)
+
+commit b1029d4b657ae2ee89a9c68b3d0f8238ebd32938
+Merge: c36d571 99cfc11
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 23 22:34:01 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit c36d571351d024c15bb68639a4d92575e0269d72
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 23 22:28:38 2018 +1000
+
+    Updated the comment formatting for TruckTests.java
+
+ 1 file changed, 29 insertions(+), 13 deletions(-)
+
+commit 99cfc11f461e2a5e628b4cf3fa6f8b98d18c35eb
+Author: Your name <lowejosh50@gmail.com>
+Date:   Wed May 23 22:22:40 2018 +1000
+
+    added 4 more stock tests
+
+ 1 file changed, 45 insertions(+), 6 deletions(-)
+
+commit 0472daadbfa437e1848c2993a47b1f45164ffb30
+Author: Your name <lowejosh50@gmail.com>
+Date:   Wed May 23 22:11:12 2018 +1000
+
+    minor changes to stockTest
+
+ 2 files changed, 21 insertions(+), 18 deletions(-)
+
+commit e6b8cca2505bc241387473d6751d99bbc4a310d5
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 23 22:07:25 2018 +1000
+
+    Added initial Truck test cases
+
+ 1 file changed, 95 insertions(+)
+
+commit 1c1e4da435da7ab4a4312ba4073b8466fe5c2c17
+Author: Your name <lowejosh50@gmail.com>
+Date:   Wed May 23 17:05:46 2018 +1000
+
+    added 3 stockTests and stock package
+
+ 1 file changed, 58 insertions(+)
+
+commit a1cf3374e10749c7676da93fbe1489dd7385072d
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Tue May 22 18:47:30 2018 +1000
+
+    Removed Git testing files
+
+ 2 files changed, 54 deletions(-)
+
+commit 3562b65ccb15f03bb0da65ce5bb9f5cdb691ac17
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Wed May 16 17:20:30 2018 +1000
+
+    Moved files from old directory
+
+ 26 files changed, 2398 insertions(+)
+
+commit 5ce76c69962fd020883fd002f9b52dfbfed88101
+Author: Joshua Lowe <lowejosh50@gmail.com>
+Date:   Fri Apr 20 23:31:29 2018 +1100
+
+    Create README.md
+
+ 1 file changed, 1 insertion(+)
