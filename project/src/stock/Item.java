@@ -20,23 +20,6 @@ public class Item {
 	Integer temp = null; // The storage temperature of a cold/fresh item
 	
 	/**
-	 * Constructor for an item that doesn't need to be kept under a certain temperature
-	 * @param name The name of the item
-	 * @param cost How must the item costs to order
-	 * @param price The selling price of the item
-	 * @param reorderPoint The amount at which a new delivery of the item is reordered
-	 * @param reorderQuantity The amount of the item which is ordered in a reorder
-	 * @throws StockException 
-	 */
-	public Item(String name, int cost, int price, int reorderPoint, int reorderQuantity) throws StockException {
-		this.name = name;
-		this.cost = cost;
-		this.price = price;
-		this.reorderPoint = reorderPoint;
-		this.reorderQuantity = reorderQuantity;
-	}
-	
-	/**
 	 * Constructor for an item that needs to be kept under a certain temperature
 	 * @param name The name of the item
 	 * @param cost How must the item costs to order
@@ -54,9 +37,7 @@ public class Item {
 		
 		if (reorderPoint < 0 || reorderQuantity < 0) {
 			throw new StockException("Item cannot be initialised: Reorder Point/Quantity cannot be negative value");
-
 		}
-		
 		this.name = name;
 		this.cost = cost;
 		this.price = price;

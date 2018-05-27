@@ -175,6 +175,7 @@ public class ReadCSV {
 		BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII); 
 			// Read the first line
 			String line = buff.readLine();
+			boolean finished = false;
 			
 			// Truck type buffer
 			boolean willTruckBeCold = false; // doesn't matter what value it starts at
@@ -183,7 +184,7 @@ public class ReadCSV {
 			int itr = 0;
 			
 			// While the whole document file hasn't been read
-			while (line!=null) {
+			while (line!=null && finished!=true) {
 				// If the line represents a truck declaration or the document has no more lines
 				if (line.charAt(0) == '>') {
 					// Create the truck if previously found
@@ -252,6 +253,8 @@ public class ReadCSV {
 					// Increase the iteration counter
 					itr++;
 					
+					System.out.println(">" + line);
+					
 					// Read the next line
 					line = buff.readLine();
 					
@@ -259,9 +262,10 @@ public class ReadCSV {
 					// Throw exception because each manifest should begin with a truck declaration
 					throw new CSVFormatException();
 					
-				} else if (buff.readLine() == null) {
-					// Split the line into an array from the ,'s
+				} else if ("".equals(line)) {
+					/*// Split the line into an array from the ,'s
 					String[] values = line.split(",");
+					System.out.println("null" + line);
 					
 					// Initialise quantity integer
 					int quantity;
@@ -274,7 +278,7 @@ public class ReadCSV {
 							stock.addQuantity(i, quantity);
 						} 
 					}
-					
+					*/
 					// If the truck is cold
 					if (willTruckBeCold) {
 						// Find out the item with the lowest required temperature and set the variable
@@ -329,9 +333,11 @@ public class ReadCSV {
 					itr++;
 					
 					// Read the next line
+					finished = true;
 					line = buff.readLine();
+				
 					
-				} else if (buff.readLine() != null) {
+				} else if (!"".equals(line)) {
 					// Split the line into an array from the ,'s
 					String[] values = line.split(",");
 					
@@ -346,6 +352,8 @@ public class ReadCSV {
 							stock.addQuantity(i, quantity);
 						} 
 					}
+					
+					System.out.println("!null\n" + line);
 					
 					// Increase the iteration counter
 					itr++;

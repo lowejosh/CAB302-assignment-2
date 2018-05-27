@@ -174,11 +174,6 @@ public class TruckTests {
 		Manifest.loadManifest("manifest_test.txt");
 		
 		assertEquals(store.getCapital(), testCompare, 0.001);
-        // cant assert these two properly as they are different instances
-        // in stockTests testGetInventory ya can see some code i made for 
-        // iterating through the two stock objects and checking field by field but
-        // thats as good as it can get without third party libraries
-        //assertEquals(store.getInventory(), stock);
 	}
 	
 	@Test
@@ -202,13 +197,6 @@ public class TruckTests {
         Manifest.loadSalesLog("sales_log_test.txt");
         
         assertEquals(store.getCapital(), expected, 0.001);
-        
-        // cant assert these two properly as they are different instances
-        // in stockTests testGetInventory ya can see some code i made for 
-        // iterating through the two stock objects and checking field by field but
-        // thats as good as it can get without third party libraries
-        //assertEquals(store.getInventory(), stock);
-		
 	}
 	
 	@Test
@@ -228,4 +216,7 @@ public class TruckTests {
 		list.add(coldTruck);
 		assertEquals(manifest.getManifest(), list);
 	}
+	
+
+	
 }
