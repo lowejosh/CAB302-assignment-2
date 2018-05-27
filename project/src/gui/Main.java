@@ -159,9 +159,6 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	public void run() {
 		try {
 			createGUI();
-<<<<<<< HEAD
-		} catch (IOException | StockException | CSVFormatException e) {
-=======
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,7 +167,6 @@ public class Main extends JFrame implements ActionListener, Runnable {
 			e.printStackTrace();
 		} catch (CSVFormatException e) {
 			// TODO Auto-generated catch block
->>>>>>> 7a780e96fbd981616a89c3767ddf2806489ffa42
 			e.printStackTrace();
 		}
 	}
