@@ -25,10 +25,6 @@ public class Manifest {
 		trucks = new ArrayList<>();
 	}
 	
-	// TODO - generateManifest() - export manifest csv based on inventory
-	
-	
-	
 	public static Manifest automateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
 		// Initialise variables
 		Manifest manifest = new Manifest();
@@ -88,7 +84,7 @@ public class Manifest {
 				int currentCapacity = 0;
 				for (int coldCheck = 0; coldCheck < coldReorderItems.size(); coldCheck++) {
 					Item item = coldReorderItems.get(coldCheck);
-					if (!coldItemRemovedIndex[coldCheck] && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+					if (!coldItemRemovedIndex[coldCheck] && coldTruck.cargoCapacity >= currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
 						System.out.println("\tadded " + item.getName() + " at coldCheck = " + coldCheck);
@@ -97,17 +93,20 @@ public class Manifest {
 					}
 				}
 				// If there can be no more coldItems fit, try to squeeze in some reg items
+				// Squeeze in as many as you can
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
 					Item item = reorderItems.get(regCheck);
-					if (!regItemRemovedIndex[regCheck] && coldTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+	
+					if (!regItemRemovedIndex[regCheck] && coldTruck.cargoCapacity >= currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
 						System.out.println("\tadded " + item.getName() + " at regCheck = " + regCheck);
 						regItemRemovedIndex[regCheck] = true;
+						
 						regItr++;
 					}
 				}
-				
+						
 				// Add the truck to the manifest
 				manifest.addTruck(coldTruck);
 				System.out.println("added cold truck ($" + coldTruck.getCost() + ") with capacity " + coldTruck.getCargo());
@@ -117,14 +116,17 @@ public class Manifest {
 				System.out.println("CREATING REG TRUCK");
 				Truck regTruck = new RegTruck();
 				int currentCapacity = 0;
-				// Squeeze in as many as you can
+				// Squeeze in as many as you can after adding the largest cargo
+				
 				for (int regCheck = 0; regCheck < reorderItems.size(); regCheck++) {
 					Item item = reorderItems.get(regCheck);
-					if (!regItemRemovedIndex[regCheck] && regTruck.cargoCapacity > currentCapacity + item.getReorderQuantity()) {
+	
+					if (!regItemRemovedIndex[regCheck] && regTruck.cargoCapacity >= currentCapacity + item.getReorderQuantity()) {
 						regTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
 						System.out.println("\tadded " + item.getName() + " at regCheck = " + regCheck);
 						regItemRemovedIndex[regCheck] = true;
+						
 						regItr++;
 					}
 				}

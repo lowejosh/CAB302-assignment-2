@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import csv.ReadCSV;
+import csv.WriteCSV;
 
 /**
  * 
@@ -245,5 +246,6 @@ public class TruckTests {
 		Stock inventory = Store.getInstance().getInventory();
 		manifest = Manifest.automateManifest(inventory);
 		System.out.println("TOTAL MANIFEST COST : " + manifest.getCost());
+		WriteCSV.writeManifest(manifest, "testing.txt");
 	}
 }
