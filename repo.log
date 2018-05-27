@@ -1,4 +1,4 @@
-AshaDasha (36):
+AshaDasha (39):
       Moved files from old directory
       Removed Git testing files
       Added initial Truck test cases
@@ -35,6 +35,9 @@ AshaDasha (36):
       Added loading and exporting Manifests to Main.java, added a missing Javadoc comment to Store.java, removed a duplicated method in Manifest.java
       Added Javadoc comments to Store.java, removed unnecessary throws declarations from Store.java and Main.java
       Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+      Added log file
+      Added Report PDF
+      Allowed the Capital label to update, added Javadoc
 
 Joshua Lowe (1):
       Create README.md
@@ -105,6 +108,9 @@ Your name (64):
       Fixed small bug with loading items
       debugged
 
+* 7a780e9 Allowed the Capital label to update, added Javadoc
+* 9eb2dbf Added Report PDF
+* 215d899 Added log file
 *   de55887 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
 |\  
 | * c59a741 debugged
@@ -247,6 +253,30 @@ Your name (64):
 * a1cf337 Removed Git testing files
 * 3562b65 Moved files from old directory
 * 5ce76c6 Create README.md
+commit 7a780e96fbd981616a89c3767ddf2806489ffa42
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:52:17 2018 +1000
+
+    Allowed the Capital label to update, added Javadoc
+
+ 22 files changed, 1398 insertions(+), 97 deletions(-)
+
+commit 9eb2dbf759f756cc0378a35d635600c547f010fa
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:37:28 2018 +1000
+
+    Added Report PDF
+
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 215d899b84c7f579b270de5d3c2dd65c2b38a447
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:34:06 2018 +1000
+
+    Added log file
+
+ 1 file changed, 1049 insertions(+)
+
 commit de558870178d871da3b41b57664b173c7ae1f5e4
 Merge: 0a6dcbb c59a741
 Author: AshaDasha <Ashley_Husband@hotmail.com>
