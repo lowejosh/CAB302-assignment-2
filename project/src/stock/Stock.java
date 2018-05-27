@@ -1,7 +1,9 @@
 package stock;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * A Collection of Items, used for tracking inventories,
@@ -91,11 +93,23 @@ public class Stock{
 	 * @return the total price
 	 */
 	public int getTotalPrice() {
-		int temp = 0;
+		/*int temp = 0;
 		stock.forEach((k,v) -> totalPrice = k.getPrice() * v);
 		temp = totalPrice;
 		totalPrice = 0;
 		return temp;
+		*/ // not working properly
+		
+		int sum = 0;
+	    Iterator<Entry<Item, Integer>> itr = this.getStock().entrySet().iterator();
+	    while (itr.hasNext()) {
+	        Entry<Item, Integer> pair = itr.next();
+	        Item item = pair.getKey();
+	        int quantity = pair.getValue();
+	        
+	        sum+=(item.getPrice() * quantity);
+	    }
+	    return sum;
 	}
 
 	/**
@@ -103,11 +117,23 @@ public class Stock{
 	 * @return the total cost
 	 */
 	public int getTotalCost() {
-		int temp = 0;
+		/*int temp = 0;
 		stock.forEach((k,v) -> totalCost = k.getCost() * v);
 		temp = totalCost;
 		totalCost = 0;
 		return temp;
+		*/ // not working properly
+		
+		int sum = 0;
+	    Iterator<Entry<Item, Integer>> itr = this.getStock().entrySet().iterator();
+	    while (itr.hasNext()) {
+	        Entry<Item, Integer> pair = itr.next();
+	        Item item = pair.getKey();
+	        int quantity = pair.getValue();
+	        
+	        sum+=(item.getCost() * quantity);
+	    }
+	    return sum;
 	}
 	
 }

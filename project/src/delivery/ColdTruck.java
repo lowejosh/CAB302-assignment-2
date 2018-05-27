@@ -42,18 +42,6 @@ public class ColdTruck extends Truck {
 
 	@Override
 	public double getCost() {
-		/*double costOfItems = 0;
-		Stock cargo = super.cargo;
-	
-	    Iterator<Entry<Item, Integer>> cargoIterator = cargo.getStock().entrySet().iterator();
-	    while (cargoIterator.hasNext()) {
-	        Entry<Item, Integer> cargoPair = cargoIterator.next();
-	        Item item = cargoPair.getKey();
-	        int quantity = cargoPair.getValue();
-	        
-	        costOfItems+=item.getCost() * quantity;
-	    }
-		*/
 		return round(900 + (200 * Math.pow(0.7, ((double)temperature / 5))), 2);
 	}
 

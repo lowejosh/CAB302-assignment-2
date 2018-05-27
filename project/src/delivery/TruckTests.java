@@ -239,4 +239,11 @@ public class TruckTests {
 		assertEquals(manifest.getTotalPrice(), 2557.99, 0.001);
 	}*/
 	
+	// TEMP
+	@Test 
+	public void testManifestGeneration() throws StockException, IOException, DeliveryException {
+		Stock inventory = Store.getInstance().getInventory();
+		manifest = Manifest.automateManifest(inventory);
+		System.out.println("TOTAL MANIFEST COST : " + manifest.getCost());
+	}
 }

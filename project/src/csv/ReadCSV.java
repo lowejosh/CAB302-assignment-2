@@ -266,7 +266,6 @@ public class ReadCSV {
 					String[] values = line.split(",");
 					
 					// Initialise quantity integer
-					System.out.println("line : " + line);
 					int quantity;
 					
 					for (Item i : Store.getInstance().getItemList()) {
@@ -339,7 +338,6 @@ public class ReadCSV {
 					String[] values = line.split(",");
 					
 					// Initialise quantity integer
-					System.out.println("line : " + line);
 					int quantity;
 					
 					for (Item i : Store.getInstance().getItemList()) {
