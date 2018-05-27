@@ -17,14 +17,61 @@ import stock.Store;
 /**
  * @author Joshua Lowe
  *
+ *	This class represents a manifest, which is a list of truck
+ *	with cargo of their own. This class includes the automateManifest algorithm which
+ *	creates an efficient manifest when given an inventory. It also holds different methods
+ *	for retrieving manifests and sales logs and updating the stores values.
+ *
  */
 public class Manifest {
 	private List<Truck> trucks;
 	
+	/**
+	 * This constructor intialises the trucks list as an empty arrayList
+	 */
 	public Manifest() {
 		trucks = new ArrayList<>();
 	}
 	
+	/**
+	 * This method adds a truck to the list of trucks
+	 * @param truck The truck object to be added
+	 */
+	public void addTruck(Truck truck) {
+		trucks.add(truck);
+	}
+	
+	/**
+	 * This method returns the list of trucks
+	 * @return The list of trucks
+	 */
+	public List<Truck> getManifest() {
+		return trucks;
+	}
+	
+	/**
+	 * This method retrieves the sum of the cost of all of the trucks and returns it
+	 * @return The cost of the manifest
+	 */
+	public double getCost() {
+		double sum = 0;
+		// Sum the cost of the truck + the cost of the items
+		for (Truck truck : trucks) {
+			sum+=truck.getCost() + truck.getStock().getTotalCost();
+			
+		}
+		return sum;
+	}
+	
+	/**
+	 * This static method generates a manifest given an inventory, it finds out which items need to be
+	 * stocked up and goes about assigning the orders to different trucks effectively.
+	 * @param inventory The given inventory which to generate the manifest from
+	 * @return The manifest created
+	 * @throws StockException If the object cannot be created
+	 * @throws IOException If the file cannot be found
+	 * @throws DeliveryException If the truck cannot be created or the cargo cannot be added
+	 */
 	public static Manifest automateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
 		// Initialise variables
 		Manifest manifest = new Manifest();
@@ -87,7 +134,7 @@ public class Manifest {
 					if (!coldItemRemovedIndex[coldCheck] && coldTruck.cargoCapacity >= currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName() + " at coldCheck = " + coldCheck);
+						System.out.println("\tadded " + item.getReorderQuantity() + " " + item.getName());
 						coldItemRemovedIndex[coldCheck] = true;
 						coldItr++;
 					}
@@ -100,7 +147,7 @@ public class Manifest {
 					if (!regItemRemovedIndex[regCheck] && coldTruck.cargoCapacity >= currentCapacity + item.getReorderQuantity()) {
 						coldTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName() + " at regCheck = " + regCheck);
+						System.out.println("\tadded " + item.getReorderQuantity() + " " + item.getName());
 						regItemRemovedIndex[regCheck] = true;
 						
 						regItr++;
@@ -124,7 +171,7 @@ public class Manifest {
 					if (!regItemRemovedIndex[regCheck] && regTruck.cargoCapacity >= currentCapacity + item.getReorderQuantity()) {
 						regTruck.addCargo(item, item.getReorderQuantity());
 						currentCapacity+=item.getReorderQuantity();
-						System.out.println("\tadded " + item.getName() + " at regCheck = " + regCheck);
+						System.out.println("\tadded " + item.getReorderQuantity() + " " + item.getName());
 						regItemRemovedIndex[regCheck] = true;
 						
 						regItr++;
@@ -168,25 +215,13 @@ public class Manifest {
 		return manifest;
 	}
 	
-	public void addTruck(Truck truck) {
-		trucks.add(truck);
-	}
-	
-	public List<Truck> getManifest() {
-		return trucks;
-	}
-	
-	public double getCost() {
-		double sum = 0;
-		// Sum the cost of the truck + the cost of the items
-		for (Truck truck : trucks) {
-			sum+=truck.getCost() + truck.getStock().getTotalCost();
-			
-		}
-		return sum;
-	}
-	
-	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
+	/**
+	 * This static method loads a manifest file and updates the capital and stock according to
+	 * the values retrieved
+	 * @param fileName File name of the manifest file
+	 * @throws IOException If the file does not exist
+	 * @throws StockException If an item cannot be created
+	 */
 	public static void loadManifest(String fileName) throws IOException, StockException {
 		// Initialise variables
 		Manifest manifest = ReadCSV.readManifest(fileName);
@@ -211,6 +246,12 @@ public class Manifest {
 	    }
 	}
 	
+	/**
+	 * This static method loads a sales log file and updates the inventory and captital accordingly.
+	 * @param fileName The name of the sales log file
+	 * @throws IOException If the file does not exist
+	 * @throws StockException If an item cannot be created
+	 */
 	public static void loadSalesLog(String fileName) throws IOException, StockException {
 		// Load in the sales and the store inventory
 		Stock sales = ReadCSV.readSalesLog(fileName);

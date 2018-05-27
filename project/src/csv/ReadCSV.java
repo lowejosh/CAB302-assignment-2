@@ -167,6 +167,13 @@ public class ReadCSV {
 		return sales;
 	}
 	
+	/**
+	 * Reads a "manifest" text file and parses it into a manifest object
+	 * @param fileName Name of the file
+	 * @return The manifest object created
+	 * @throws IOException When the file doesn't exist
+	 * @throws StockException If the item object cannot be created
+	 */
 	public static Manifest readManifest(String fileName) throws IOException, StockException {
 		// Initialise variables
 		Stock stock = new Stock();
