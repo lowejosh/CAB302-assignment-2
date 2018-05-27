@@ -43,8 +43,8 @@ public class ColdTruck extends Truck {
 	
 	/**
 	 * This method adds a given quantity of an item to the Truck's stock
-	 * @param item The given item
-	 * @param quantity The quantity of said item
+	 * @param item The item to add
+	 * @param quantity The quantity of the item to add
 	 * @throws DeliveryException If the given quantity exceeds the cargo capacity
 	 */
 	@Override
@@ -73,7 +73,7 @@ public class ColdTruck extends Truck {
 	
 	/**
 	 * This helper method rounds a double to a certain amount of places - used in rounding the cost
-	 * @param value The given value to round
+	 * @param value The value to round
 	 * @param places Decimal places to round to
 	 * @return The rounded value
 	 */

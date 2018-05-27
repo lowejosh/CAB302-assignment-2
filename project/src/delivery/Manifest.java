@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import csv.CSVFormatException;
 import csv.ReadCSV;
 import stock.Item;
 import stock.Stock;
@@ -66,7 +67,7 @@ public class Manifest {
 	/**
 	 * This static method generates a manifest given an inventory, it finds out which items need to be
 	 * stocked up and goes about assigning the orders to different trucks effectively.
-	 * @param inventory The given inventory which to generate the manifest from
+	 * @param inventory The inventory which to generate the manifest from
 	 * @return The manifest created
 	 * @throws StockException If the object cannot be created
 	 * @throws IOException If the file cannot be found
@@ -221,8 +222,9 @@ public class Manifest {
 	 * @param fileName File name of the manifest file
 	 * @throws IOException If the file does not exist
 	 * @throws StockException If an item cannot be created
+	 * @throws CSVFormatException If the file is in the incorrect format
 	 */
-	public static void loadManifest(String fileName) throws IOException, StockException {
+	public static void loadManifest(String fileName) throws IOException, StockException, CSVFormatException {
 		// Initialise variables
 		Manifest manifest = ReadCSV.readManifest(fileName);
 		double cost = manifest.getCost();
@@ -251,8 +253,9 @@ public class Manifest {
 	 * @param fileName The name of the sales log file
 	 * @throws IOException If the file does not exist
 	 * @throws StockException If an item cannot be created
+	 * @throws CSVFormatException If the file is in the incorrect format
 	 */
-	public static void loadSalesLog(String fileName) throws IOException, StockException {
+	public static void loadSalesLog(String fileName) throws IOException, StockException, CSVFormatException {
 		// Load in the sales and the store inventory
 		Stock sales = ReadCSV.readSalesLog(fileName);
 		Stock inventory = Store.getInstance().getInventory();

@@ -27,8 +27,8 @@ public class RegTruck extends Truck {
 
 	/**
 	 * This override method adds an item of given quantity to the truck's cargo
-	 * @param item The given item
-	 * @param quantity The quantity of said item
+	 * @param item The item to add
+	 * @param quantity The quantity of item to add
 	 * @throws DeliveryException When the quantity exceeds the capacity, or it is a cold item
 	 */
 	@Override

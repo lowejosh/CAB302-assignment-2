@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import csv.CSVFormatException;
 import csv.ReadCSV;
 import csv.WriteCSV;
 
@@ -144,13 +145,12 @@ public class TruckTests {
 	 */
 	
 	@Test 
-	public void testManifestConstruction() throws StockException, IOException, DeliveryException {
-		Stock inventory = Store.getInstance().getInventory();
+	public void testManifestConstruction() throws StockException, IOException, DeliveryException, CSVFormatException {
 		manifest = new Manifest();
 	}
 	
 	@Test
-	public void testLoadManifest() throws StockException, IOException, DeliveryException {
+	public void testLoadManifest() throws StockException, IOException, DeliveryException, CSVFormatException {
 		stock = new Stock();
 		store = Store.getInstance();
 		
@@ -182,7 +182,7 @@ public class TruckTests {
 	}
 	
 	@Test
-	public void testLoadSalesLog() throws StockException, IOException {
+	public void testLoadSalesLog() throws StockException, IOException, CSVFormatException {
 		store = Store.getInstance();
 		stock = new Stock();
 		
@@ -226,26 +226,5 @@ public class TruckTests {
 		list.add(regTruck);
 		list.add(coldTruck);
 		assertEquals(manifest.getManifest(), list);
-	}
-	
-	// Might be unnecessary - cost is worked out as part of parsing the manifest
-	/*@Test
-	public void testGetTotalCost() throws DeliveryException {
-		regTruck.addCargo(biscuit, 300);
-		coldTruck.addCargo(iceCream, 50);
-		
-		manifest.addTruck(regTruck);
-		manifest.addTruck(coldTruck);
-		
-		assertEquals(manifest.getTotalPrice(), 2557.99, 0.001);
-	}*/
-	
-	// TEMP
-	@Test 
-	public void testManifestGeneration() throws StockException, IOException, DeliveryException {
-		Stock inventory = Store.getInstance().getInventory();
-		manifest = Manifest.automateManifest(inventory);
-		System.out.println("TOTAL MANIFEST COST : " + manifest.getCost());
-		WriteCSV.writeManifest(manifest, "testing.txt");
 	}
 }

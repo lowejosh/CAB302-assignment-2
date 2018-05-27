@@ -7,6 +7,7 @@ package stock;
 
 import static org.junit.Assert.*;
 
+import csv.CSVFormatException;
 import csv.ReadCSV;
 import delivery.Manifest;
 
@@ -340,7 +341,7 @@ public class StockTests {
 	 * Test : Grabbing the basic store instance 
 	 */
 	@Test 
-	public void testStoreConstruction() throws StockException, IOException {
+	public void testStoreConstruction() throws StockException, IOException, CSVFormatException {
 		// Retrieve the store instance
 		Store store = Store.getInstance();
 	}
@@ -350,7 +351,7 @@ public class StockTests {
 	 * Test : Get the Starting Store Capital
 	 */
 	@Test
-	public void testStoreCapital() throws StockException, IOException {
+	public void testStoreCapital() throws StockException, IOException, CSVFormatException {
 		
 		double startingCapital = 100000.0;
 		
@@ -363,30 +364,10 @@ public class StockTests {
 	
 	
 	/*
-	 * Test : Get the Store Name
-	 * TODO - DELETE? MIGHT NOT BE NEEDED
-	 * 
-	@Test
-	public void testStoreName() {
-		// Create the stock
-		stock = new Stock();
-		
-		// Construct the Store object
-		double capital = randCapital();
-		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
-		store = new Store(capital, stock, storeName);
-		
-		// Test the get method
-		assertEquals(store.getName(), storeName);
-	}
-	*/
-	
-	
-	/*
 	 * Test : Get the Store ItemList
 	 */
 	@Test
-	public void testStoreItemList() throws IOException, StockException {
+	public void testStoreItemList() throws IOException, StockException, CSVFormatException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -423,7 +404,7 @@ public class StockTests {
 	 * Test : Get the Store Inventory
 	 */
 	@Test
-	public void testStoreInventory() throws StockException, IOException {
+	public void testStoreInventory() throws StockException, IOException, CSVFormatException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -459,7 +440,7 @@ public class StockTests {
 	 * Test : Modify Store Capital by adding
 	 */
 	@Test
-	public void ModifyStoreCapitalByAdding() throws StockException, IOException {
+	public void ModifyStoreCapitalByAdding() throws StockException, IOException, CSVFormatException {
 		
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -479,7 +460,7 @@ public class StockTests {
 	 * Test : Modify Store Capital by removing
 	 */
 	@Test
-	public void ModifyStoreCapitalByRemoving() throws StockException, IOException {
+	public void ModifyStoreCapitalByRemoving() throws StockException, IOException, CSVFormatException {
 
 		// Retrieve the store instance
 		Store store = Store.getInstance();
@@ -508,7 +489,6 @@ public class StockTests {
 	
 	/*
 	 * Test : Get the Total Price
-	 * TODO - test for more than one item
 	 */
 	@Test
 	public void getTotalPrice() throws StockException {
@@ -529,7 +509,6 @@ public class StockTests {
 
 	/*
 	 * Test : Get the Total Cost
-	 * TODO - test for more than one item
 	 */
 	@Test
 	public void getTotalCost() throws StockException {

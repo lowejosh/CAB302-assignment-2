@@ -37,8 +37,8 @@ public class ReadCSV {
 	 * @param fileName The name of the file
 	 * @return A list of items retrieved from the file
 	 * @throws IOException If the file does not exist
-	 * @throws CSVFormatException 
-	 * @throws StockException 
+	 * @throws CSVFormatException If the file is in the incorrect format
+	 * @throws StockException If an item cannot be created
 	 */
 	public static List<Item> initialiseItems(String fileName) throws IOException, StockException, CSVFormatException {
 		// Initialise a list of Item objects and retrieve the File Path
