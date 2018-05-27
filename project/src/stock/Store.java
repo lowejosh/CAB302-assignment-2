@@ -47,7 +47,7 @@ public class Store {
             for (Item i : itemList) {
             	inventory.addQuantity(i, 0);
             }
-            
+            */
             
         }
         return instance;
