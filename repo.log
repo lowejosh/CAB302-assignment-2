@@ -1,4 +1,4 @@
-AshaDasha (39):
+AshaDasha (40):
       Moved files from old directory
       Removed Git testing files
       Added initial Truck test cases
@@ -38,11 +38,12 @@ AshaDasha (39):
       Added log file
       Added Report PDF
       Allowed the Capital label to update, added Javadoc
+      Updated repo
 
 Joshua Lowe (1):
       Create README.md
 
-Your name (64):
+Your name (68):
       added 3 stockTests and stock package
       minor changes to stockTest
       added 4 more stock tests
@@ -107,8 +108,21 @@ Your name (64):
       merging
       Fixed small bug with loading items
       debugged
+      final manifest thingy
+      fixing conflicts rip
+      lol choke
+      Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
 
-* 7a780e9 Allowed the Capital label to update, added Javadoc
+*   ab70bbd Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+|\  
+| * 19bb715 Updated repo
+* | 46ecb0a lol choke
+|/  
+*   c72fc22 fixing conflicts rip
+|\  
+| * 7a780e9 Allowed the Capital label to update, added Javadoc
+* | df70bba final manifest thingy
+|/  
 * 9eb2dbf Added Report PDF
 * 215d899 Added log file
 *   de55887 Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
@@ -253,6 +267,44 @@ Your name (64):
 * a1cf337 Removed Git testing files
 * 3562b65 Moved files from old directory
 * 5ce76c6 Create README.md
+commit ab70bbdee0d280425a2e1ed13f956492539e45c8
+Merge: 46ecb0a 19bb715
+Author: Your name <lowejosh50@gmail.com>
+Date:   Mon May 28 00:00:44 2018 +1000
+
+    Merge branch 'master' of https://github.com/lowejosh/CAB302-assignment-2
+
+commit 46ecb0a47fbefcd22823ff6a2928fa2b57dd3a04
+Author: Your name <lowejosh50@gmail.com>
+Date:   Mon May 28 00:00:11 2018 +1000
+
+    lol choke
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 19bb715ab1f37f96b777bb440f9c2e1cc181fce6
+Author: AshaDasha <Ashley_Husband@hotmail.com>
+Date:   Sun May 27 23:59:39 2018 +1000
+
+    Updated repo
+
+ 1 file changed, 31 insertions(+), 1 deletion(-)
+
+commit c72fc22d89c6a4903f9ac53a1d55f708290575eb
+Merge: df70bba 7a780e9
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 23:59:29 2018 +1000
+
+    fixing conflicts rip
+
+commit df70bba7959335b34e7af720f03cf39335b76fb9
+Author: Your name <lowejosh50@gmail.com>
+Date:   Sun May 27 23:58:26 2018 +1000
+
+    final manifest thingy
+
+ 4 files changed, 98 insertions(+), 4 deletions(-)
+
 commit 7a780e96fbd981616a89c3767ddf2806489ffa42
 Author: AshaDasha <Ashley_Husband@hotmail.com>
 Date:   Sun May 27 23:52:17 2018 +1000
