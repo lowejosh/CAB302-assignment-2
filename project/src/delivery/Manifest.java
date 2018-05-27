@@ -180,7 +180,8 @@ public class Manifest {
 	}
 	
 	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
-	public void loadManifest(String fileName) throws IOException, StockException {
+	public static void loadManifest(String fileName) throws IOException, StockException {
+		System.out.println("reached");
 		Manifest manifest = ReadCSV.readManifest(fileName);
 		double cost = manifest.getCost();
 		System.out.println(cost);

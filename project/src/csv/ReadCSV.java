@@ -186,8 +186,8 @@ public class ReadCSV {
 			
 			// While the whole document file hasn't been read
 			while (line!=null) {
-				// If the line represents a truck declaration
-				if (line.charAt(0) == '>') {
+				// If the line represents a truck declaration or the document has no more lines
+				if (line.charAt(0) == '>' || buff.readLine() == null) {
 					// Create the truck if previously found
 					if (itr != 0) {
 						// If the truck is cold
@@ -245,11 +245,18 @@ public class ReadCSV {
 					stock = new Stock();
 					
 					// Find out which truck it is
-					if (line == ">Ordinary") {
+					if (line.equals(">Ordinary")) {
 						willTruckBeCold = false;
-					} else if (line == ">Refrigerated") {
+					} else if (line.equals(">Refrigerated")) {
 						willTruckBeCold = true;
 					}
+					System.out.println("truck is cold : " + willTruckBeCold + "\nitr = " + itr);
+					
+					// Increase the iteration counter
+					itr++;
+					
+					// Read the next line
+					line = buff.readLine();
 					
 				} else if (itr == 0) {
 					// Throw exception because each manifest should begin with a truck declaration
@@ -261,6 +268,7 @@ public class ReadCSV {
 					String[] values = line.split(",");
 					
 					// Initialise quantity integer
+					System.out.println(line);
 					int quantity;
 					
 					for (Item i : Store.getInstance().getItemList()) {
@@ -271,9 +279,12 @@ public class ReadCSV {
 							stock.addQuantity(i, quantity);
 						} 
 					}
+					
+					// Increase the iteration counter
+					itr++;
+					
 					// Read the next line
 					line = buff.readLine();
-					
 				}
 			}
 		}

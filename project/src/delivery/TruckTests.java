@@ -153,13 +153,19 @@ public class TruckTests {
 		store = Store.getInstance();
 		stock = new Stock();
 		
-		List<Item> itemList = ReadCSV.initialiseItems("item_properties.txt");
+		List<Item> itemList = Store.getInstance().getItemList();
         for (Item i : itemList) {
             stock.addQuantity(i, 0);
         }
-		
+        // For getting the same instances of items initialised in the store
+        for (Item i : itemList) {
+        	if (i.getName().equals("biscuits")) {
+        		biscuit = i;
+        	}
+        }
+        
 		stock.addQuantity(biscuit, 700);
-		manifest.loadManifest("manifest_test.csv");
+		Manifest.loadManifest("manifest_test.txt");
 		
 		assertEquals(store.getCapital(), 97200.00, 0.001);
 		assertEquals(store.getInventory(), stock);
@@ -182,7 +188,7 @@ public class TruckTests {
         }
         stock.addQuantity(biscuit, 394);
         double expected = store.getCapital() + biscuit.getPrice() * stock.getQuantity(biscuit);
-        manifest.loadSalesLog("sales_log_test.txt");
+        Manifest.loadSalesLog("sales_log_test.txt");
         
         assertEquals(store.getCapital(), expected, 0.001);
         
