@@ -26,6 +26,9 @@ import javax.swing.table.DefaultTableModel;
 
 import csv.CSVFormatException;
 import csv.ReadCSV;
+import csv.WriteCSV;
+import delivery.DeliveryException;
+import delivery.Manifest;
 import stock.StockException;
 import stock.Store;
 import stock.Item;
@@ -39,6 +42,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	
 	private static Store store;
 	private List<Item> itemList;
+	private Manifest manifest;
 	
 	private boolean itemsLoaded = false;
 	
@@ -63,7 +67,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		super(title);
 	}
 
-	private void createGUI() {
+	private void createGUI() throws StockException, IOException, CSVFormatException {
 		setSize(WIDTH, HEIGHT);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setLayout(new BorderLayout());
@@ -81,7 +85,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	    btnLoadManifest = createButton("Load Manifest");
 	    btnLoadSales = createButton("Load Sales Log");
 	    
-	    lblCapital = createLabel("Captial:");
+	    lblCapital = createLabel("Captial: $" + Store.getInstance().getCapital());
 	    
 	    //pnlDisplay.setLayout(new BorderLayout());
 	    pnlThree.add(lblCapital);
@@ -153,7 +157,12 @@ public class Main extends JFrame implements ActionListener, Runnable {
 
 	@Override
 	public void run() {
-		createGUI(); 
+		try {
+			createGUI();
+		} catch (StockException | IOException | CSVFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 	@Override
@@ -176,6 +185,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 			}
 			updateTable();		
 		}
+		
 		if (src == btnLoadSales) {
 			JFileChooser chooser = new JFileChooser();
 			
@@ -184,7 +194,6 @@ public class Main extends JFrame implements ActionListener, Runnable {
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				try {
 					store.loadSalesLog(chooser.getSelectedFile().getAbsolutePath());
-					updateTable();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -195,7 +204,57 @@ public class Main extends JFrame implements ActionListener, Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				updateTable();
 			}		
+		}
+		
+		if (src == btnLoadManifest) {
+			JFileChooser chooser = new JFileChooser();
+			
+			int returnValue = chooser.showOpenDialog(null);
+
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				try {
+					Manifest.loadManifest(chooser.getSelectedFile().getAbsolutePath());
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (StockException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CSVFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (DeliveryException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				updateTable();
+			}
+		}
+		
+		if (src == btnExportManifest) {
+			String fileName = JOptionPane.showInputDialog("Type your file name");
+		
+			try {
+				WriteCSV.writeManifest(Manifest.automateManifest(Store.getInstance().getInventory()), fileName);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (StockException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (DeliveryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (CSVFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			updateTable();
 		}
 	}
 	
