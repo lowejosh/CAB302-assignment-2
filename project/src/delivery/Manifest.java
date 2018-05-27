@@ -26,7 +26,10 @@ public class Manifest {
 	}
 	
 	// TODO - generateManifest() - export manifest csv based on inventory
-	public void generateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
+	
+	
+	
+	public void automateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
 		// Initialise variables
 		Manifest manifest = new Manifest();
 		List<Item> reorderItems = new ArrayList<>();
@@ -130,7 +133,6 @@ public class Manifest {
 				System.out.println("added reg truck ($" + regTruck.getCost() + ") with capacity " + regTruck.getCargo() + "\n");
 			}
 			
-			
 			// Update the lowest temp
 			if (coldReorderItems != null && coldItr != coldReorderItems.size()) {
 				lowestTemp = coldReorderItems.get(coldItr).getTemp();
@@ -167,12 +169,26 @@ public class Manifest {
 	
 	public List<Truck> getManifest() {
 		return trucks;
-		
+	}
+	
+	public double getCost() {
+		double sum = 0;
+		for (Truck truck : trucks) {
+			sum+=truck.getCost();
+		}
+		return sum;
 	}
 	
 	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
+	public void loadManifest(String fileName) throws IOException, StockException {
+		Manifest manifest = ReadCSV.readManifest(fileName);
+		double cost = manifest.getCost();
+		System.out.println(cost);
+		Store.getInstance().modifyCapital(-cost);
+	}
 	
 	
+	// We could move this somewhere else if needed
 	public static void loadSalesLog(String fileName) throws IOException, StockException {
 		// Load in the sales and the store inventory
 		Stock sales = ReadCSV.readSalesLog(fileName);
