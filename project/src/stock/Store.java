@@ -26,7 +26,13 @@ public class Store {
         if (instance == null) {
         	instance = new Store();
             inventory = new Stock();
-            //itemList = ReadCSV.initialiseItems("item_properties.txt");
+            /*for debugging
+            itemList = ReadCSV.initialiseItems("item_properties.txt");
+            for (Item i : itemList) {
+            	inventory.addQuantity(i, 0);
+            }*/
+            
+            
         }
 
         return instance;
