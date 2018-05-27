@@ -3,6 +3,7 @@ package stock;
 import java.io.IOException;
 import java.util.List;
 
+import csv.CSVFormatException;
 import csv.ReadCSV;
 
 public class Store {
@@ -19,7 +20,7 @@ public class Store {
     private Store() {
     }
 
-    public static Store getInstance() throws StockException, IOException {
+    public static Store getInstance() throws StockException, IOException, CSVFormatException {
         if (instance == null) {
         	instance = new Store();
             inventory = new Stock();

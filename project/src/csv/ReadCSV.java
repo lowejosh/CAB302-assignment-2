@@ -37,14 +37,16 @@ public class ReadCSV {
 	 * @param fileName The name of the file
 	 * @return A list of items retrieved from the file
 	 * @throws IOException If the file does not exist
+	 * @throws CSVFormatException 
+	 * @throws StockException 
 	 */
-	public static List<Item> initialiseItems(String fileName) throws IOException {
+	public static List<Item> initialiseItems(String fileName) throws IOException, StockException, CSVFormatException {
 		// Initialise a list of Item objects and retrieve the File Path
 		List<Item> items = new ArrayList<>();
 		Path filePath = Paths.get(fileName);
 		
 		// Try to create a BufferedReader from the file
-		try (BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII)) {
+		BufferedReader buff = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII);
 			// Read the first line
 			String line = buff.readLine();
 			
@@ -60,11 +62,8 @@ public class ReadCSV {
 				// Read the next line
 				line = buff.readLine();
 			}
-		}
-		// Catch exception
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		
 		
 		// Return the list of items retrieved
 		return items;
@@ -89,17 +88,15 @@ public class ReadCSV {
 		Integer temp;
 		
 		// Try to assign the variables to the given data
-		try {
+		
 			name = data[0];
 			cost = Integer.parseInt(data[1]);
 			price = Integer.parseInt(data[2]);
 			reorderPoint = Integer.parseInt(data[3]);
 			reorderQuantity = Integer.parseInt(data[4]);
-		} 
+		
 		// Throw a CSVFormatException if it's in the wrong format
-		catch (ArrayIndexOutOfBoundsException e) {
-			throw new CSVFormatException();
-		}
+		
 		
 		// Try to assign temperature if it exists, if not, assign null
 		try {
@@ -109,14 +106,12 @@ public class ReadCSV {
 		}
 		
 		// Try to create the item object and return it
-		try {
+		
 			Item item = new Item(name, cost, price, reorderPoint, reorderQuantity, temp);
 			return item;
-		} 
+		
 		// Throw a StockException if the item object cannot be created
-		catch (Exception e) {
-			throw new StockException();
-		}
+		
 	}
 	
 	

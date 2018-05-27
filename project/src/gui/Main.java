@@ -7,17 +7,26 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+
+import csv.CSVFormatException;
+import csv.ReadCSV;
+import stock.StockException;
+import stock.Store;
+import stock.Item;
 
 public class Main extends JFrame implements ActionListener, Runnable {
 
@@ -25,7 +34,11 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	public static final int WIDTH = 1200;
 	public static final int HEIGHT = 600;
 	
+	private static Store store;
+	private List<Item> itemList;
+	
 	private JTable table;
+	private DefaultTableModel tableModel;
 	
 	private JScrollPane scrollPane;
 	
@@ -80,16 +93,18 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	}
 	
 	private JTable createTable() {
-		DefaultTableModel model = new DefaultTableModel(); 
-		JTable table = new JTable(model); 
+		tableModel = new DefaultTableModel(); 
+		JTable table = new JTable(tableModel); 
 
-		model.addColumn("Name"); 
-		model.addColumn("Quantity"); 
-		model.addColumn("Cost");
-		model.addColumn("Price");
-		model.addColumn("Reorder Point");
-		model.addColumn("Reorder Amount");
-		model.addColumn("Temperature");
+		tableModel.addColumn("Name"); 
+		tableModel.addColumn("Quantity"); 
+		tableModel.addColumn("Cost");
+		tableModel.addColumn("Price");
+		tableModel.addColumn("Reorder Point");
+		tableModel.addColumn("Reorder Amount");
+		tableModel.addColumn("Temperature");
+		
+		table.setFont(table.getFont().deriveFont((float) 16.0));
 		
 		return table;
 	}
@@ -137,13 +152,51 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-
+	public void actionPerformed(ActionEvent event) {
+		Object src=event.getSource(); 
+	      
+		//Consider the alternatives - not all active at once. 
+		if (src== btnLoadItems) {
+			try {
+				populateTable();
+			} catch (IOException e) {
+				System.err.println("Error");
+				JOptionPane.showMessageDialog(this,"Error Message","Error: File Not Found",JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (StockException e) {
+				JOptionPane.showMessageDialog(this,"Error Message","Error: Item can't be created",JOptionPane.ERROR_MESSAGE);
+				//e.printStackTrace();
+			} catch (CSVFormatException e) {
+				JOptionPane.showMessageDialog(this,"Error Message","Error: File format incorrect",JOptionPane.ERROR_MESSAGE);
+				//e.printStackTrace();
+			}
+		}
 	}
 
-	public static void main(String[] args) {
+	private void populateTable() throws IOException, StockException, CSVFormatException {
+		itemList = ReadCSV.initialiseItems("item_properties.txt");
+		
+		
+		for (Item item : itemList) {
+			Object[] newRowData = new Object[7];
+			newRowData[0] = item.getName();
+			newRowData[1] = 0;
+			newRowData[2] = item.getCost();
+			newRowData[3] = item.getPrice();
+			newRowData[4] = item.getReorderPoint();
+			newRowData[5] = item.getReorderQuantity();
+			if (item.getTemp() == null) newRowData[6] = "N/A";
+			else newRowData[6] = item.getTemp();
+			tableModel.addRow(newRowData);
+			
+		}
+		
+	}
+
+	public static void main(String[] args) throws StockException, IOException, CSVFormatException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
         SwingUtilities.invokeLater(new Main("BorderLayout"));
+        store = Store.getInstance();
 	}
 
 }
