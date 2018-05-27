@@ -364,6 +364,57 @@ public class ReadCSV {
 					throw new CSVFormatException();
 				}
 			}
+			
+			// If the truck is cold
+			if (willTruckBeCold) {
+				// Find out the item with the lowest required temperature and set the variable
+				Integer lowestTemp = null;
+				Iterator<Entry<Item, Integer>> tempCheck = stock.getStock().entrySet().iterator();
+				while (tempCheck.hasNext()) {
+					Entry<Item, Integer> storePair = tempCheck.next();
+					Item item = storePair.getKey();
+					if (item.getTemp() != null) {
+						if (lowestTemp == null) {
+							lowestTemp = item.getTemp();
+						} else if (item.getTemp() < lowestTemp) {
+							lowestTemp = item.getTemp();
+						}
+					}
+				}
+				
+				// Create the truck
+				Truck truck = new ColdTruck(lowestTemp);
+				
+				// Add the items to the truck
+			    Iterator<Entry<Item, Integer>> stockIterator = stock.getStock().entrySet().iterator();
+			    while (stockIterator.hasNext()) {
+			        Entry<Item, Integer> stockPair = stockIterator.next();
+			        Item item = stockPair.getKey();
+			        int stockQuantity = stockPair.getValue();
+			        
+			        truck.addCargo(item, stockQuantity);
+			    }
+			    
+			    // Add the truck to the manifest
+				manifest.addTruck(truck);
+			} else {
+				// Create the truck
+				Truck truck = new RegTruck();
+				
+				// Add the items to the truck
+			    Iterator<Entry<Item, Integer>> stockIterator = stock.getStock().entrySet().iterator();
+			    while (stockIterator.hasNext()) {
+			        Entry<Item, Integer> stockPair = stockIterator.next();
+			        Item item = stockPair.getKey();
+			        int stockQuantity = stockPair.getValue();
+			        
+			        truck.addCargo(item, stockQuantity);
+			    }
+			    
+			    // Add the truck to the manifest
+			    manifest.addTruck(truck);
+			}					
+			
 		
 		
 		// Return the manifest

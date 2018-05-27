@@ -34,11 +34,15 @@ public class Store {
     /**
      * Returns the instance of the Store, initialising it if it does not already exist
      * @return the Store
+     * @throws CSVFormatException 
+     * @throws StockException 
+     * @throws IOException 
      */
-    public static Store getInstance(){
+    public static Store getInstance() {
         if (instance == null) {
         	instance = new Store();
             inventory = new Stock();
+            /*for debugging
             itemList = ReadCSV.initialiseItems("item_properties.txt");
             for (Item i : itemList) {
             	inventory.addQuantity(i, 0);
