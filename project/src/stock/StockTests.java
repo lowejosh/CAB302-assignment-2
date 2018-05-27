@@ -364,26 +364,6 @@ public class StockTests {
 	
 	
 	/*
-	 * Test : Get the Store Name
-	 * TODO - DELETE? MIGHT NOT BE NEEDED
-	 * 
-	@Test
-	public void testStoreName() {
-		// Create the stock
-		stock = new Stock();
-		
-		// Construct the Store object
-		double capital = randCapital();
-		String storeName = "Capalaba SuperMart"; // TODO - ADD RANDOM
-		store = new Store(capital, stock, storeName);
-		
-		// Test the get method
-		assertEquals(store.getName(), storeName);
-	}
-	*/
-	
-	
-	/*
 	 * Test : Get the Store ItemList
 	 */
 	@Test
@@ -509,7 +489,6 @@ public class StockTests {
 	
 	/*
 	 * Test : Get the Total Price
-	 * TODO - test for more than one item
 	 */
 	@Test
 	public void getTotalPrice() throws StockException {
@@ -530,7 +509,6 @@ public class StockTests {
 
 	/*
 	 * Test : Get the Total Cost
-	 * TODO - test for more than one item
 	 */
 	@Test
 	public void getTotalCost() throws StockException {

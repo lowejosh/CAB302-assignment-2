@@ -37,6 +37,8 @@ public class Main extends JFrame implements ActionListener, Runnable {
 	private static Store store;
 	private List<Item> itemList;
 	
+	private boolean itemsLoaded = false;
+	
 	private JTable table;
 	private DefaultTableModel tableModel;
 	
@@ -175,22 +177,22 @@ public class Main extends JFrame implements ActionListener, Runnable {
 
 	private void populateTable() throws IOException, StockException, CSVFormatException {
 		itemList = ReadCSV.initialiseItems("item_properties.txt");
-		
-		
-		for (Item item : itemList) {
-			Object[] newRowData = new Object[7];
-			newRowData[0] = item.getName();
-			newRowData[1] = 0;
-			newRowData[2] = item.getCost();
-			newRowData[3] = item.getPrice();
-			newRowData[4] = item.getReorderPoint();
-			newRowData[5] = item.getReorderQuantity();
-			if (item.getTemp() == null) newRowData[6] = "N/A";
-			else newRowData[6] = item.getTemp();
-			tableModel.addRow(newRowData);
-			
+		// TODO - dont know if this will break anything in the long run it stops a bug from loading the list over and over again
+		if (!itemsLoaded) { 
+			for (Item item : itemList) {
+				Object[] newRowData = new Object[7];
+				newRowData[0] = item.getName();
+				newRowData[1] = 0;
+				newRowData[2] = item.getCost();
+				newRowData[3] = item.getPrice();
+				newRowData[4] = item.getReorderPoint();
+				newRowData[5] = item.getReorderQuantity();
+				if (item.getTemp() == null) newRowData[6] = "N/A";
+				else newRowData[6] = item.getTemp();
+				tableModel.addRow(newRowData);	
+			}
+			itemsLoaded = true;
 		}
-		
 	}
 
 	public static void main(String[] args) throws StockException, IOException, CSVFormatException {
