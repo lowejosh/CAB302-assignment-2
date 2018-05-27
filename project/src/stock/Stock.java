@@ -9,7 +9,6 @@ import java.util.Map.Entry;
  * A Collection of Items, used for tracking inventories,
  * cargo etc.
  * @author Ashley Husband
- * @param <Item> The type of element contained in a stock
  */
 public class Stock{
 	

@@ -11,7 +11,7 @@ import csv.ReadCSV;
  * An object representing a store. Since the program
  * only supports one store, the class was written using the
  * Singleton pattern.
- * @author Ashley
+ * @author Ashley Husband
  *
  */
 public class Store {
@@ -46,7 +46,7 @@ public class Store {
             itemList = ReadCSV.initialiseItems("item_properties.txt");
             for (Item i : itemList) {
             	inventory.addQuantity(i, 0);
-            }*/
+            }
             
             
         }
