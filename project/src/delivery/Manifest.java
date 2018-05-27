@@ -72,8 +72,9 @@ public class Manifest {
 	 * @throws StockException If the object cannot be created
 	 * @throws IOException If the file cannot be found
 	 * @throws DeliveryException If the truck cannot be created or the cargo cannot be added
+	 * @throws CSVFormatException 
 	 */
-	public static Manifest automateManifest(Stock inventory) throws StockException, IOException, DeliveryException {
+	public static Manifest automateManifest(Stock inventory) throws StockException, IOException, DeliveryException, CSVFormatException {
 		// Initialise variables
 		Manifest manifest = new Manifest();
 		List<Item> reorderItems = new ArrayList<>();
@@ -223,8 +224,10 @@ public class Manifest {
 	 * @throws IOException If the file does not exist
 	 * @throws StockException If an item cannot be created
 	 * @throws CSVFormatException If the file is in the incorrect format
+	 * @throws DeliveryException 
+	 * @throws NumberFormatException 
 	 */
-	public static void loadManifest(String fileName) throws IOException, StockException, CSVFormatException {
+	public static void loadManifest(String fileName) throws IOException, StockException, CSVFormatException, NumberFormatException, DeliveryException {
 		// Initialise variables
 		Manifest manifest = ReadCSV.readManifest(fileName);
 		double cost = manifest.getCost();
