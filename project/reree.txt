@@ -1,0 +1,30 @@
+>Refrigerated
+ice cream,250
+frozen vegetable mix,325
+chips,200
+>Refrigerated
+bread,200
+frozen meat,575
+>Refrigerated
+fish,475
+ice,325
+>Refrigerated
+beef,550
+>Refrigerated
+yoghurt,325
+milk,425
+>Refrigerated
+celery,350
+cheese,450
+>Refrigerated
+mushrooms,325
+chicken,425
+>Refrigerated
+lettuce,350
+tomatoes,400
+>Ordinary
+biscuits,575
+chocolate,375
+>Ordinary
+beans,525
+rice,300
