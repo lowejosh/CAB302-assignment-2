@@ -67,7 +67,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		super(title);
 	}
 
-	private void createGUI(){
+	private void createGUI() throws IOException, StockException, CSVFormatException{
 		setSize(WIDTH, HEIGHT);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setLayout(new BorderLayout());
@@ -157,7 +157,18 @@ public class Main extends JFrame implements ActionListener, Runnable {
 
 	@Override
 	public void run() {
-		createGUI();
+		try {
+			createGUI();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (StockException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CSVFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -178,7 +189,18 @@ public class Main extends JFrame implements ActionListener, Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			updateTable();		
+			try {
+				updateTable();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (StockException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (CSVFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 		}
 		
 		if (src == btnLoadSales) {
@@ -199,7 +221,18 @@ public class Main extends JFrame implements ActionListener, Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				updateTable();
+				try {
+					updateTable();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (StockException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CSVFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}		
 		}
 		
@@ -227,7 +260,18 @@ public class Main extends JFrame implements ActionListener, Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				updateTable();
+				try {
+					updateTable();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (StockException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CSVFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -249,7 +293,18 @@ public class Main extends JFrame implements ActionListener, Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			updateTable();
+			try {
+				updateTable();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (StockException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (CSVFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -262,7 +317,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		}
 	}
 
-	private void updateTable() {
+	private void updateTable() throws IOException, StockException, CSVFormatException {
 		itemList = null;
 		//itemList.addAll(store.getInventory().getStock().keySet());
 		Stock stock = store.getInventory();
@@ -281,12 +336,12 @@ public class Main extends JFrame implements ActionListener, Runnable {
 				else newRowData[6] = item.getTemp();
 				
 				tableModel.addRow(newRowData);	
-			//}
-			//itemsLoaded = true;
-		}
+			
+			}
+		lblCapital.setText("Captial: $" + Store.getInstance().getCapital());
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, StockException, CSVFormatException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
         SwingUtilities.invokeLater(new Main("BorderLayout"));
         store = Store.getInstance();
