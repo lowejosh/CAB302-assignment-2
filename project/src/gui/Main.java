@@ -67,7 +67,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		super(title);
 	}
 
-	private void createGUI() throws StockException, IOException, CSVFormatException {
+	private void createGUI(){
 		setSize(WIDTH, HEIGHT);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setLayout(new BorderLayout());
@@ -157,12 +157,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 
 	@Override
 	public void run() {
-		try {
-			createGUI();
-		} catch (StockException | IOException | CSVFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		createGUI();
 	}
 
 	@Override
@@ -258,7 +253,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		}
 	}
 	
-	private void loadItemProperties() throws StockException, IOException, CSVFormatException {
+	private void loadItemProperties() throws CSVFormatException, StockException, IOException {
 		JFileChooser chooser = new JFileChooser();
 		int returnValue = chooser.showOpenDialog(null);
 
@@ -291,7 +286,7 @@ public class Main extends JFrame implements ActionListener, Runnable {
 		}
 	}
 
-	public static void main(String[] args) throws StockException, IOException, CSVFormatException {
+	public static void main(String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
         SwingUtilities.invokeLater(new Main("BorderLayout"));
         store = Store.getInstance();

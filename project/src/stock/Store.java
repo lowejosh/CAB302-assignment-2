@@ -7,7 +7,13 @@ import java.util.Map.Entry;
 
 import csv.CSVFormatException;
 import csv.ReadCSV;
-
+/**
+ * An object representing a store. Since the program
+ * only supports one store, the class was written using the
+ * Singleton pattern.
+ * @author Ashley
+ *
+ */
 public class Store {
     
     private final double STARTING_CAPITAL = 100000.00;
@@ -19,41 +25,66 @@ public class Store {
     private static Store instance;
     private static List<Item> itemList;
     
+    /**
+     * Privately constructs the store so other classes cannot call it
+     */
     private Store() {
     }
 
-    public static Store getInstance() throws StockException, IOException, CSVFormatException {
+    /**
+     * Returns the instance of the Store, initialising it if it does not already exist
+     * @return the Store
+     */
+    public static Store getInstance(){
         if (instance == null) {
         	instance = new Store();
             inventory = new Stock();
-            //itemList = ReadCSV.initialiseItems("item_properties.txt");
         }
-
         return instance;
     }
-
+    /**
+     * Returns the capital of the Store
+     * @return the capital
+     */
     public double getCapital() {
         return capital;
     }
-
+    
+    /**
+     * Modifies the capital of the Store by adding a number
+     * (number can be negative to subtract money)
+     * @param amountToAdd the amount to modify the capital by
+     */
     public void modifyCapital(double amountToAdd) {
         capital += amountToAdd;
     }
-
+    /**
+     * Returns the inventory of the Store
+     * @return the inventory as a Stock
+     */
     public Stock getInventory() {
         return inventory;
     }
-
+    
+    /**
+     * Returns the list of items carried by the Store
+     * @return the item list
+     */
 	public List<Item> getItemList() {
 		return itemList;
 	}
 	
+	/**
+	 * Sets the Store's item list and inventory as the passed item list
+	 * (This method is called by the GUI to set up the item properties)
+	 * @param list the list of items being passed
+	 * @throws StockException if one of the items in the list cannot be added
+	 */
 	public void setItemList(List<Item> list) throws StockException {
 		itemList = list;
 		for (Item i : itemList) {
 			inventory.addQuantity(i, 0);
 		}
-		
 	}
 	/**
 	 * This static method loads a sales log file and updates the inventory and captital accordingly.
