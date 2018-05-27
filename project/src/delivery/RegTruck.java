@@ -1,6 +1,10 @@
 package delivery;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import stock.Item;
+import stock.Stock;
 import stock.StockException;
 
 /**
@@ -29,8 +33,20 @@ public class RegTruck extends Truck {
 	
 	@Override
 	public double getCost() {
+		/*double costOfItems = 0;
+		Stock cargo = super.cargo;
+	
+	    Iterator<Entry<Item, Integer>> cargoIterator = cargo.getStock().entrySet().iterator();
+	    while (cargoIterator.hasNext()) {
+	        Entry<Item, Integer> cargoPair = cargoIterator.next();
+	        Item item = cargoPair.getKey();
+	        int quantity = cargoPair.getValue();
+	        System.out.println(item.getName() + " : " + quantity);
+	        costOfItems+=item.getCost() * quantity;
+	    }*/
+		
 		double totalQuantity = super.getCargo();
-		return 750 + (0.25 * totalQuantity);
+		return (750 + (0.25 * totalQuantity));
 	}
 
 }

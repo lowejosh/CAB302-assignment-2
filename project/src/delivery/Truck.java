@@ -29,5 +29,9 @@ public abstract class Truck {
 		return sum;
 	}
 	
+	public Stock getStock() {
+		return cargo;
+	}
+	
 	public abstract double getCost();
 }

@@ -174,17 +174,16 @@ public class Manifest {
 	public double getCost() {
 		double sum = 0;
 		for (Truck truck : trucks) {
-			sum+=truck.getCost();
+			System.out.println("Truckcost : " + truck.getStock().getTotalCost());
+			sum+=truck.getCost() + truck.getStock().getTotalCost();
 		}
 		return sum;
 	}
 	
 	// TODO - loadManifest() - load manifest csv and reduce store capital and increase inventory
 	public static void loadManifest(String fileName) throws IOException, StockException {
-		System.out.println("reached");
 		Manifest manifest = ReadCSV.readManifest(fileName);
 		double cost = manifest.getCost();
-		System.out.println(cost);
 		Store.getInstance().modifyCapital(-cost);
 	}
 	
