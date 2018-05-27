@@ -7,12 +7,14 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -172,6 +174,28 @@ public class Main extends JFrame implements ActionListener, Runnable {
 				JOptionPane.showMessageDialog(this,"Error Message","Error: File format incorrect",JOptionPane.ERROR_MESSAGE);
 				//e.printStackTrace();
 			}
+		}
+		if (src == btnLoadSales) {
+			JFrame chooserFrame = new JFrame("FileChooserDemo");
+			JFileChooser chooser = new JFileChooser();
+			chooserFrame.add(chooser);
+			
+			int returnValue = chooser.showOpenDialog(null);
+
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				try {
+					store.loadSalesLog(chooser.getSelectedFile().getAbsolutePath());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (StockException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CSVFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}		
 		}
 	}
 
